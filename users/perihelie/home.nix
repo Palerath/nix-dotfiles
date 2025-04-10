@@ -11,6 +11,7 @@
 		home.packages = with pkgs; [
 			neovim
 			git
+			nerd-fonts.iosevka
 		];
 
 
@@ -34,6 +35,8 @@
 	imports = [
 		./modules/zsh.nix
 	];
+
+	fonts.fontconfig.enable = true;
 
 
 # Let Home Manager install and manage itself.

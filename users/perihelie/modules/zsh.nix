@@ -14,7 +14,7 @@
 
       shellAliases =
          let
-            flakePath = "/home/perihelie/.dotfiles";
+            flakePath = "/home/perihelie/dotfiles";
          in{
             rebuild = "sudo nixos-rebuild switch --flake ${flakePath}";
             hms = "home-manager switch --flake ${flakePath}";
