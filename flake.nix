@@ -17,7 +17,16 @@
 	nixosConfigurations = {
 		perikon = lib.nixosSystem {
 			system = "x86_64-linux";
-			modules = [ ./configuration.nix];
+			modules = [ 
+				./configuration.nix
+				home-manager.nixosModules.home-manager {
+					home-manager.useGlobalPkgs = true;
+					home-manager.useUserPackages =true;
+					home-manager.users.perihelie = ./home.nix;
+
+					# home-manager.extraSpecialArgs = [];
+				}
+			];
 		};
 	};
 	homeConfigurations = {
@@ -25,13 +34,13 @@
 			system = nixpkgs.legacyPackages."x86_64-linux";
 			username = "perihelie";
 			homeDirectory = "/home/perihelie";
-			configuration.imports = [ ./home.nix ];
+			imports = [ ./home.nix ];
 		};
 		"perihelie@air" = home-manager.lib.homeManagerConfiguration {
 			system = nixpkgs.legacyPackages."aarch64-darwin";
 			username = "perihelie";
 			homeDirectory = "Users/perihelie";
-			configuration.imports = [ ./home.nix ];
+			imports = [ ./home.nix ];
 		};
 	};
 
