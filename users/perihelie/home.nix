@@ -32,12 +32,9 @@
 	};
 
 	imports = [
-		./modules/fish.nix
+		./modules/zsh.nix
 	];
 
-	programs.fish = {
-		enable =  true;
-	};
 
 # Let Home Manager install and manage itself.
 	programs.home-manager.enable = true;
