@@ -12,6 +12,7 @@
   outputs = { self, nixpkgs, home-manager }: 
 	let 
 		lib = nixpkgs.lib;
+		pkgs = nixpkgs.legacyPackages."x86_64-linux";
 	in
 	{
 	nixosConfigurations = {
@@ -30,17 +31,9 @@
 		};
 	};
 	homeConfigurations = {
-		"perihelie@perikon" = home-manager.lib.homeManagerConfiguration {
-			system = nixpkgs.legacyPackages."x86_64-linux";
-			username = "perihelie";
-			homeDirectory = "/home/perihelie";
-			imports = [ ./home.nix ];
-		};
-		"perihelie@air" = home-manager.lib.homeManagerConfiguration {
-			system = nixpkgs.legacyPackages."aarch64-darwin";
-			username = "perihelie";
-			homeDirectory = "Users/perihelie";
-			imports = [ ./home.nix ];
+		perihelie = home-manager.lib.homeManagerConfiguration {
+			inherit pkgs;
+			modules = [ ./home.nix ];
 		};
 	};
 
