@@ -9,7 +9,11 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager }: {
+  outputs = { self, nixpkgs, home-manager }: 
+	let 
+		lib = nixpkgs.lib;
+	in
+	{
 	nixosConfigurations = {
 		perikon = lib.nixosSystem {
 			system = "x86_64-linux";
@@ -18,13 +22,13 @@
 	};
 	homeConfigurations = {
 		"perihelie@perikon" = home-manager.lib.homeManagerConfiguration {
-			system = "x86_64-linux";
+			system = nixpkgs.legacyPackages."x86_64-linux";
 			username = "perihelie";
 			homeDirectory = "/home/perihelie";
 			configuration.imports = [ ./home.nix ];
 		};
 		"perihelie@air" = home-manager.lib.homeManagerConfiguration {
-			system = "'aarch64-darwin";
+			system = nixpkgs.legacyPackages."aarch64-darwin";
 			username = "perihelie";
 			homeDirectory = "Users/perihelie";
 			configuration.imports = [ ./home.nix ];
