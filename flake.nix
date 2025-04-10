@@ -19,11 +19,11 @@
 		perikon = lib.nixosSystem {
 			system = "x86_64-linux";
 			modules = [ 
-				./configuration.nix
+				./devices/perikon/configuration.nix
 				home-manager.nixosModules.home-manager {
 					home-manager.useGlobalPkgs = true;
 					home-manager.useUserPackages =true;
-					home-manager.users.perihelie = ./home.nix;
+					home-manager.users.perihelie = ./users/perihelie/home.nix;
 
 					# home-manager.extraSpecialArgs = [];
 				}
@@ -33,7 +33,7 @@
 	homeConfigurations = {
 		perihelie = home-manager.lib.homeManagerConfiguration {
 			inherit pkgs;
-			modules = [ ./home.nix ];
+			modules = [ ./users/perihelie/home.nix ];
 		};
 	};
 
