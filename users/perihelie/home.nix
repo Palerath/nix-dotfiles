@@ -15,12 +15,6 @@
 			tree
 		];
 
-	home.packages = with pkgs; 
-	if pkgs.stdenv.isDarwin then [
-# darwin specific packages
-	] else [
-# linux specific packages
-	];
 
 
 	home.file.".confuig/nvim/init.vim".text = '' 

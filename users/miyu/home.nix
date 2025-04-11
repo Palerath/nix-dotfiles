@@ -1,5 +1,10 @@
 {config, pkgs, ...}:
 {
+	
+	imports = [
+		../../common/home_common.nix
+	];
+
 	home.username = "miyu";
 	home.homeDirectory = "/home/miyu"
 

@@ -53,12 +53,12 @@
 		};
 	};
 
- 	# homeConfigurations = {
- 	# 	"perihelie@air" = home-manager.lib.homeManagerConfiguration {
- 	# 		system = nixpkgs.legacyPackages."aarch64-darwin";
- 	# 		modules = [ ./users/perihelie/home.nix ];
- 	# 	};
- 	# };
+ 	homeConfigurations = {
+ 	 	"miyu" = home-manager.lib.homeManagerConfiguration {
+ 			system = nixpkgs.legacyPackages."aarch64-darwin";
+ 	 		modules = [ ./users/miyu/home.nix ];
+ 	 	};
+ 	};
 
   };
 }

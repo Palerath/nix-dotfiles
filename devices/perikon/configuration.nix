@@ -9,6 +9,9 @@
 		[ # Include the results of the hardware scan.
 		./hardware-configuration.nix
 		./modules/shell.nix
+		./modules/graphics.nix
+		./modules/drives.nix
+		./modoles/bootloader.nix
 		];
 
 # Bootloader.
