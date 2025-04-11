@@ -34,6 +34,7 @@
 	};
 
 	imports = [
+		../../common/home_common.nix
 		./modules/zsh.nix
 	];
 
