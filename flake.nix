@@ -39,17 +39,26 @@
 	};
 
 	darwinConfigurations = {
-		"perihelie@air" = nix-darwin.lib.darwinSystem {
-			modules = [ ./devices/macbook-air/darwin-configuration.nix ];
+		"perihelie@air" = darwin.lib.darwinSystem {
+			modules = [ 
+				./devices/macbook-air/darwin-configuration.nix 
+				home-manager.darwinModules.home-manager {
+					home-manager.useGlobalPkgs = true;
+					home-manager.useUserPackages = true;
+					home-manager.users.perihelie = ./users/perihelie/home.nix;
+
+					# home-manager.extraSpecialArgs = [];
+				}
+			];
 		};
 	};
 
- 	homeConfigurations = {
- 		"perihelie@air" = home-manager.lib.homeManagerConfiguration {
- 			system = nixpkgs.legacyPackages."aarch64-darwin";
- 			modules = [ ./users/perihelie/home.nix ];
- 		};
- 	};
+ 	# homeConfigurations = {
+ 	# 	"perihelie@air" = home-manager.lib.homeManagerConfiguration {
+ 	# 		system = nixpkgs.legacyPackages."aarch64-darwin";
+ 	# 		modules = [ ./users/perihelie/home.nix ];
+ 	# 	};
+ 	# };
 
   };
 }
