@@ -30,12 +30,12 @@
 			];
 		};
 	};
-	homeConfigurations = {
-		perihelie = home-manager.lib.homeManagerConfiguration {
-			inherit pkgs;
-			modules = [ ./users/perihelie/home.nix ];
-		};
-	};
+ 	homeConfigurations = {
+ 		"perihelie@air" = home-manager.lib.homeManagerConfiguration {
+ 			system = nixpkgs.legacyPackages."aarch64-darwin";
+ 			modules = [ ./users/perihelie/home.nix ];
+ 		};
+ 	};
 
   };
 }

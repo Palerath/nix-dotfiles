@@ -12,6 +12,7 @@
 			neovim
 			git
 			nerd-fonts.iosevka
+			tree
 		];
 
 
