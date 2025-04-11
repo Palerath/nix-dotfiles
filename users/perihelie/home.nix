@@ -33,6 +33,9 @@
       vlc
       lf
       tmux
+      steam
+      gnome-software
+      flatpak
    ];
 
    programs.git = {
@@ -50,7 +53,6 @@
       ../../common/home_common.nix
       ./modules/zsh.nix
       ./modules/nvf.nix
-      ./modules/steam.nix
       ./modules/alacritty.nix
    ];
 
