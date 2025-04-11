@@ -1,8 +1,29 @@
+{config, pkgs, ...}:
 {
-	services.xserver.enable = true;
-	services.xserver.displayManager.sddm.enable = true;
-	services.displayManager.sddm.wayland.enable = true;
+	services.displayManager = {
+		sddm = {
+			enable = true;
+			wayland = {
+				enable = true;
+			};
+		};
 
-	services.xserver.desktopManager.plasma6.enable = true;
-	services.displayManager.defaultSession = "plasma";
+		defaultSession = "plasma";
+	};
+
+	services.desktopManager.plasma6 = {
+		enable = true;
+		enableQt5Integration = false;
+	};
+
+	xdg.portal = {
+		enable = true;
+		extraPortals = [ pkgs.kdePackages.xdg-desktop-portal-kde ];
+	};
+
+	environment.sessionVariables = {
+		NIXOS_OZONE_NL = "1";
+		QT_QPA_PLATFORM = "wayland";
+		GDK_BACKEND = "wayland";
+	};
 }

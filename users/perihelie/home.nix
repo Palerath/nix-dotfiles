@@ -13,6 +13,7 @@
 			git
 			nerd-fonts.iosevka
 			tree
+			nvf
 		];
 
 
@@ -37,6 +38,7 @@
 	imports = [
 		../../common/home_common.nix
 			./modules/zsh.nix
+			./modules/nvf
 	];
 
 	fonts.fontconfig.enable = true;
