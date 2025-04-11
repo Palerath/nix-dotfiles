@@ -9,11 +9,18 @@
 	home.stateVersion = "24.11"; # Please read the comment before changing.
 
 		home.packages = with pkgs; [
-			neovim
+		neovim
 			git
 			nerd-fonts.iosevka
 			tree
 		];
+
+	home.packages = with pkgs; 
+	if pkgs.stdenv.isDarwin then [
+# darwin specific packages
+	] else [
+# linux specific packages
+	];
 
 
 	home.file.".confuig/nvim/init.vim".text = '' 
@@ -35,7 +42,7 @@
 
 	imports = [
 		../../common/home_common.nix
-		./modules/zsh.nix
+			./modules/zsh.nix
 	];
 
 	fonts.fontconfig.enable = true;
