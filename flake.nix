@@ -27,18 +27,19 @@
 		pkgs = nixpkgs.legacyPackages."x86_64-linux";
 	in
 	{
+
 	nixosConfigurations = {
 		perikon = lib.nixosSystem {
 			system = "x86_64-linux";
 			modules = [ 
 				./devices/perikon/configuration.nix
-				home-manager.nixosModules.home-manager {
-					home-manager.useGlobalPkgs = true;
-					home-manager.useUserPackages =true;
-					home-manager.users.perihelie = ./users/perihelie/home.nix;
-
+				# home-manager.nixosModules.home-manager {
+				# 	home-manager.useGlobalPkgs = true;
+				# 	home-manager.useUserPackages =true;
+				# 	home-manager.users.perihelie = ./users/perihelie/home.nix;
 					# home-manager.extraSpecialArgs = [];
-				}
+				# }
+
 			];
 		};
 	};
@@ -59,9 +60,12 @@
 	# };
 
  	homeConfigurations = {
- 	 	"miyu" = home-manager.lib.homeManagerConfiguration {
- 			system = nixpkgs.legacyPackages."aarch64-darwin";
- 	 		modules = [ ./users/miyu/home.nix ];
+ 	 	"perihelie" = home-manager.lib.homeManagerConfiguration {
+ 			pkgs = nixpkgs.legacyPackages."x86_64-linux";
+ 	 		modules = [ 
+				./users/perihelie/home.nix 
+				nvf.homeManagerModules.nvf
+			];
  	 	};
  	};
 
