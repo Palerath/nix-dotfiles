@@ -11,12 +11,10 @@
 		./modules/shell.nix
 		./modules/graphics.nix
 		./modules/drives.nix
-		./modoles/bootloader.nix
+		./modules/bootloader.nix
+		./modules/desktop-env/plasma.nix
 		];
 
-# Bootloader.
-	boot.loader.systemd-boot.enable = true;
-	boot.loader.efi.canTouchEfiVariables = true;
 
 	networking.hostName = "perikon"; # Define your hostname.
 # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -65,7 +63,7 @@
 	services.printing.enable = true;
 
 # Enable sound with pipewire.
-	hardware.pulseaudio.enable = false;
+	services.pulseaudio.enable = false;
 	security.rtkit.enable = true;
 	services.pipewire = {
 		enable = true;
