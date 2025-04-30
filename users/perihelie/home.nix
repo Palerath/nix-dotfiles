@@ -7,7 +7,7 @@
    home.homeDirectory = "/home/perihelie";
 
    home.stateVersion = "24.11"; # Please read the comment before changing.
-   
+
    nixpkgs.config.allowUnfree = true;
 
    home.packages = with pkgs; [
@@ -36,6 +36,8 @@
       steam
       gnome-software
       flatpak
+      protonup-ng
+      protonup-qt
    ];
 
    programs.git = {
