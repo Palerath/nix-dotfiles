@@ -1,16 +1,4 @@
 {config, pkgs, ...}:
-{
-	services.displayManager = {
-		sddm = {
-			enable = true;
-			wayland = {
-				enable = true;
-			};
-		};
-
-		defaultSession = "plasma";
-	};
-
 	services.desktopManager.plasma6 = {
 		enable = true;
 		enableQt5Integration = false;

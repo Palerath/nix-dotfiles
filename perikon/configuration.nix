@@ -13,6 +13,7 @@
          ./modules/drives.nix
          ./modules/bootloader.nix
          ./modules/desktop-env/plasma.nix
+	 ./modules/display-manager.nix
          ./modules/flatpak.nix
       ];
 
