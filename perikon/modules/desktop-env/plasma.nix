@@ -2,8 +2,8 @@
 {
 	services.desktopManager.plasma6.enable = true;
 	
-	environmnent.systemPackages = with pkgs; [
-		plasma-workspace
+	environment.systemPackages = with pkgs; [
+		kdePackages.plasma-workspace
 		konsole
 		plasma-systemmonitor
 		kate
