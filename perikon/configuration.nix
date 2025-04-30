@@ -85,6 +85,8 @@
       ];
    };
 
+   boot.kernelPackages = pkgs.linuxPackages_zen;
+   
    nixpkgs.config.allowUnfree = true;
    # Install firefox.
    programs.firefox.enable = true;
