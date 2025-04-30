@@ -1,13 +1,14 @@
 {config, pkgs, ...}:
-	services.desktopManager.plasma6 = {
-		enable = true;
-		enableQt5Integration = false;
-	};
-
-	xdg.portal = {
-		enable = true;
-		extraPortals = [ pkgs.kdePackages.xdg-desktop-portal-kde ];
-	};
+{
+	services.desktopManager.plasma6.enable = true;
+	
+	environmnent.systemPackages = with pkgs; [
+		plasma-workspace
+		konsole
+		plasma-systemmonitor
+		kate
+		dolphin
+	];
 
 	environment.sessionVariables = {
 		NIXOS_OZONE_NL = "1";
