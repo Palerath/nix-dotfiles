@@ -5,6 +5,6 @@
 		displayManager.sddm.enable = true;
 		displayManager.gdm.enable = false;
 
-		displayManager.defaultSession = "plasmawayland";
+		displayManager.defaultSession = "plasma";
 	};
 }

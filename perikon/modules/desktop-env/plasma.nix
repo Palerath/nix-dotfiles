@@ -4,10 +4,10 @@
 	
 	environment.systemPackages = with pkgs; [
 		kdePackages.plasma-workspace
-		konsole
-		plasma-systemmonitor
-		kate
-		dolphin
+		kdePackages.konsole
+		kdePackages.plasma-systemmonitor
+		kdePackages.kate
+		kdePackages.dolphin
 	];
 
 	environment.sessionVariables = {

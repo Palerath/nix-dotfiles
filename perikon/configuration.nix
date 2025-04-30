@@ -13,7 +13,8 @@
          ./modules/drives.nix
          ./modules/bootloader.nix
          ./modules/desktop-env/plasma.nix
-	 ./modules/display-manager.nix
+         ./modules/desktop-env/xfce.nix
+         ./modules/display-manager.nix
          ./modules/flatpak.nix
       ];
 
@@ -87,7 +88,7 @@
    };
 
    boot.kernelPackages = pkgs.linuxPackages_zen;
-   
+
    nixpkgs.config.allowUnfree = true;
    # Install firefox.
    programs.firefox.enable = true;
