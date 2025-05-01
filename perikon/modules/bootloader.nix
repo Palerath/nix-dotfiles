@@ -1,8 +1,14 @@
+{config, pkgs, ...}:
 {
 	boot.loader.systemd-boot.enable = false;
 	boot.loader.efi.canTouchEfiVariables = true;
-	boot.loader.grub.enable = true;
-	boot.loader.grub.devices = [ "nodev" ];
-	boot.loader.grub.efiSupport = true;
-	boot.loader.grub.useOSProber = true;
+	boot.loader.grub = {
+		enable = true;
+		devices = [ "nodev" ];
+		efiSupport = true;
+		useOsProber = true;
+		configurationLimit = 200;
+	};
+
+	system.nixos.label = "Sable $(date +%Y-%m-%d)";
 }
