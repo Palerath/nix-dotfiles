@@ -33,6 +33,7 @@
       tmux
       gnome-software
       flatpak
+      anki
    ];
 
    programs.git = {
