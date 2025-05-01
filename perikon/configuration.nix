@@ -19,6 +19,7 @@
          ./modules/gayming.nix
       ];
 
+   security.sudo.enable = true;
 
    networking.hostName = "perikon"; # Define your hostname.
    # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -67,7 +68,7 @@
       alsa.enable = true;
       alsa.support32Bit = true;
       pulse.enable = true;
-   
+
       # If you want to use JACK applications, uncomment this
       #jack.enable = true;
 
