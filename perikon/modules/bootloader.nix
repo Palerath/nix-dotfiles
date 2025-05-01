@@ -6,9 +6,8 @@
 		enable = true;
 		devices = [ "nodev" ];
 		efiSupport = true;
-		useOsProber = true;
-		configurationLimit = 200;
+		useOSProber = true;
+		configurationLimit = 2000;
 	};
 
-	system.nixos.label = "Sable $(date +%Y-%m-%d)";
 }
