@@ -4,31 +4,38 @@
       ntfs3g
       udiskie
    ];
+
    boot.supportedFilesystems = ["ntfs-3g"];
-   fileSystems."/mnt/hdd" = {
+
+   fileSystems."/home/perihelie/drives/hdd" = {
       device = "/dev/sda4";
       fsType = "ntfs-3g";
       options = [ 
-         "defaults"  "rw" "exec" "auto" "nofail" 
+         "defaults"  "rw" "exec"
          "uid=1000" 
          "umask=0022" 
          "gid=1000" 
          "dmask=000" 
-         "fmask=111"
+         "fmask=000"
+         "permissions"
+         "no fail" "auto"
       ];
    };
 
-   fileSystems."/mnt/nvme" = {
+   fileSystems."/home/perihelie/drives/nvme" = {
       device = "/dev/nvme0n1p5";
       fsType = "ntfs-3g";
       options = [ 
-         "defaults" "rw" "exec" "auto" "nofail" 
+         "defaults" "rw" "exec" 
          "uid=1000" 
          "umask=0022" 
          "gid=1000" 
-         "dmask=007" 
-         "fmask=117"
+         "dmask=000" 
+         "fmask=000"
+         "permissions"
+         "no fail" "auto"
       ];
    };
+
 }
 
