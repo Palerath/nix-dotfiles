@@ -38,7 +38,7 @@
    programs.git = {
       enable = true;
       userName = "perihelie";
-      userEmail = "archibaldmk4@gmail.com";		
+      userEmail = "archibaldmk4@gmail.com";
 
    };
 
@@ -51,7 +51,6 @@
       ./modules/zsh.nix
       ./modules/nvf.nix
       ./modules/alacritty.nix
-      ./modules/gayming.nix
    ];
 
    fonts.fontconfig.enable = true;

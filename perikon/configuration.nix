@@ -16,6 +16,7 @@
          ./modules/desktop-env/xfce.nix
          ./modules/display-manager.nix
          ./modules/flatpak.nix
+         ./modules/gayming.nix
       ];
 
 
