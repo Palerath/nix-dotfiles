@@ -1,6 +1,9 @@
 {pkgs, ...}:
 {
-   environment.systemPackages = with pkgs; [ ntfs3g ];
+   environment.systemPackages = with pkgs; [ 
+      ntfs3g
+      udiskie
+   ];
    boot.supportedFilesystems = ["ntfs-3g"];
    fileSystems."/mnt/hdd" = {
       device = "/dev/sda4";

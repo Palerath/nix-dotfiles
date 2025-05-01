@@ -15,12 +15,10 @@
       tree
       ueberzug
       prismlauncher
-      lutris
       unrar
       p7zip
       unzip
       wget
-      wine
       vesktop
       fastfetch
       btop
@@ -33,11 +31,8 @@
       vlc
       lf
       tmux
-      steam
       gnome-software
       flatpak
-      protonup-ng
-      protonup-qt
    ];
 
    programs.git = {
@@ -56,6 +51,7 @@
       ./modules/zsh.nix
       ./modules/nvf.nix
       ./modules/alacritty.nix
+      ./modules/gayming.nix
    ];
 
    fonts.fontconfig.enable = true;
