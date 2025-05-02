@@ -34,6 +34,7 @@
       gnome-software
       flatpak
       anki
+      nvtopPackages.nvidia
    ];
 
    programs.git = {
