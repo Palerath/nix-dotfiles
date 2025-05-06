@@ -19,14 +19,13 @@
          inputs.nixpkgs.follows = "nixpkgs";
       };
 
-      hyprland = {
-         url = "github:hyprwm/Hyprland";
-         # inputs.nixpkgs.follows = "nixpkgs";
+      hyprland.url = "github:hyprwm/Hyprland";
+      hyprland-plugins = {
+         url = "github:hyprwm/hyprland-plugins";
+         inputs.hyprland.follows = "hyprland";   
       };
-
    };
-
-   outputs = inputs@{ self, nixpkgs, home-manager, nvf, ... }:
+   outputs = { self, nixpkgs, home-manager, nvf, hyprland, hyprland-plugins,  ... }@inputs:
       let 
          lib = nixpkgs.lib;
          pkgs = nixpkgs.legacyPackages."x86_64-linux";
@@ -46,6 +45,7 @@
                   # }
 
                ];
+               specialArgs = {inherit inputs;};
             };
          };
 
@@ -71,8 +71,10 @@
                   ./users/perihelie/home.nix 
                   nvf.homeManagerModules.nvf
                ];
+               extraSpecialArgs = {inherit inputs;};
             };
          };
 
       };
+
 }

@@ -1,8 +1,8 @@
-{inputs, pkgs, ...}: 
+{pkgs, inputs, ...}: 
 {
    programs.hyprland = {
       enable = true;
-      package = inputs.hyprland.systemPackages."${pkgs.system}".hyprland;
+      package = inputs.hyprland.packages."${pkgs.system}".hyprland;
       xwayland.enable = true;
       withUWSM = true; 
    };
