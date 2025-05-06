@@ -24,8 +24,9 @@
          url = "github:hyprwm/hyprland-plugins";
          inputs.hyprland.follows = "hyprland";   
       };
+      nix-colors.url = "github:misterio77/nix-colors";
    };
-   outputs = { self, nixpkgs, home-manager, nvf, hyprland, hyprland-plugins,  ... }@inputs:
+   outputs = { self, nixpkgs, home-manager, nvf, hyprland, hyprland-plugins, nix-colors, ... }@inputs:
       let 
          lib = nixpkgs.lib;
          pkgs = nixpkgs.legacyPackages."x86_64-linux";
