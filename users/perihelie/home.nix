@@ -53,6 +53,7 @@
       ./modules/zsh.nix
       ./modules/nvf.nix
       ./modules/alacritty.nix
+      ./modules/mpv.nix
    ];
 
    fonts.fontconfig.enable = true;
