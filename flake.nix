@@ -21,12 +21,12 @@
 
       hyprland = {
          url = "github:hyprwm/Hyprland";
-         inputs.nixpkgs.follows = "nixpkgs";
+         # inputs.nixpkgs.follows = "nixpkgs";
       };
 
    };
 
-   outputs = inputs@{ self, nixpkgs, home-manager, nvf, hyprland, ... }:
+   outputs = inputs@{ self, nixpkgs, home-manager, nvf, ... }:
       let 
          lib = nixpkgs.lib;
          pkgs = nixpkgs.legacyPackages."x86_64-linux";
