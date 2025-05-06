@@ -18,10 +18,14 @@
 	url = "github:notashelf/nvf";
 	inputs.nixpkgs.follows = "nixpkgs";
     };
+    hyprland = {
+		url = "github:hyprwm/Hyprland";
+		inputs.nixpkgs.follows = "nixpkgs";
+    };
 
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, nvf, ... }: 
+  outputs = inputs@{ self, nixpkgs, home-manager, nvf, hyprland, ... }:
 	let 
 		lib = nixpkgs.lib;
 		pkgs = nixpkgs.legacyPackages."x86_64-linux";

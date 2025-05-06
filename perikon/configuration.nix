@@ -14,6 +14,7 @@
          ./modules/bootloader.nix
          ./modules/desktop-env/plasma.nix
          ./modules/desktop-env/xfce.nix
+         ./modules/desktop-env/hyprland.nix
          ./modules/display-manager.nix
          ./modules/flatpak.nix
          ./modules/gayming.nix
