@@ -12,6 +12,7 @@
 
    home.packages = with pkgs; [
       git
+      discord
       tree
       ueberzug
       prismlauncher
