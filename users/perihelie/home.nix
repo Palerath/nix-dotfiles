@@ -35,6 +35,7 @@
       flatpak
       anki
       nvtopPackages.nvidia
+      texlab
    ];
 
    programs.git = {
