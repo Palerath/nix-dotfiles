@@ -21,7 +21,8 @@
          # source: https://kokomins.wordpress.com/2019/10/14/mpv-config-guide/
 
          profile="gpu-hq";
-         #gpu-api=vulkan
+         gpu-api="vulkan";
+         vo="gpu-next";
 
          # video
          deband="yes";
@@ -73,6 +74,29 @@
          force-seekable="yes"; # Force stream to be seekable even if disabled.
          ytdl-format = "bestvideo+bestaudio";
          cache-default = 4000000;
+      };
+
+      scriptOpts = {
+         mpvacious = {
+            deck_name="MASTER::JP::SentenceMining::Imports";
+            model_name="Japanese sentences+";
+            sentence_field="SentKanji";
+            secondary_field="SentEng";
+            audio_field="SentAudio";
+            image_field="Image";
+
+            vocab_field="VocabKanji";
+            vocab_audio_field="VocabAudio";
+
+            use_ffmpeg="yes";
+            autoclip_method="clipboard";
+            snapshot_format="webp";
+            snapshot_quality=65;
+
+            audio_format="opus";
+            opus_container="ogg";
+
+         };
       };
 
    };
