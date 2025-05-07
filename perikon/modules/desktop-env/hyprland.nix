@@ -1,7 +1,7 @@
 {pkgs, inputs, ...}: 
 {
    programs.hyprland = {
-      enable = false;
+      enable = true;
       package = inputs.hyprland.packages."${pkgs.system}".hyprland;
       xwayland.enable = true;
       withUWSM = true; 
@@ -16,6 +16,7 @@
       dunst
       libnotify
       rofi-wayland
+      swww
    ];  
 
    environment.sessionVariables = {
@@ -25,7 +26,7 @@
 
    xdg.portal = {
       extraPortals = with pkgs; [
-         # xdg-desktop-portal-hyprland
+         xdg-desktop-portal-hyprland
       ];
    };
 }

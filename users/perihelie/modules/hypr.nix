@@ -19,10 +19,6 @@ in
 
       settings = {
          exec-once = ''${startupScript}/bin/start'';
-         # general = with config.colorScheme.colors; {
-         #   "col.active_border" = "rgba(${base0E}ff) rdga(${base09}ff) 60deg";
-         #   "col.inactive_border" = "rgba(${base00}ff)";
-         # };
          decoration = {
             shadow_offset = "0 5";
             "col.shadow" = "rgba(00000099)";
