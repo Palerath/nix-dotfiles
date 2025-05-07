@@ -24,9 +24,6 @@
       NIXOS_OZONE_WL = "1";
    }; 
 
-   xdg.portal = {
-      extraPortals = with pkgs; [
-         xdg-desktop-portal-hyprland
-      ];
-   };
+   xdg.portal.config.hyprland.default = [ "hyprland" "gtk" ];
+   systemd.user.services.xdg-desktop-portal-hyprland.enable = false;
 }

@@ -16,7 +16,12 @@
 
          vim.statusline.lualine.enable = true;
          vim.telescope.enable = true;
-         vim.autocomplete.nvim-cmp.enable = true;
+         vim.autocomplete = {
+            enableSharedCmpSources = true;
+            blink-cmp.enable = true;
+            friendly-snippets = true;
+            nvim-cmp.enable = true;
+         };
 
          vim.git = {
             enable = true;
@@ -87,6 +92,7 @@
             surround.enable = true;
             leetcode-nvim.enable = true;
             multicursors.enable = true;
+            oil-nvim.enable = true;
          };
 
          vim.terminal = {

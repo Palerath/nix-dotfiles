@@ -18,17 +18,5 @@
       GDK_BACKEND = "wayland";
    };
 
-
-   systemd.user.services."xdg-desktop-portal-kde" = {
-      # Enable it so that `systemctl --user start xdg-desktop-portal-kde` works
-      enable = true;                                        # :contentReference[oaicite:4]{index=4}
-
-      # Provide the missing ExecStart
-      serviceConfig = {
-         Type       = "simple";
-         ExecStart  = "${pkgs.kdePackages.xdg-desktop-portal-kde}/libexec/xdg-desktop-portal-kde";
-         Restart    = "on-failure";
-      };
-      wantedBy = [ "default.target" ];
-   };
+   xdg.portal.config.common.default = [ "kde" ];
 }

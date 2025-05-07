@@ -55,7 +55,7 @@
       ./modules/nvf.nix
       ./modules/alacritty.nix
       ./modules/mpv.nix
-      ./modules/hypr.nix
+      ./modules/hypr/default.nix
    ];
 
    fonts.fontconfig.enable = true;
