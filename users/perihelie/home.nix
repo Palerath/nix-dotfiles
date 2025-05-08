@@ -21,7 +21,6 @@
       unzip
       wget
       vesktop
-      fastfetch
       btop
       qbittorrent
       dconf
@@ -65,14 +64,6 @@
 
    };
 
-   programs.fastfetch.settings = {
-      logo = {
-         source = "images/73712874.png";
-         padding = { right = 1; };
-      };
-   };
-
-
    home.sessionVariables = {
       EDITOR = "neovim";
    };
@@ -83,6 +74,7 @@
       ./modules/alacritty.nix
       ./modules/mpv.nix
       ./modules/hypr/default.nix
+      ./modules/fastfetch.nix
    ];
 
    fonts.fontconfig.enable = true;

@@ -22,7 +22,7 @@
 
          };
 
-      initExtra = ''
+      initContent = ''
          fastfetch
       '';
    };
