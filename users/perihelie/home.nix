@@ -37,6 +37,25 @@
       anki
       nvtopPackages.nvidia
       texlab
+      qolibri
+      yt-dlp
+      ffmpeg
+      ffmpegthumbnailer
+
+      # fonts
+      nerd-fonts.iosevka
+      nerd-fonts.iosevka-term
+      nerd-fonts.jetbrains-mono
+      ipafont
+      ipaexfont
+      migu
+      jigmo
+      noto-fonts-cjk-sans
+      noto-fonts-cjk-serif
+      font-awesome
+      powerline-fonts
+      powerline-symbols
+      noto-fonts-emoji
    ];
 
    programs.git = {
@@ -45,6 +64,14 @@
       userEmail = "archibaldmk4@gmail.com";
 
    };
+
+   programs.fastfetch.settings = {
+      logo = {
+         source = "images/73712874.png";
+         padding = { right = 1; };
+      };
+   };
+
 
    home.sessionVariables = {
       EDITOR = "neovim";

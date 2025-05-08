@@ -18,8 +18,7 @@
          vim.telescope.enable = true;
          vim.autocomplete = {
             enableSharedCmpSources = true;
-            blink-cmp.enable = true;
-            friendly-snippets = true;
+            blink-cmp.enable = false;
             nvim-cmp.enable = true;
          };
 
@@ -70,6 +69,7 @@
             java.enable = true;
             sql.enable = true;
             yaml.enable = true;
+            css.enable = true;
          };
 
          vim.options = {

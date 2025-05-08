@@ -11,7 +11,7 @@
       enableCompletion = true;
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
-
+       
       shellAliases =
          let
             flakePath = "/home/perihelie/dotfiles";
@@ -21,6 +21,10 @@
             nv = "nvim";
 
          };
+
+      initExtra = ''
+         fastfetch
+      '';
    };
 
    programs.zsh.oh-my-zsh = {
