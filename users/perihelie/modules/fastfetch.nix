@@ -1,13 +1,13 @@
 {
-   home.file."fastfetch/logos/custom.png" = {
-      source = "./images/73712874.png";
+   home.file."fastfetch/logos/cirno.png" = {
+      source = /."" + toString ./images/cirno.png;
    };
 
    programs.fastfetch = {
       enable = true;
       settings = {
          logo = {
-            source = "custom.png";
+            source = "cirno.png";
             type = "file";
             padding = { right = 2; };
          };
