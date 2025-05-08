@@ -1,6 +1,6 @@
 {
    home.file."fastfetch/logos/cirno.png" = {
-      source = /."" + toString ./images/cirno.png;
+      source = ./images/cirno.png;
    };
 
    programs.fastfetch = {
@@ -8,7 +8,7 @@
       settings = {
          logo = {
             source = "cirno.png";
-            type = "file";
+            type = "kitty-gfx";
             padding = { right = 2; };
          };
       };

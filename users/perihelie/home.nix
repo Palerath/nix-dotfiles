@@ -40,6 +40,7 @@
       yt-dlp
       ffmpeg
       ffmpegthumbnailer
+      chafa
 
       # fonts
       nerd-fonts.iosevka
@@ -72,6 +73,7 @@
       ./modules/zsh.nix
       ./modules/nvf.nix
       ./modules/alacritty.nix
+      ./modules/wezterm.nix
       ./modules/mpv.nix
       ./modules/hypr/default.nix
       ./modules/fastfetch.nix

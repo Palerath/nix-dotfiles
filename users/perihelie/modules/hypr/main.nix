@@ -30,10 +30,11 @@
          ];
 
          "$mainMod" = "SUPER";
-         "$terminal" = "alacritty";
+         "$terminal" = "wezterm";
          "$fileManager" = "dolphin";
          #  "$fileManager" = "$terminal -e sh -c 'dolphin'";
          "$menu" = "rofi";
+         "$browser" = "firefox";
 
          general = {
             gaps_in = 0;

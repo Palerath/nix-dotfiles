@@ -8,6 +8,7 @@
          "$mainMod ALT, C, killactive,"
          "$mainMod ALT, Q, exit,"
          "$mainMod,     E, exec, $fileManager"
+         "$mainMod      W, exec, $browser"
          "$mainMod,     F, togglefloating,"
          "$mainMod,     D, exec, $menu --show drun"
          "$mainMod,     P, pin,"
@@ -17,26 +18,25 @@
          "$mainMod ALT, B, exec, pkill -SIGUSR1 waybar"
          "$mainMod,     L, exec, loginctl lock-session"
          "$mainMod,     P, exec, hyprpicker -an"
-         "$mainMod,     N, exec, swaync-client -t"
          ", Print, exec, grimblast --notify --freeze copysave area"
 
          # Moving focus
-         "$mainMod, left, movefocus, l"
-         "$mainMod, right, movefocus, r"
-         "$mainMod, up, movefocus, u"
-         "$mainMod, down, movefocus, d"
+         "$mainMod, h, movefocus, l"
+         "$mainMod, l, movefocus, r"
+         "$mainMod, j, movefocus, u"
+         "$mainMod, k, movefocus, d"
 
          # Moving windows
-         "$mainMod SHIFT, left,  swapwindow, j"
-         "$mainMod SHIFT, right, swapwindow, l"
-         "$mainMod SHIFT, up,    swapwindow, j"
-         "$mainMod SHIFT, down,  swapwindow, k"
+         "$mainMod SHIFT, h,  swapwindow, l"
+         "$mainMod SHIFT, l, swapwindow, r"
+         "$mainMod SHIFT, j,    swapwindow, u"
+         "$mainMod SHIFT, k,  swapwindow, d"
 
          # Resizeing windows                   X  Y
-         "$mainMod CTRL, left,  resizeactive, -60 0"
-         "$mainMod CTRL, right, resizeactive,  60 0"
-         "$mainMod CTRL, up,    resizeactive,  0 -60"
-         "$mainMod CTRL, down,  resizeactive,  0  60"
+         "$mainMod CTRL, h,  resizeactive, -60 0"
+         "$mainMod CTRL, l, resizeactive,  60 0"
+         "$mainMod CTRL, j,    resizeactive,  0 -60"
+         "$mainMod CTRL, k,  resizeactive,  0  60"
 
          # Switching workspaces
          "$mainMod, 1, workspace, 1"
