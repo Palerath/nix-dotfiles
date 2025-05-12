@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{  pkgs, ... }:
 
 {
    # Home Manager needs a bit of information about you and the paths it should
@@ -6,7 +6,7 @@
    home.username = "perihelie";
    home.homeDirectory = "/home/perihelie";
 
-   home.stateVersion = "24.11"; # Please read the comment before changing.
+   home.stateVersion = "25.05"; # Please read the comment before changing.
 
    nixpkgs.config.allowUnfree = true;
 

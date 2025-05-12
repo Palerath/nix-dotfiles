@@ -5,16 +5,33 @@
 
    programs.fastfetch = {
       enable = true;
-      imageSupport = true;
-
       settings = {
          logo = {
-            source = "cirno_diffusion.txt";
-            type = "data-raw";
-            width = 80;
-            height = 40;
+            #  source = "cirno.png";
+            source = "/home/perihelie/.config/fastfetch/cirno.png";
+            type = "kitty-direct";
+            height = 20;
+            width = 40;
+
+            padding=  { right = 2; };
          };
-         
+
+         modules = [ 
+            "title"
+            "separator"
+            "shell"
+            "uptime"
+            "packages"
+            "kernel"
+            "os"
+            "cpu"
+            "gpu"
+            "display"
+            "memory"
+            "swap"
+            "disk"
+         ];
+
       };
    };
 }
