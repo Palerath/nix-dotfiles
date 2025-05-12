@@ -9,11 +9,6 @@
          inputs.nixpkgs.follows = "nixpkgs";
       };
 
-      # darwin = {
-      # url = "github:nix-darwin/nix-darwin/master";
-      # inputs.nixpkgs.follows = "nixpkgs";
-      # };
-
       nvf = {
          url = "github:notashelf/nvf";
          inputs.nixpkgs.follows = "nixpkgs";
@@ -49,21 +44,6 @@
                specialArgs = {inherit inputs;};
             };
          };
-
-         # darwinConfigurations = {
-         # "perihelie@air" = darwin.lib.darwinSystem {
-         # modules = [ 
-         # ./devices/macbook-air/darwin-configuration.nix 
-         # home-manager.darwinModules.home-manager {
-         # home-manager.useGlobalPkgs = true;
-         # home-manager.useUserPackages = true;
-         # home-manager.users.perihelie = ./users/perihelie/home.nix;
-
-         # home-manager.extraSpecialArgs = [];
-         # }
-         # ];
-         # };
-         # };
 
          homeConfigurations = {
             "perihelie" = home-manager.lib.homeManagerConfiguration {

@@ -41,6 +41,8 @@
       ffmpeg
       ffmpegthumbnailer
       chafa
+      kitty-img
+      libsixel
 
       # fonts
       nerd-fonts.iosevka

@@ -5,12 +5,16 @@
 
    programs.fastfetch = {
       enable = true;
+      imageSupport = true;
+
       settings = {
          logo = {
-            source = "cirno.png";
-            type = "kitty-gfx";
-            padding = { right = 2; };
+            source = "cirno_diffusion.txt";
+            type = "data-raw";
+            width = 80;
+            height = 40;
          };
+         
       };
    };
 }
