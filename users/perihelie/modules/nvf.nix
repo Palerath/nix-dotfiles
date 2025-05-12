@@ -64,7 +64,16 @@
 
             python.enable = true;
             lua.enable = true;
-            markdown.enable = true;
+            markdown = {
+               enable = true;
+               lsp.enable = true;
+               treesitter.enable = true;
+               format.enable = true;
+               extensions = {
+                  markview-nvim.enable = true;
+                  render-markdown-nvim.enable = true;
+               };
+            };
             html.enable = true;
             java.enable = true;
             sql.enable = true;
