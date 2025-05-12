@@ -25,5 +25,5 @@
    }; 
 
    xdg.portal.config.hyprland.default = [ "hyprland" "gtk" ];
-   systemd.user.services.xdg-desktop-portal-hyprland.enable = false;
+   systemd.user.services.xdg-desktop-portal-hyprland.enable = true;
 }
