@@ -1,5 +1,5 @@
 {pkgs, ...}:
-   {
+{
    # Enable graphics support
    hardware.graphics = {
       enable = true;
@@ -34,17 +34,9 @@
       xdgOpenUsePortal = true;
       extraPortals = with pkgs; [
          xdg-desktop-portal-gtk
-         # xdg-desktop-portal-wlr
+         xdg-desktop-portal-wlr
       ];
       configPackages = [ pkgs.kdePackages.xdg-desktop-portal-kde ];
-      config = {
-         common = {
-            "org.freedesktop.impl.portal.ScreenCast" = [ "kde" "gtk" ];
-         };
-         kde = {
-            "org.freedesktop.impl.portal.ScreenCast" = [ "kde" ];
-         };
-      };
    };
 
    systemd.user.services."xdg-desktop-portal".enable = true;

@@ -13,9 +13,12 @@
    ];
 
    environment.sessionVariables = {
-      NIXOS_OZONE_NL = "1";
-      QT_QPA_PLATFORM = "wayland";
-      GDK_BACKEND = "wayland";
+      XDG_CURRENT_DESKTOP = "KDE";
+      XDG_SESSION_TYPE = "wayland";
+      XDG_SESSION_DESKTOP = "plasmawayland";
+      MOZ_ENABLE_WAYLAND = "1";           # (optional) for Firefox Wayland support
+      NIXOS_OZONE_WL = "1";              # for Chromium/Electron apps:contentReference[oaicite:8]{index=8}
+      ELECTRON_OZONE_PLATFORM_HINT = "wayland";
    };
 
    xdg.portal.config.common.default = [ "kde" ];
