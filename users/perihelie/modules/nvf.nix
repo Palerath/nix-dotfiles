@@ -64,16 +64,7 @@
 
             python.enable = true;
             lua.enable = true;
-            markdown = {
-               enable = true;
-               lsp.enable = true;
-               treesitter.enable = true;
-               format.enable = true;
-               extensions = {
-                  markview-nvim.enable = true;
-                  render-markdown-nvim.enable = true;
-               };
-            };
+            markdown.enable = true;
             html.enable = true;
             java.enable = true;
             sql.enable = true;
@@ -116,6 +107,12 @@
                enable = false;
                setupOpts = {
                   completion.nvim_cmp = true;
+                  workspaces = [
+                     {
+                        name = "Cocoon";
+                        path = "/home/perihelie/drives/hdd/Documents/Cocoon";
+                     }
+                  ];
                };
             };
             mind-nvim.enable = true;
