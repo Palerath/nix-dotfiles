@@ -41,9 +41,9 @@
          vim.snippets.luasnip.enable = true;
          vim.autopairs.nvim-autopairs.enable = true;
 
-         vim.treesitter.indent.enable = true;
-         vim.treesitter.context.enable = true;
-         vim.treesitter.highlight.enable = true;
+         vim.treesitter = {
+            enable = true;
+         };
 
          vim.languages = {
             enableLSP = true;
@@ -83,6 +83,9 @@
             shiftwidth = 3;
             softtabstop = 3;
             expandtab = true;
+
+            conceallevel = 2;
+            concealcursor = "niv";
          };
 
          vim.utility = {
@@ -104,7 +107,7 @@
 
          vim.notes = {
             obsidian = {
-               enable = false;
+               enable = true;
                setupOpts = {
                   completion.nvim_cmp = true;
                   workspaces = [
