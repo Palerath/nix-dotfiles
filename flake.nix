@@ -32,29 +32,30 @@
             perikon = lib.nixosSystem {
                system = "x86_64-linux";
                modules = [ 
-                  ./perikon/configuration.nix
-                  # home-manager.nixosModules.home-manager {
-                  # 	home-manager.useGlobalPkgs = true;
-                  # 	home-manager.useUserPackages =true;
-                  # 	home-manager.users.perihelie = ./users/perihelie/home.nix;
-                  # home-manager.extraSpecialArgs = [];
-                  # }
+                  ./perikon/configuration.nixnixpkgs
 
+                  home-manager.nixosModules.home-manager {
+                     home-manager.useGlobalPkgs = true;
+                     home-manager.useUserPackages =true;
+                     home-manager.users."perihelie" = ./users/perihelie/home.nix;
+                  }
+
+                  nvf.homeManagerModules.nvf
                ];
                specialArgs = {inherit inputs;};
             };
          };
 
-         homeConfigurations = {
-            "perihelie" = home-manager.lib.homeManagerConfiguration {
-               pkgs = nixpkgs.legacyPackages."x86_64-linux";
-               modules = [ 
-                  ./users/perihelie/home.nix 
-                  nvf.homeManagerModules.nvf
-               ];
-               extraSpecialArgs = {inherit inputs;};
-            };
-         };
+         #homeConfigurations = {
+         #  "perihelie" = home-manager.lib.homeManagerConfiguration {
+         #     pkgs = nixpkgs.legacyPackages."x86_64-linux";
+         #     modules = [ 
+         #     ./users/perihelie/home.nix 
+         #        nvf.homeManagerModules.nvf
+         #     ];
+         #     extraSpecialArgs = {inherit inputs;};
+         #  };
+         #  };
 
       };
 

@@ -43,6 +43,7 @@
       chafa
       kitty-img
       libsixel
+      krita
 
       # fonts
       nerd-fonts.iosevka
@@ -58,6 +59,7 @@
       powerline-fonts
       powerline-symbols
       noto-fonts-emoji
+      nerd-fonts.agave
    ];
 
    programs.git = {
