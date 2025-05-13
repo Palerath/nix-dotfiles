@@ -24,38 +24,30 @@
    outputs = { self, nixpkgs, home-manager, nvf, hyprland, hyprland-plugins, nix-colors, ... }@inputs:
       let 
          lib = nixpkgs.lib;
-         pkgs = nixpkgs.legacyPackages."x86_64-linux";
       in
          {
 
          nixosConfigurations = {
             perikon = lib.nixosSystem {
                system = "x86_64-linux";
-               modules = [ 
-                  ./perikon/configuration.nixnixpkgs
-
-                  home-manager.nixosModules.home-manager {
-                     home-manager.useGlobalPkgs = true;
-                     home-manager.useUserPackages =true;
-                     home-manager.users."perihelie" = ./users/perihelie/home.nix;
-                  }
-
-                  nvf.homeManagerModules.nvf
-               ];
                specialArgs = {inherit inputs;};
+               modules = [ 
+                  ./perikon/configuration.nix
+               ];        
             };
          };
 
-         #homeConfigurations = {
-         #  "perihelie" = home-manager.lib.homeManagerConfiguration {
-         #     pkgs = nixpkgs.legacyPackages."x86_64-linux";
-         #     modules = [ 
-         #     ./users/perihelie/home.nix 
-         #        nvf.homeManagerModules.nvf
-         #     ];
-         #     extraSpecialArgs = {inherit inputs;};
-         #  };
-         #  };
+         # STANDALONE CONFIG
+         homeConfigurations = {
+            "perihelie" = home-manager.lib.homeManagerConfiguration {
+               pkgs = nixpkgs.legacyPackages."x86_64-linux";
+               modules = [ 
+                  ./users/perihelie/home.nix 
+                  nvf.homeManagerModules.nvf
+               ];
+               extraSpecialArgs = {inherit inputs;};
+            };
+         };
 
       };
 

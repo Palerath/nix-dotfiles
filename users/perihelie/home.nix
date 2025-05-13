@@ -10,6 +10,8 @@
 
    nixpkgs.config.allowUnfree = true;
 
+   fonts.fontconfig.enable = true;
+
    home.packages = with pkgs; [
       git
       discord
@@ -44,22 +46,6 @@
       kitty-img
       libsixel
       krita
-
-      # fonts
-      nerd-fonts.iosevka
-      nerd-fonts.iosevka-term
-      nerd-fonts.jetbrains-mono
-      ipafont
-      ipaexfont
-      migu
-      jigmo
-      noto-fonts-cjk-sans
-      noto-fonts-cjk-serif
-      font-awesome
-      powerline-fonts
-      powerline-symbols
-      noto-fonts-emoji
-      nerd-fonts.agave
    ];
 
    programs.git = {

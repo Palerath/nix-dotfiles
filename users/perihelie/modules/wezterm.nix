@@ -12,7 +12,7 @@
          config.initial_rows = 28
 
          -- or, changing the font size and color scheme.
-         config.font = wezterm.font "Agave"
+         config.font = wezterm.font("iosevka")
          config.font_size = 14
          config.color_scheme = 'Afterglow'
 
