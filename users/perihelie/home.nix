@@ -10,8 +10,6 @@
 
    nixpkgs.config.allowUnfree = true;
 
-   fonts.fontconfig.enable = true;
-
    home.packages = with pkgs; [
       git
       discord
@@ -56,7 +54,7 @@
    };
 
    home.sessionVariables = {
-      EDITOR = "neovim";
+      EDITOR = "nvim";
    };
 
    imports = [
