@@ -19,6 +19,7 @@
          ./modules/flatpak.nix
          ./modules/gayming.nix
          ./modules/fonts.nix
+         ./modules/keyboarding.nix
       ];
 
    security.sudo.enable = true;
@@ -51,12 +52,6 @@
       LC_PAPER = "fr_FR.UTF-8";
       LC_TELEPHONE = "fr_FR.UTF-8";
       LC_TIME = "fr_FR.UTF-8";
-   };
-
-   # Configure keymap in X11
-   services.xserver.xkb = {
-      layout = "us";
-      variant = "";
    };
 
    # Enable CUPS to print documents.
@@ -106,10 +101,22 @@
    environment.systemPackages = with pkgs; [
       vim
       home-manager
-      qwerty-fr
       slop
       jan
    ];
+
+   #  system.autoUpgrade = {
+   #    enable = true;
+   #    flake = inputs.self.outPath;
+   #    flags = [
+   #       "--update-input"
+   #       "nixpkgs"
+   #       "--no-write-lock-file"
+   #       "-L" # print build logs
+   #    ];
+   #    dates = "02:00";
+   #    randomizedDelaySec = "45min";
+   # };
 
    # Some programs need SUID wrappers, can be configured further or are
    # started in user sessions.
