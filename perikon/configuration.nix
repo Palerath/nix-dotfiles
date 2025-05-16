@@ -109,6 +109,10 @@
       qwerty-fr
       slop
       jan
+      winePackages.unstableFull
+      wine64Packages.unstableFull
+      dotnet-sdk
+      winetricks
    ];
 
    # Some programs need SUID wrappers, can be configured further or are
