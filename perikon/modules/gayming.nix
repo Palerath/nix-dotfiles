@@ -4,36 +4,26 @@
       gamemode
       protonup-ng
       protonup-qt
+      lutris
       wine
       bottles
       mangohud
       xdg-desktop-portal-gtk
       steam-devices-udev-rules
+      wineWowPackages.unstableFull
+      winePackages.unstableFull
+      wine64Packages.unstableFull
+      dotnet-sdk
+      winetricks
+      protontricks
+      dxvk
+      vulkan-loader
+      libGL
+      libgcrypt
    ];
 
    xdg.portal.enable = true;
    xdg.portal.extraPortals = with pkgs; [xdg-desktop-portal-gtk];
-
-   programs.lutris-unwrapped = {
-      enable = true;
-      package = pkgs.lutris.override {
-         extraPkgs = pkgs: with pkgs; [
-            wineWowPackages
-            winePackages
-            vulkan-loader
-            dxvk
-            gamemode
-         ];
-         extraLibraries = pkgs: with pkgs; [
-            libGL
-            libgcrypt
-         ];
-      };
-
-      env = ''
-         export DXVK_HUD=full
-      '';
-   };
 
    programs.steam = {
       enable = true;
