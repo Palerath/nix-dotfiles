@@ -29,7 +29,7 @@
    };
 
    # Ibus auto-start
-   # environment.pathsToLink = [ "/etc/xdg/autostart" ];
+   environment.pathsToLink = [ "/etc/xdg/autostart" ];
    environment.etc = {
       "xdg/autostart/ibus-wayland.desktop".text = ''
       [Desktop Entry]
@@ -39,6 +39,17 @@
       OnlyShowIn=KDE;
       X-KDE-Wayland-ImKey=ibus
       '';
+   };
+
+   environment.etc = {
+      "xdg/ibus-setup/anthy" = {
+         text = ''
+      [Engine]
+      PagePeriod=0
+      PageComma=0
+         '';
+         mode = "0644";
+      };
    };
 
    # environment variables for fcitx5
