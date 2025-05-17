@@ -1,12 +1,20 @@
-{config, pkgs, ...}:
 {
-   services.xserver = {
+   services.displayManager = {
       enable = true;
-      displayManager.sddm.enable = true;
-      displayManager.gdm.enable = false;
-      displayManager.lightdm.enable = false;
+      sddm = {
+         enable = true;
+         setupScript = ''
+            unset QT_IM_MODULE
+            unset GTK_IM_MODULE
+         '';
+      };
 
-      displayManager.defaultSession = "plasma";
+      defaultSession = "plasma";
+   };
+
+   services.xserver.displayManager = {
+      gdm.enable = false;
+      lightdm.enable = false;
    };
 
    systemd.services."lightdm.service" = {

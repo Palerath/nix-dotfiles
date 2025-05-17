@@ -1,17 +1,39 @@
 { pkgs, lib, ... }:
 {
    environment.systemPackages = with pkgs; [ 
-      ibus 
+      ibus
       qwerty-fr
+      fcitx5
    ];
+
+   programs.dconf.enable = true;
 
    i18n.inputMethod = {
       enable = true;
       type = "ibus";
-      ibus.engines = with pkgs.ibus-engines; [ anthy ];
+      ibus = { 
+         engines = with pkgs.ibus-engines; [ anthy ];
+         panel = null;
+      };
       # fcitx5.addons = with pkgs; [ fcitx5-gtk fcitx5-configtool pkgs.fcitx5-mozc ];
       # fcitx5.waylandFrontend = true;   # Wayland mode (suppress env warnings):contentReference[oaicite:3]{index=3}
    };
+
+   # Ibus env-variables
+   environment.variables = {
+      QT_IM_MODULE = lib.mkForce "";
+      GTK_IM_MODULE = lib.mkForce "";
+   };
+
+   # environment variables for fcitx5
+   # environment.variables = {
+   # GTK_IM_MODULE = "fcitx";
+   # QT_IM_MODULE  = "fcitx";
+   # XMODIFIERS    = lib.mkDefault "@im=fcitx5";
+   # XIM_PROGRAM   = "fcitx5";
+   # };
+
+   # Ibus auto-start
 
 
    services.xserver = {
@@ -20,14 +42,6 @@
          variant = ",";
          options = "grp:alt_shift_toggle,grp_led:scroll";
       };
-   };
-
-   # Set environment variables for fcitx5
-   environment.variables = {
-      GTK_IM_MODULE = "ibus";
-      QT_IM_MODULE  = "ibus";
-      XMODIFIERS    = lib.mkDefault "@im=ibus";
-      XIM_PROGRAM   = "ibus-daemon";
    };
 
    # Locales and keyboard layout toggling

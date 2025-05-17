@@ -23,7 +23,6 @@
       vesktop
       btop
       qbittorrent
-      dconf
       slurp
       wl-clipboard
       obsidian

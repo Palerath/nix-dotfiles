@@ -4,14 +4,11 @@
    hardware.graphics = {
       enable = true;
       enable32Bit = true;
-   };
-
-   hardware.opengl = {
-      enable = true;
       extraPackages = with pkgs;[
          mesa
          vulkan-loader
       ];
+
    };
 
    # Specify the NVIDIA driver
