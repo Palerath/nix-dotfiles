@@ -16,7 +16,7 @@
       extraLayouts.qwerty-fr = {
          description = "QWERTY-FR layout";
          languages = [ "fr" ];
-         symbolsFile = /etc/nixos/xkb/symbols/custom/qwerty-fr; # Local file path
+         symbolsFile = ./symbols/us_qwerty-fr; # Local file path
       };
 
       layout = "qwerty-fr";
