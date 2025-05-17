@@ -3,12 +3,11 @@
       enable = true;
       sddm = {
          enable = true;
-         setupScript = ''
-            unset QT_IM_MODULE
-            unset GTK_IM_MODULE
-         '';
+         wayland.enable = true;
+         settings = {
+            WaylandSession.inputMethod = "ibus";
+         };
       };
-
       defaultSession = "plasma";
    };
 
