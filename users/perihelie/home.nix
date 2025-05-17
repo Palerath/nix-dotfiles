@@ -43,6 +43,7 @@
       kitty-img
       libsixel
       krita
+      dconf
    ];
 
    programs.git = {
@@ -64,9 +65,18 @@
       ./modules/mpv.nix
       ./modules/hypr/default.nix
       ./modules/fastfetch.nix
+      ./modules/session-variables.nix
    ];
 
    fonts.fontconfig.enable = true;
+
+
+   dconf.settings = {
+      "org.kde.keyboard" = {
+         layouts = [ "qwerty-fr" ];
+         defaultLayout = "qwerty-fr";
+      };
+   };
 
 
    # Let Home Manager install and manage itself.

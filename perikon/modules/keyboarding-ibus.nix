@@ -4,7 +4,6 @@
       ibus
       ibus-engines.anthy
       qwerty-fr
-      fcitx5
    ];
 
    programs.dconf.enable = true;
@@ -16,8 +15,6 @@
          engines = with pkgs.ibus-engines; [ anthy ];
          panel = null;
       };
-      # fcitx5.addons = with pkgs; [ fcitx5-gtk fcitx5-configtool pkgs.fcitx5-mozc ];
-      # fcitx5.waylandFrontend = true;   # Wayland mode (suppress env warnings):contentReference[oaicite:3]{index=3}
    };
 
    # Ibus env-variables
@@ -52,16 +49,6 @@
       };
    };
 
-   # environment variables for fcitx5
-   # environment.variables = {
-   # GTK_IM_MODULE = "fcitx";
-   # QT_IM_MODULE  = "fcitx";
-   # XMODIFIERS    = lib.mkDefault "@im=fcitx5";
-   # XIM_PROGRAM   = "fcitx5";
-   # };
-
-   # Ibus auto-start
-
 
    services.xserver = {
       xkb = {
@@ -83,11 +70,5 @@
    environment.variables.XKB_DEFAULT_LAYOUT = "us,fr";
    environment.variables.XKB_DEFAULT_OPTIONS = "grp:alt_shift_toggle";
 
-
-   # boot.kernelParams = [ "vm.vfs_cache_pressure=50" ];
-   # systemd.user.extraConfig = ''
-   #   DefaultLimitDATA=4G
-   #   DefaultLimitRSS=4G
-   # '';
 }
 

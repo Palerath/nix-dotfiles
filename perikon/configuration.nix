@@ -19,7 +19,7 @@
          ./modules/flatpak.nix
          ./modules/gayming.nix
          ./modules/fonts.nix
-         ./modules/keyboarding.nix
+         ./modules/keyboarding-fcitx5.nix
       ];
 
    security.sudo.enable = true;
