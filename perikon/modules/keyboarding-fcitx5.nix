@@ -1,7 +1,8 @@
-{pkgs , ...}:
+{pkgs , ... }:
 {
    i18n.inputMethod = {
-      enabled = "fcitx5";
+      enable = true;
+      type = "fcitx5";
       fcitx5.addons = with pkgs; [ 
          fcitx5-mozc         # Japanese conversion engine
          fcitx5-gtk          # GTK integration
@@ -12,7 +13,7 @@
 
    # QWERTY-FR
    environment.systemPackages = [ pkgs.qwerty-fr ];
-   services.xserver = {
+   services.xserver.xkb = {
       extraLayouts.qwerty-fr = {
          description = "QWERTY-FR layout";
          languages = [ "fr" ];
@@ -20,7 +21,7 @@
       };
 
       layout = "qwerty-fr";
-      xkbVariant = "";
+      variant = "";
    };
 
    systemd.services.display-manager = {

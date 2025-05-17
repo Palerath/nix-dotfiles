@@ -6,13 +6,13 @@
    };
 
    # Fcitx5 Plasma integration
-   xdg.configFile."fcitx5/profile".text = ''
-      [Profile]
-      DefaultIM=mozc
-   '';
+   #  xdg.configFile."fcitx5/profile".text = ''
+   #  [Profile]
+   #   DefaultIM=mozc
+   # '';
 
-   xdg.configFile."fcitx5/config".text = ''
-      [Hotkey]
-      TriggerKeys=Control+Shift
-   '';
+   #    xdg.configFile."fcitx5/config".text = ''
+   #   [Hotkey]
+   #   TriggerKeys=Control+Shift
+   # '';
 }
