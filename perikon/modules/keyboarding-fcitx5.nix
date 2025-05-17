@@ -10,25 +10,13 @@
       fcitx5.waylandFrontend = true; # Critical for Wayland compatibility
    };
 
-   # Plasma integration
-   xdg.configFile."fcitx5/profile".text = ''
-      [Profile]
-      DefaultIM=mozc
-   '';
-
-   xdg.configFile."fcitx5/config".text = ''
-      [Hotkey]
-      TriggerKeys=Control+Shift
-   '';
-
-
    # QWERTY-FR
    environment.systemPackages = [ pkgs.qwerty-fr ];
    services.xserver = {
       extraLayouts.qwerty-fr = {
          description = "QWERTY-FR layout";
          languages = [ "fr" ];
-         symbolsFile = ./custom/qwerty-fr; # Local file path
+         symbolsFile = /etc/nixos/xkb/symbols/custom/qwerty-fr; # Local file path
       };
 
       layout = "qwerty-fr";
