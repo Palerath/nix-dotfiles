@@ -1,5 +1,11 @@
 {pkgs, lib, ... }:
 {
+   
+   home.packages = [ 
+      pkgs.redshift-plasma-applet 
+      pkgs.geoclue2
+   ];
+
    services.redshift = {
       enable = true;
       package = pkgs.redshift;
@@ -17,7 +23,7 @@
             # brightness-day = "1.0";   
             # brightness-night = "0.7";
             temp-day = lib.mkDefault "6500";
-            temp-night = lib.mkDefault "3700";
+            temp-night = lib.mkDefault "2700";
             transition = true;
          };
          randr = {

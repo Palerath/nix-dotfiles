@@ -103,6 +103,7 @@
       home-manager
       slop
       jan
+      mecab
    ];
 
    #  system.autoUpgrade = {
