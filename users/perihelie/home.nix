@@ -66,6 +66,7 @@
       ./modules/hypr/default.nix
       ./modules/fastfetch.nix
       ./modules/session-variables.nix
+      ./modules/redshift.nix
    ];
 
    fonts.fontconfig.enable = true;
