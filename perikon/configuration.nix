@@ -104,6 +104,7 @@
       slop
       jan
       mecab
+      mozcdic-ut-neologd
    ];
 
    #  system.autoUpgrade = {
