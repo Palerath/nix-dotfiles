@@ -44,6 +44,7 @@
       libsixel
       krita
       dconf
+      glances
    ];
 
    programs.git = {
