@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ inputs, config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
    imports =
@@ -36,12 +36,6 @@
    networking.networkmanager.enable = true;
 
    nix.settings.experimental-features = ["nix-command" "flakes"];
-
-   nixpkgs.config.packageOverrides = pkgs: {
-      nur = import inputs.nur {
-         inherit pkgs;
-      };
-   };
 
    # Set your time zone.
    time.timeZone = "Europe/Paris";
@@ -91,9 +85,6 @@
       isNormalUser = true;
       description = "perihelie";
       extraGroups = [ "networkmanager" "wheel" ];
-      packages = with pkgs; [
-         #  thunderbird
-      ];
    };
 
    boot.kernelPackages = pkgs.linuxPackages_zen;
