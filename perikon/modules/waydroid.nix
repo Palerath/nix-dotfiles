@@ -11,7 +11,7 @@
   
    environment.systemPackages = with pkgs; [ 
       waydroid
-      adb
+      android-tools
       nur.repos.ataraxiasjel.waydroi-script
    ];
    boot.kernelModules = [ "binder_linux" ];

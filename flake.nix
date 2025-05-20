@@ -19,11 +19,14 @@
          url = "github:hyprwm/hyprland-plugins";
          inputs.hyprland.follows = "hyprland";   
       };
+
       nix-colors.url = "github:misterio77/nix-colors";
+
       nur = {
          url = "github:nix-community/NUR";
          inputs.nixpkgs.follows = "nixpkgs";
       };
+
    };
    outputs = { self, nixpkgs, home-manager, nvf, hyprland, hyprland-plugins, nix-colors, nur, ... }@inputs:
       let 
