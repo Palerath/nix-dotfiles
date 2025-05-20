@@ -37,6 +37,12 @@
 
    nix.settings.experimental-features = ["nix-command" "flakes"];
 
+   nixpkgs.config.packageOverrides = pkgs: {
+      nur = import inputs.nur {
+         inherit pkgs;
+      };
+   };
+
    # Set your time zone.
    time.timeZone = "Europe/Paris";
 

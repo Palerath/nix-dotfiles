@@ -1,4 +1,4 @@
-{pkgs, ... }:
+{pkgs, nur, ... }:
 {
    virtualisation.waydroid.enable = true;
 
@@ -12,7 +12,7 @@
    environment.systemPackages = with pkgs; [ 
       waydroid
       android-tools
-      nur.repos.ataraxiasjel.waydroi-script
+      nur.repos.ataraxiasjel.waydroid-script
    ];
    boot.kernelModules = [ "binder_linux" ];
 
