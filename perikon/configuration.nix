@@ -20,6 +20,7 @@
          ./modules/gayming.nix
          ./modules/fonts.nix
          ./modules/keyboarding-fcitx5.nix
+         ./modules/waydroid.nix
       ];
 
    security.sudo.enable = true;
@@ -35,6 +36,12 @@
    networking.networkmanager.enable = true;
 
    nix.settings.experimental-features = ["nix-command" "flakes"];
+
+   nixpkgs.config.packageOverrides = pkgs: {
+      nur = import inputs.nur {
+         inherit pkgs;
+      };
+   };
 
    # Set your time zone.
    time.timeZone = "Europe/Paris";

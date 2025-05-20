@@ -1,4 +1,4 @@
-{config, pkgs, ...}:
+{pkgs, ... }:
 {
    virtualisation.waydroid.enable = true;
 
@@ -8,7 +8,12 @@
       allowedUDPPorts = [ 53 ];
    };
 
-   environment.systemPackages = with pkgs; [ waydroid ];
+  
+   environment.systemPackages = with pkgs; [ 
+      waydroid
+      adb
+      nur.repos.ataraxiasjel.waydroi-script
+   ];
    boot.kernelModules = [ "binder_linux" ];
 
 }

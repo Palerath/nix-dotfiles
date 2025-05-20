@@ -20,8 +20,12 @@
          inputs.hyprland.follows = "hyprland";   
       };
       nix-colors.url = "github:misterio77/nix-colors";
+      nur = {
+         url = "github:nix-community/NUR";
+         inputs.nixpkgs.follows = "nixpkgs";
+      };
    };
-   outputs = { self, nixpkgs, home-manager, nvf, hyprland, hyprland-plugins, nix-colors, ... }@inputs:
+   outputs = { self, nixpkgs, home-manager, nvf, hyprland, hyprland-plugins, nix-colors, nur, ... }@inputs:
       let 
          lib = nixpkgs.lib;
       in
