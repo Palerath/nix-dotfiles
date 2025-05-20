@@ -23,7 +23,7 @@
       nix-colors.url = "github:misterio77/nix-colors";
 
    };
-   outputs = { self, nixpkgs, home-manager, nvf, hyprland, hyprland-plugins, nix-color, ... }@inputs:
+   outputs = { self, nixpkgs, home-manager, nvf, hyprland, hyprland-plugins, nix-colors, ... }@inputs:
       let 
          lib = nixpkgs.lib;
       in
