@@ -18,8 +18,8 @@
          in{
             rebuild = "sudo nixos-rebuild switch --flake ${flakePath}";
             hms = "home-manager switch --flake ${flakePath}";
-            nv = "nvim";
-
+            nv = "nvim .";
+            nvim = "nvim .";
          };
 
       initContent = ''

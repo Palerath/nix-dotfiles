@@ -90,8 +90,16 @@
          vim.binds = {
             whichKey.enable = true;
             cheatsheet.enable = true;
-            hardtime-nvim.enable = true;
+            hardtime-nvim.enable = false;
          };
+
+         vim.keymaps = [
+            {
+               key = "<leader>o";
+               mode = "n";
+               action = "<CMD>Oil %:p:h<CR>";
+            }
+         ];
 
          vim.tabline.nvimBufferline.enable = true;
          vim.filetree.neo-tree.enable = true;
@@ -103,7 +111,6 @@
             inlayHints.enable = true;
             nvim-docs-view = {
                enable = true;
-               # setupOpts = {};
             };
          };
 
@@ -161,6 +168,7 @@
                setupOpts = {
                   default_file_explorer = true;
                   show_hidden = true;
+                  colums = [ "icon" "size" "mtime" ];
                };
             };
          };
@@ -178,7 +186,7 @@
             obsidian = {
                enable = true;
                setupOpts = {
-                  completion.nvim_cmp = true;
+                  completion.nvim_cmp = false;
 
                   workspaces = [
                      {
@@ -186,6 +194,16 @@
                         path = "/home/perihelie/drives/hdd/Documents/Cocoon";
                      }
                   ];
+
+                  daily_notes = {
+                     date_format = "%Y-%M-%D";
+                     folder = "500 - Journal/501 - Dailies";
+                     template = "Daily template";
+                  };
+
+                  templates = {
+                     folder = "Templates";
+                  };
                };
             };
             mind-nvim.enable = true;
