@@ -90,7 +90,7 @@
    nixpkgs.config.allowUnfree = true;
    # Install firefox.
    programs.firefox.enable = true;
-
+   programs.ssh.askPassword = "";
 
    # List packages installed in system profile. To search, run:
    # $ nix search wget
