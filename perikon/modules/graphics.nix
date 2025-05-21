@@ -1,43 +1,59 @@
-{pkgs, ...}:
+{pkgs, config, ...}:
 {
    environment.systemPackages = with pkgs; [
+      glxinfo
       vulkan-loader
       vulkan-tools
       vulkan-validation-layers 
       libGL
       libgcrypt
-
+      glib
+      glib-networking
+      gsettings-desktop-schemas
+      openssl
    ];
 
    # Enable graphics support
    hardware.graphics = {
       enable = true;
-      enable32Bit = true;
-      extraPackages = with pkgs;[
-         mesa
+      driSupport = true;
+      driSupport32Bit = true;  
+      extraPackages = with pkgs; [
          vaapiVdpau
          libvdpau-va-gl
-         vulkan-loader
       ];
-
-      extraPackages32 = with pkgs.pkgsi686Linux; [
+      extraPackages32 = with pkgs.pkgsi686Linux; [ 
+         libva 
          vaapiVdpau
          libvdpau-va-gl
-         glib-networking
       ];
 
    };
 
-   # Specify the NVIDIA driver
-   services.xserver.videoDrivers = [ "nvidia" ];
-
    hardware.nvidia = {
       open = true;
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
       videoAcceleration = true;
       powerManagement.enable = true;
       powerManagement.finegrained = false;
       modesetting.enable = true; 
       nvidiaSettings = true;
+   };
+
+   services.xserver = {
+      enable = true;
+      videoDrivers = [ "nvidia" ];
+
+      config = ''
+      Section "Device"
+          Identifier  "NVIDIA"
+          Driver      "nvidia"
+          Option      "NoLogo" "true"
+          Option      "UseEDID" "true"
+          Option      "AllowIndirectGLXProtocol" "off"
+          Option      "TripleBuffer" "on"
+      EndSection
+      '';
    };
 
    xdg.portal = {
@@ -56,6 +72,7 @@
       XDG_CURRENT_DESKTOP = "KDE";
       # Tell QtWebEngine-based apps to use the portal
       QTWEBENGINE_USE_PORTAL = "1";
-
+      VK_LOADER_DEBUG = "all";
+      VK_LAYER_PATH = "${pkgs.vulkan-validation-layers}/share/vulkan/explicit_layer.d";
    };
 }

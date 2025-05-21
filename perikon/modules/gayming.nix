@@ -9,17 +9,21 @@
 
       # Wine and Proton
       wine
+      wine-wayland
+      wine64
       winetricks
       protonup-ng
       protonup-qt
       protontricks
-      wineWowPackages.unstableFull
-      winePackages.unstableFull
-      wine64Packages.unstableFull
+      wineWowPackages.stable
+      winePackages.stable
+      wine64Packages.stable
 
       # Gaming utilities
       gamemode
+      gamescope
       mangohud
+      goverlay
       dxvk
 
       # Graphics and system dependencies
@@ -34,6 +38,13 @@
 
       # Additional dependencies
       dotnet-sdk
+      xorg.libXcursor
+      xorg.libXi
+      xorg.libXinerama
+      xorg.libXrandr
+      libpulseaudio
+      libvdpau
+      pavucontrol
    ];
 
    xdg.portal = {
@@ -56,6 +67,8 @@
          extraPkgs = pkgs: with pkgs; [
             libkrb5
             keyutils
+            glib-networking
+            libgudev
          ];
       };
    };
@@ -65,6 +78,13 @@
       settings = {
          general = {
             renice = 10;  # Process priority when gaming
+         };
+         gpu = {
+            apply_gpu_optimisations = 1;
+            gpu_device = 0;
+         };
+         custom = {
+            start = "${pkgs.libglvnd}/bin/libglvnd";
          };
       };
    };
@@ -77,5 +97,19 @@
          source = "${pkgs.gamescope}/bin/gamescope";
       };
    };
+
+   environment.variables = {
+      # IMPORTANT: These help with NVIDIA and Vulkan performance
+      __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+      __GL_SHADER_DISK_CACHE = "1";
+      __GL_SHADER_DISK_CACHE_SIZE = "1073741824"; # 1GB shader cache
+      PROTON_ENABLE_NVAPI = "1"; # For DLSS support in games
+      VKD3D_CONFIG = "dxr"; # For DirectX raytracing support
+
+      # Optional: Use Gamescope for better performance in some games
+      # GAMESCOPE_FORCE_FULLSCREEN = "1";
+      # STEAM_GAMESCOPE_PATH_PREFIX 
+   };
+
 
 }

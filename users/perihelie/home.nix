@@ -67,8 +67,7 @@
       ./modules/hypr/default.nix
       ./modules/fastfetch.nix
       ./modules/session-variables.nix
-      ./modules/redshift.nix
-      # ./modules/peridroid.nix
+      ./modules/desktop-entries.nix
    ];
 
    fonts.fontconfig.enable = true;
@@ -80,6 +79,8 @@
          defaultLayout = "qwerty-fr";
       };
    };
+
+
 
 
    # Let Home Manager install and manage itself.

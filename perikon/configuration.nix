@@ -20,7 +20,7 @@
          ./modules/gayming.nix
          ./modules/fonts.nix
          ./modules/keyboarding-fcitx5.nix
-         # ./modules/waydroid.nix
+         ./modules/kernel.nix
       ];
 
    security.sudo.enable = true;
@@ -84,10 +84,8 @@
    users.users.perihelie = {
       isNormalUser = true;
       description = "perihelie";
-      extraGroups = [ "networkmanager" "wheel" ];
+      extraGroups = [ "networkmanager" "wheel" "video" "audio" "input" "gamemode" ];
    };
-
-   boot.kernelPackages = pkgs.linuxPackages_zen;
 
    nixpkgs.config.allowUnfree = true;
    # Install firefox.
@@ -103,10 +101,6 @@
       jan
       mecab
       mozcdic-ut-neologd
-
-      glib
-      glib-networking
-      gsettings-desktop-schemas
    ];
 
    services.gnome.glib-networking.enable = true;

@@ -13,7 +13,12 @@
       font-awesome
       powerline-fonts
       powerline-symbols
+      noto-fonts
+      noto-fonts-cjk
       noto-fonts-emoji
       nerd-fonts.agave
+      liberation_ttf
+      fira-code
+      fira-code-symbols
    ];
 }
