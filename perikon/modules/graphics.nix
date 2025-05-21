@@ -66,7 +66,6 @@
    systemd.user.services."xdg-desktop-portal".enable = true;
 
    environment.sessionVariables = {
-      XDG_CURRENT_DESKTOP = "KDE";
       # Tell QtWebEngine-based apps to use the portal
       QTWEBENGINE_USE_PORTAL = "1";
       VK_LOADER_DEBUG = "all";
