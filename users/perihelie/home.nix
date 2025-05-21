@@ -68,6 +68,7 @@
       ./modules/fastfetch.nix
       ./modules/session-variables.nix
       ./modules/desktop-entries.nix
+      ./modules/gammastep.nix
    ];
 
    fonts.fontconfig.enable = true;
