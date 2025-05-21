@@ -72,9 +72,9 @@
                      height = 0.80;
                      preview_cutoff = 120;
                   };
-                  file_previewer = "require('telescope.previewers').vim_buffer_cat.new";
-                  grep_previewer = "require('telescope.previewers').vim_buffer_vimgrep.new";
-                  qflist_previewer = "require('telescope.previewers').vim_buffer_qflist.new";
+                  # file_previewer = "require('telescope.previewers').vim_buffer_cat.new";
+                  # grep_previewer = "require('telescope.previewers').vim_buffer_vimgrep.new";
+                  # qflist_previewer = "require('telescope.previewers').vim_buffer_qflist.new";
                };
                pickers = {
                   find_files = {
@@ -167,12 +167,7 @@
                mode = "n";
                action = "<CMD>Telescope find_files<CR>";
             }
-            {
-               key = "<leader>sb";
-               mode = "n";
-               action = "<CMD>SidebarNvimToggle<CR>";
-            }
-         ];
+        ];
 
          vim.tabline.nvimBufferline.enable = true;
          vim.snippets.luasnip.enable = true;
@@ -345,7 +340,6 @@
    # Enhanced package list for better functionality
    home.packages = with pkgs; [ 
       vimPlugins.plenary-nvim 
-      vimPlugins.telescope-nvim
       # Tools for better file linking and markdown support
       ripgrep      # For telescope live_grep
       fd           # For telescope find_files
