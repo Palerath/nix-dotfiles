@@ -1,12 +1,29 @@
 {pkgs, ...}:
 {
+   environment.systemPackages = with pkgs; [
+      vulkan-loader
+      vulkan-tools
+      vulkan-validation-layers 
+      libGL
+      libgcrypt
+
+   ];
+
    # Enable graphics support
    hardware.graphics = {
       enable = true;
       enable32Bit = true;
       extraPackages = with pkgs;[
          mesa
+         vaapiVdpau
+         libvdpau-va-gl
          vulkan-loader
+      ];
+
+      extraPackages32 = with pkgs.pkgsi686Linux; [
+         vaapiVdpau
+         libvdpau-va-gl
+         glib-networking
       ];
 
    };
@@ -19,10 +36,7 @@
       videoAcceleration = true;
       powerManagement.enable = true;
       powerManagement.finegrained = false;
-      modesetting = {
-         enable = true;
-      };
-
+      modesetting.enable = true; 
       nvidiaSettings = true;
    };
 

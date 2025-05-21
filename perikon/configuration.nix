@@ -20,7 +20,7 @@
          ./modules/gayming.nix
          ./modules/fonts.nix
          ./modules/keyboarding-fcitx5.nix
-         ./modules/waydroid.nix
+         # ./modules/waydroid.nix
       ];
 
    security.sudo.enable = true;
@@ -103,7 +103,13 @@
       jan
       mecab
       mozcdic-ut-neologd
+
+      glib
+      glib-networking
+      gsettings-desktop-schemas
    ];
+
+   services.gnome.glib-networking.enable = true;
 
    #  system.autoUpgrade = {
    #    enable = true;

@@ -68,7 +68,7 @@
       ./modules/fastfetch.nix
       ./modules/session-variables.nix
       ./modules/redshift.nix
-      ./modules/peridroid.nix
+      # ./modules/peridroid.nix
    ];
 
    fonts.fontconfig.enable = true;

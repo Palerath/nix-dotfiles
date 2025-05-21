@@ -7,7 +7,7 @@
    ];
 
    services.redshift = {
-      enable = true;
+      enable = false;
       package = pkgs.redshift;
       tray = true;
       enableVerboseLogging  = false;    
