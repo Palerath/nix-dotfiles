@@ -105,6 +105,10 @@
       __GL_SHADER_DISK_CACHE_SIZE = "1073741824"; # 1GB shader cache
       PROTON_ENABLE_NVAPI = "1"; # For DLSS support in games
       VKD3D_CONFIG = "dxr"; # For DirectX raytracing support
+      WLR_NO_HARDWARE_CURSORS = "1";
+      LIBVA_DRIVER_NAME = "nvidia";
+      GBM_BACKEND = "nvidia-drm";
+      WLR_RENDERER = "vulkan";
 
       # Optional: Use Gamescope for better performance in some games
       # GAMESCOPE_FORCE_FULLSCREEN = "1";
