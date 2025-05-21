@@ -8,7 +8,7 @@
       settings = {
          logo = {
             #  source = "cirno.png";
-            source = "/home/perihelie/.config/fastfetch/cirno.png";
+            source = ".images/cirno.png";
             type = "kitty-direct";
             height = 20;
             width = 40;
