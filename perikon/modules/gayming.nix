@@ -5,7 +5,6 @@
       lutris
       bottles
       steam-run
-      gamescope
 
       # Wine and Proton
       wine
@@ -38,10 +37,6 @@
 
       # Additional dependencies
       dotnet-sdk
-      xorg.libXcursor
-      xorg.libXi
-      xorg.libXinerama
-      xorg.libXrandr
       libpulseaudio
       libvdpau
       pavucontrol
@@ -79,41 +74,9 @@
          general = {
             renice = 10;  # Process priority when gaming
          };
-         gpu = {
-            apply_gpu_optimisations = 1;
-            gpu_device = 0;
-         };
-         custom = {
-            start = "${pkgs.libglvnd}/bin/libglvnd";
-         };
       };
    };
 
-   security.wrappers = {
-      gamescope = {
-         owner = "root";
-         group = "root";
-         capabilities = "cap_sys_nice+ep";
-         source = "${pkgs.gamescope}/bin/gamescope";
-      };
-   };
-
-   environment.variables = {
-      # IMPORTANT: These help with NVIDIA and Vulkan performance
-      __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-      __GL_SHADER_DISK_CACHE = "1";
-      __GL_SHADER_DISK_CACHE_SIZE = "1073741824"; # 1GB shader cache
-      PROTON_ENABLE_NVAPI = "1"; # For DLSS support in games
-      VKD3D_CONFIG = "dxr"; # For DirectX raytracing support
-      WLR_NO_HARDWARE_CURSORS = "1";
-      LIBVA_DRIVER_NAME = "nvidia";
-      GBM_BACKEND = "nvidia-drm";
-      WLR_RENDERER = "vulkan";
-
-      # Optional: Use Gamescope for better performance in some games
-      # GAMESCOPE_FORCE_FULLSCREEN = "1";
-      # STEAM_GAMESCOPE_PATH_PREFIX 
-   };
 
 
 }

@@ -40,18 +40,7 @@
    services.xserver = {
       enable = true;
       videoDrivers = [ "nvidia" ];
-
-      config = ''
-      Section "Device"
-          Identifier  "NVIDIA"
-          Driver      "nvidia"
-          Option      "NoLogo" "true"
-          Option      "UseEDID" "true"
-          Option      "AllowIndirectGLXProtocol" "off"
-          Option      "TripleBuffer" "on"
-      EndSection
-      '';
-   };
+    };
 
    xdg.portal = {
       enable = true;
@@ -65,10 +54,4 @@
 
    systemd.user.services."xdg-desktop-portal".enable = true;
 
-   environment.sessionVariables = {
-      # Tell QtWebEngine-based apps to use the portal
-      QTWEBENGINE_USE_PORTAL = "1";
-      VK_LOADER_DEBUG = "all";
-      VK_LAYER_PATH = "${pkgs.vulkan-validation-layers}/share/vulkan/explicit_layer.d";
-   };
 }
