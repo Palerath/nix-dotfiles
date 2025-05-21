@@ -56,7 +56,44 @@
             theme = "gruvbox";
          };
 
-         vim.telescope.enable = true;
+         vim.telescope = {
+            enable = true;
+            setupOpts = {
+               defaults = {
+                  layout_strategy = "horizontal";
+                  layout_config = {
+                     horizontal = {
+                        preview_width = 0.6;
+                     };
+                     vertical = {
+                        mirror = false;
+                     };
+                     width = 0.87;
+                     height = 0.80;
+                     preview_cutoff = 120;
+                  };
+                  file_previewer = "require('telescope.previewers').vim_buffer_cat.new";
+                  grep_previewer = "require('telescope.previewers').vim_buffer_vimgrep.new";
+                  qflist_previewer = "require('telescope.previewers').vim_buffer_qflist.new";
+               };
+               pickers = {
+                  find_files = {
+                     theme = "dropdown";
+                     previewer = true;
+                  };
+                  live_grep = {
+                     theme = "ivy";
+                     previewer = true;
+                  };
+                  buffers = {
+                     theme = "dropdown";
+                     previewer = true;
+                     sort_lastused = true;
+                     sort_mru = true;
+                  };
+               };
+            };
+         };
 
          vim.autocomplete = {
             enableSharedCmpSources = true;
@@ -130,10 +167,14 @@
                mode = "n";
                action = "<CMD>Telescope find_files<CR>";
             }
+            {
+               key = "<leader>sb";
+               mode = "n";
+               action = "<CMD>SidebarNvimToggle<CR>";
+            }
          ];
 
          vim.tabline.nvimBufferline.enable = true;
-         vim.filetree.neo-tree.enable = true;
          vim.snippets.luasnip.enable = true;
          vim.autopairs.nvim-autopairs.enable = true;
 
@@ -166,10 +207,7 @@
 
             python.enable = true;
             lua.enable = true;
-            markdown = {
-               enable = true;
-               glow.enable = true;
-            };
+            markdown.enable = true;
             html.enable = true;
             java.enable = true;
             sql.enable = true;
@@ -223,7 +261,41 @@
                setupOpts = {
                   default_file_explorer = true;
                   show_hidden = true;
-                  columns = [ "icon" "size" "mtime" ]; 
+                  columns = [ "icon" "size" "mtime" ];
+               };
+            };
+            preview.glow.enable = true; 
+         };
+
+         vim.filetree.neo-tree = {
+
+            enable = true;
+
+            setupOpts = {
+               close_if_last_window = false;
+               enable_git_status = true;
+               enable_diagnostic = true;
+               sort_case_insensitive = false;
+               default_component_configs = {
+                  container = {
+                     enable_character_fade = true;
+                  };
+                  window = {
+                     position = "right";
+                     width = 50;
+                  };
+                  filesystem = {
+                     filtered_items = {
+                        visible = false;
+                        hide_dotfiles = false;
+                        hide_gitignored = false;
+                        hide_hidden = false;
+                     };
+                     follow_current_file = true;
+                     group_empty_dirs = true;
+                     hijack_netrw_behavior = "open_default";
+                     use_libuv_file_watcher = false;
+                  };
                };
             };
          };
@@ -237,7 +309,6 @@
 
          vim.comments.comment-nvim.enable = true;
 
-         # Replace obsidian-nvim with better markdown/note-taking setup
          vim.notes = {
             obsidian = {
                enable = true; 
@@ -267,12 +338,7 @@
             mind-nvim.enable = true;
             todo-comments.enable = true;
 
-
          };
-
-
-
-
       };
    };
 
@@ -286,6 +352,7 @@
       # Markdown tools
       glow         # Terminal markdown viewer
       pandoc       # Document converter
+      eza
    ];
 
 }
