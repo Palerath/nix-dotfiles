@@ -271,19 +271,21 @@
          };
 
 
-         # Enhanced package list for better functionality
-         home.packages = with pkgs; [ 
-            vimPlugins.plenary-nvim 
-            # Tools for better file linking and markdown support
-            ripgrep      # For telescope live_grep
-            fd           # For telescope find_files
-            fzf          # Alternative fuzzy finder
-            # Markdown tools
-            glow         # Terminal markdown viewer
-            pandoc       # Document converter
-         ];
+
 
       };
    };
+
+   # Enhanced package list for better functionality
+   home.packages = with pkgs; [ 
+      vimPlugins.plenary-nvim 
+      # Tools for better file linking and markdown support
+      ripgrep      # For telescope live_grep
+      fd           # For telescope find_files
+      fzf          # Alternative fuzzy finder
+      # Markdown tools
+      glow         # Terminal markdown viewer
+      pandoc       # Document converter
+   ];
 
 }
