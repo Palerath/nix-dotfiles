@@ -16,8 +16,6 @@
    # Enable graphics support
    hardware.graphics = {
       enable = true;
-      driSupport = true;
-      driSupport32Bit = true;  
       extraPackages = with pkgs; [
          vaapiVdpau
          libvdpau-va-gl
@@ -32,7 +30,6 @@
 
    hardware.nvidia = {
       open = true;
-      package = config.boot.kernelPackages.nvidiaPackages.stable;
       videoAcceleration = true;
       powerManagement.enable = true;
       powerManagement.finegrained = false;

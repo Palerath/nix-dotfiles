@@ -14,7 +14,7 @@
       powerline-fonts
       powerline-symbols
       noto-fonts
-      noto-fonts-cjk
+      noto-fonts-cjk-sans
       noto-fonts-emoji
       nerd-fonts.agave
       liberation_ttf
