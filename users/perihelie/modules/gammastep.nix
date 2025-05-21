@@ -8,8 +8,8 @@
 
       settings = {
          general = {
-            temp-day = 6500;
-            temp-night = 2700;
+            # temp-day = 6500;
+            # temp-night = 2700;
             gamma = 0.8;
             brightness-day = 1.0;
             brightness-night = 0.8;

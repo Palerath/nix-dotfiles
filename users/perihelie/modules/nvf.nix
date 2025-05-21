@@ -29,6 +29,8 @@
                enable = true;
                setupOpts.custom_colorcolumn = {
                   nix = "110";
+                  markdown = "80";
+                  yaml = "80";
                };
             };
 
@@ -64,6 +66,8 @@
                   sourcePlugins = [
                      "cmp-path"
                      "cmp-treesitter"
+                     "cmp-buffer"
+                     "cmp-nvim-lsp"
                   ];
                };
             };
@@ -85,7 +89,7 @@
          };
 
          vim.projects.project-nvim.enable = true;
-         vim.notify.nvim-notify.enable = false;
+         vim.notify.nvim-notify.enable = true;
 
          vim.binds = {
             whichKey.enable = true;
@@ -98,6 +102,33 @@
                key = "<leader>o";
                mode = "n";
                action = "<CMD>Oil %:p:h<CR>";
+            }
+            # Additional keymaps for better workflow
+            {
+               key = "<leader>ff";
+               mode = "n"; 
+               action = "<CMD>Telescope find_files<CR>";
+            }
+            {
+               key = "<leader>fg";
+               mode = "n";
+               action = "<CMD>Telescope live_grep<CR>";
+            }
+            {
+               key = "<leader>fb";
+               mode = "n";
+               action = "<CMD>Telescope buffers<CR>";
+            }
+            {
+               key = "<leader>fh";
+               mode = "n";
+               action = "<CMD>Telescope help_tags<CR>";
+            }
+            # Quick file navigation
+            {
+               key = "<C-p>";
+               mode = "n";
+               action = "<CMD>Telescope find_files<CR>";
             }
          ];
 
@@ -122,9 +153,12 @@
             rust.enable = true;
             rust.lsp.opts = '' 
                ['rust-analyzer'] = {
-                  cargo = {allFeature = true},
+                  cargo = {allFeatures = true},
                   checkOnSave = true,
                   procMacro = {
+                     enable = true
+                  },
+                  inlayHints = {
                      enable = true
                   },
                },
@@ -132,7 +166,10 @@
 
             python.enable = true;
             lua.enable = true;
-            markdown.enable = true;
+            markdown = {
+               enable = true;
+               glow.enable = true;
+            };
             html.enable = true;
             java.enable = true;
             sql.enable = true;
@@ -154,6 +191,24 @@
 
             conceallevel = 2;
             concealcursor = "niv";
+
+            # Better search
+            ignorecase = true;
+            smartcase = true;
+            hlsearch = true;
+            incsearch = true;
+
+            # Better editing experience
+            number = true;
+            relativenumber = true;
+            signcolumn = "yes";
+            wrap = false;
+            scrolloff = 8;
+            sidescrolloff = 8;
+
+            # Better performance
+            updatetime = 50;
+            timeoutlen = 300;
          };
 
          vim.utility = {
@@ -168,7 +223,7 @@
                setupOpts = {
                   default_file_explorer = true;
                   show_hidden = true;
-                  colums = [ "icon" "size" "mtime" ];
+                  columns = [ "icon" "size" "mtime" ]; 
                };
             };
          };
@@ -182,9 +237,10 @@
 
          vim.comments.comment-nvim.enable = true;
 
+         # Replace obsidian-nvim with better markdown/note-taking setup
          vim.notes = {
             obsidian = {
-               enable = true;
+               enable = true; 
                setupOpts = {
                   completion.nvim_cmp = false;
 
@@ -205,15 +261,29 @@
                      folder = "Templates";
                   };
                };
+
             };
+
             mind-nvim.enable = true;
             todo-comments.enable = true;
+
+
          };
 
+
+         # Enhanced package list for better functionality
+         home.packages = with pkgs; [ 
+            vimPlugins.plenary-nvim 
+            # Tools for better file linking and markdown support
+            ripgrep      # For telescope live_grep
+            fd           # For telescope find_files
+            fzf          # Alternative fuzzy finder
+            # Markdown tools
+            glow         # Terminal markdown viewer
+            pandoc       # Document converter
+         ];
+
       };
-
    };
-
-   home.packages = with pkgs; [ vimPlugins.plenary-nvim ];
 
 }
