@@ -1,4 +1,4 @@
-{pkgs, config, ...}:
+{ pkgs, ... }:
 {
    environment.systemPackages = with pkgs; [
       glxinfo
@@ -29,7 +29,7 @@
    };
 
    hardware.nvidia = {
-      open = false;
+      open = true;
       videoAcceleration = true;
       powerManagement.enable = true;
       powerManagement.finegrained = false;
