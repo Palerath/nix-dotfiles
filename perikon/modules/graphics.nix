@@ -29,7 +29,7 @@
    };
 
    hardware.nvidia = {
-      open = true;
+      open = false;
       videoAcceleration = true;
       powerManagement.enable = true;
       powerManagement.finegrained = false;
@@ -42,16 +42,5 @@
       videoDrivers = [ "nvidia" ];
     };
 
-   xdg.portal = {
-      enable = true;
-      xdgOpenUsePortal = true;
-      extraPortals = with pkgs; [
-         xdg-desktop-portal-gtk
-         xdg-desktop-portal-wlr
-      ];
-      configPackages = [ pkgs.kdePackages.xdg-desktop-portal-kde ];
-   };
-
-   systemd.user.services."xdg-desktop-portal".enable = true;
 
 }

@@ -1,9 +1,8 @@
-{pkgs,  ... }:
 {
    services.displayManager = {
       enable = true;
       sddm = {
-         enable = true;
+         enable = false;
          wayland.enable = true;
          settings = {
             WaylandSession.inputMethod = "ibus";
@@ -13,7 +12,7 @@
    };
 
    services.xserver.displayManager = {
-      gdm.enable = false;
+      gdm.enable = true;
       lightdm.enable = false;
    };
 

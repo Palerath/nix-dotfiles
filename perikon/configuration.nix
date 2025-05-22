@@ -101,9 +101,14 @@
       jan
       mecab
       mozcdic-ut-neologd
+      polkit
    ];
-
+   
+   services.dbus.enable = true;
+   services.udisks2.enable = true;
+   #   services.polkit.enable = true;
    services.gnome.glib-networking.enable = true;
+   services.xserver.enable = true;
 
    #  system.autoUpgrade = {
    #    enable = true;
