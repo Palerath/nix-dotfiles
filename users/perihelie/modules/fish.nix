@@ -1,5 +1,9 @@
 {pkgs, ...}:
-{
+
+let
+   sharedAliases = import ./shared-aliases.nix { };
+in
+   {
    home.packages = with pkgs; [
       fish
       fishPlugins.tide          # Modern Fish prompt (similar to agnoster)
@@ -9,25 +13,14 @@
 
    programs.fish = {
       enable = true;
-
-      shellAliases =
-         let
-            flakePath = "/home/perihelie/dotfiles";
-         in{
-            rebuild = "sudo nixos-rebuild switch --flake ${flakePath}";
-            hms = "home-manager switch --flake ${flakePath}";
-         };
-
       shellInit = ''
          fastfetch
       '';
 
+      # Import shared aliases
+      shellAliases = sharedAliases.shellAliases;
+
       plugins = [
-         # Git-related functionality (equivalent to oh-my-zsh git plugin)
-         {
-            name = "git-abbr";
-            src = pkgs.fishPlugins.git-abbr.src;
-         }
          # Sudo functionality (press ESC twice to add sudo)
          {
             name = "bang-bang";

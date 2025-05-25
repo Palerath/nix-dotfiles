@@ -11,15 +11,32 @@
       nvtopPackages.nvidia
       glances
       slurp
-      lf
-      tmux
+      # lf
+      # tmux
+      zellij
       ffmpeg
       ffmpegthumbnailer
       chafa
       kitty-img
       libsixel
       dconf
-      
+      ripgrep-all
+      fd
+      bat
+      eza
+      zoxide
+      xh
+      gitui
+      dust
+      dua
+      yazi
+      evil-helix
+      cargo-info
+      fselect
+      delta
+      tokei
+      wiki-tui
+      # presenterm
    ];
 
    dconf.settings = {

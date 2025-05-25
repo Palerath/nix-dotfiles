@@ -1,5 +1,8 @@
 {pkgs, ...}:
-{
+
+let
+   sharedAliases = import ./shared-aliases.nix { };
+in{
    home.packages = with pkgs; [
       zsh
       oh-my-zsh
@@ -11,14 +14,8 @@
       enableCompletion = true;
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
-       
-      shellAliases =
-         let
-            flakePath = "/home/perihelie/dotfiles";
-         in{
-            rebuild = "sudo nixos-rebuild switch --flake ${flakePath}";
-            hms = "home-manager switch --flake ${flakePath}";
-         };
+
+      shellAliases = sharedAliases.shellAliases;
 
       initContent = ''
          fastfetch
