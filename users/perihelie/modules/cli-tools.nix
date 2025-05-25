@@ -54,4 +54,6 @@
       useTheme = "M365Princess";
    };
 
+   programs.command-not-found.enable = false;
+
 }

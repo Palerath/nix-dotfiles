@@ -21,6 +21,7 @@
          ./modules/fonts.nix
          ./modules/keyboarding-fcitx5.nix
          ./modules/kernel.nix
+         ./modules/virtual-machines.nix
       ];
 
    security.sudo.enable = true;
@@ -104,6 +105,7 @@
       polkit
       wl-clipboard
       uutils-coreutils-noprefix
+      pciutils
    ];
    
    services.dbus.enable = true;

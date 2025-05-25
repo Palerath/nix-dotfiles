@@ -29,9 +29,10 @@ in
       ];
    };
 
-   # Configure Tide prompt (modern alternative to agnoster)
    programs.fish.interactiveShellInit = ''
-      # Tide prompt configuration
+      # Disable command-not-found to avoid database errors
+      set -e fish_command_not_found_handler
+
       tide configure --auto --style=Lean --prompt_colors='True color' --show_time='24-hour format' --lean_prompt_height='Two lines' --prompt_connection=Disconnected --prompt_spacing=Compact --icons='Many icons' --transient=No
    '';
 }
