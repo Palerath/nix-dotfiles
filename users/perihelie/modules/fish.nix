@@ -25,8 +25,8 @@
       plugins = [
          # Git-related functionality (equivalent to oh-my-zsh git plugin)
          {
-            name = "git";
-            src = pkgs.fishPlugins.git.src;
+            name = "git-abbr";
+            src = pkgs.fishPlugins.git-abbr.src;
          }
          # Sudo functionality (press ESC twice to add sudo)
          {
