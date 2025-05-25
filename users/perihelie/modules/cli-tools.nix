@@ -19,6 +19,7 @@
       kitty-img
       libsixel
       dconf
+      
    ];
 
    dconf.settings = {

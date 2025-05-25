@@ -103,6 +103,7 @@
       mozcdic-ut-neologd
       polkit
       wl-clipboard
+      uutils-coreutils-noprefix
    ];
    
    services.dbus.enable = true;

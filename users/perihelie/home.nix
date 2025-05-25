@@ -41,6 +41,7 @@
 
    imports = [
       ./modules/fish.nix
+      ./modules/nushell.nix
       ./modules/nvf.nix
       ./modules/alacritty.nix
       ./modules/wezterm.nix

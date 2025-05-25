@@ -1,7 +1,7 @@
 {pkgs, ...}:
 {
    users.extraUsers.perihelie = {
-      shell = pkgs.zsh;
+      shell = pkgs.fish;
    };
    users.users.perihelie.ignoreShellProgramCheck = true;
 
