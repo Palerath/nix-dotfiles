@@ -40,7 +40,7 @@
    };
 
    imports = [
-      ./modules/zsh.nix
+      ./modules/fish.nix
       ./modules/nvf.nix
       ./modules/alacritty.nix
       ./modules/wezterm.nix
