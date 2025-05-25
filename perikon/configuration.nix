@@ -102,6 +102,7 @@
       mecab
       mozcdic-ut-neologd
       polkit
+      wl-clipboard
    ];
    
    services.dbus.enable = true;

@@ -13,38 +13,19 @@
    home.packages = with pkgs; [
       git
       discord
-      tree
-      ueberzug
       prismlauncher
-      unrar
-      p7zip
-      unzip
-      wget
       vesktop
-      btop
       qbittorrent
-      slurp
-      wl-clipboard
       obsidian
       go
       vlc
-      lf
-      tmux
       gnome-software
       flatpak
       anki
-      nvtopPackages.nvidia
       texlab
       qolibri
       yt-dlp
-      ffmpeg
-      ffmpegthumbnailer
-      chafa
-      kitty-img
-      libsixel
       krita
-      dconf
-      glances
    ];
 
    programs.git = {
@@ -68,21 +49,11 @@
       ./modules/fastfetch.nix
       ./modules/session-variables.nix
       ./modules/desktop-entries.nix
-      ./modules/gammastep.nix
+      # ./modules/gammastep.nix
+      ./modules/cli-tools.nix
    ];
 
    fonts.fontconfig.enable = true;
-
-
-   dconf.settings = {
-      "org.kde.keyboard" = {
-         layouts = [ "qwerty-fr" ];
-         defaultLayout = "qwerty-fr";
-      };
-   };
-
-
-
 
    # Let Home Manager install and manage itself.
    programs.home-manager.enable = true;
