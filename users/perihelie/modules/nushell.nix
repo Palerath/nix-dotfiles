@@ -6,7 +6,6 @@ in
    home.packages = with pkgs; [
       nushell
       carapace  # Enhanced completions for nushell
-      oh-my-posh  # Cross-shell prompt engine with agnoster theme
    ];
 
    programs.nushell = {
@@ -18,6 +17,7 @@ in
       # Nushell configuration
       configFile.text = ''
          # Nushell config
+         source ./nushell-aliases.nu
          $env.config = {
             show_banner: false
             completions: {
@@ -87,9 +87,4 @@ in
       '';
    };
 
-   # Oh My Posh with agnoster theme
-   programs.oh-my-posh = {
-      enable = true;
-      useTheme = "agnoster";
-   };
 }

@@ -37,6 +37,8 @@
       tokei
       wiki-tui
       # presenterm
+      oh-my-posh 
+      sqlite
    ];
 
    dconf.settings = {
@@ -45,4 +47,11 @@
          defaultLayout = "qwerty-fr";
       };
    };
+
+   # Oh My Posh with M365 Princess theme
+   programs.oh-my-posh = {
+      enable = true;
+      useTheme = "M365Princess";
+   };
+
 }
