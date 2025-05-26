@@ -33,7 +33,7 @@
       kernelParams = [
          "amd_iommu=on"  
          "iommu=pt"
-         "vfio-pci.ids=10de:1f82"
+         "vfio-pci.ids=10de:10fa"
          "default_hugepagesz=1G"
          "hugepagesz=1G"
          "hugepages=16"  # Adjust based on your RAM
@@ -42,8 +42,7 @@
       # Blacklist GPU driver for second GPU (replace with your GPU's PCI ID)
       extraModprobeConfig = ''
       softdep drm pre: vfio-pci
-      # Find it with: lspci -nn | grep VGA
-      options vfio-pci ids=10de:1f82,10de:5678
+      options vfio-pci ids=10de:10fa
       '';
    };
 

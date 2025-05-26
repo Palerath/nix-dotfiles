@@ -53,6 +53,7 @@
       ./modules/desktop-entries.nix
       # ./modules/gammastep.nix
       ./modules/cli-tools.nix
+      ./modules/perilization.nix
    ];
 
    fonts.fontconfig.enable = true;
