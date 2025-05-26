@@ -25,6 +25,10 @@ let
       l = "eza -l";
       ".." = "z ..";
       "..." = "z ../..";
+
+      # virt-manager
+      android-vm = "virt-manager";
+      adb-connect = "adb connect localhost:5555";
    };
 
    # Convert aliases to Nushell format

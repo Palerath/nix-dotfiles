@@ -1,4 +1,4 @@
-{config, pkgs, ...}:
+{ pkgs, ...}:
 {
    services.desktopManager.plasma6.enable = true;
    services.desktopManager.plasma6.enableQt5Integration = true;
@@ -22,6 +22,11 @@
       MOZ_ENABLE_WAYLAND = "1";           # (optional) for Firefox Wayland support
       NIXOS_OZONE_WL = "1";              # for Chromium/Electron apps:contentReference[oaicite:8]{index=8}
       ELECTRON_OZONE_PLATFORM_HINT = "wayland";
+      WLR_NO_HARDWARE_CURSORS = "1";
+      QT_QPA_PLATFORM = "wayland";
+      GDK_BACKEND = "wayland,x11";
+      SDL_VIDEODRIVER = "wayland";
+      CLUTTER_BACKEND = "wayland";
    };
 
    xdg.portal = {

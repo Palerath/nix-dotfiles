@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
    environment.systemPackages = with pkgs; [
       glxinfo
@@ -35,6 +35,9 @@
       powerManagement.finegrained = false;
       modesetting.enable = true; 
       nvidiaSettings = true;
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
+
+      prime.nvidiaBusId = "PCI:06:00.0";
    };
 
    services.xserver = {

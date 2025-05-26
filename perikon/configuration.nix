@@ -20,7 +20,6 @@
          ./modules/gayming.nix
          ./modules/fonts.nix
          ./modules/keyboarding-fcitx5.nix
-         ./modules/kernel.nix
          ./modules/virtual-machines.nix
       ];
 
@@ -113,6 +112,8 @@
    #   services.polkit.enable = true;
    services.gnome.glib-networking.enable = true;
    services.xserver.enable = true;
+
+   boot.kernelPackages = pkgs.linuxPackages_zen;
 
    #  system.autoUpgrade = {
    #    enable = true;
