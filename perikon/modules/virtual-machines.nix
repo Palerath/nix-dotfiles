@@ -67,13 +67,15 @@
       spiceUSBRedirection.enable = true;
    };
 
-   systemd.services.libvirtd.enable = true;
+   # Ensure libvirt daemon starts automatically
+   systemd.services.libvirtd = {
+      enable = true;
+      wantedBy = [ "multi-user.target" ];
+   };
 
-   # Network bridge for VM (optional)
-   #  networking.bridges = {
-   #  br0 = {
-   #     interfaces = [ ];
-   #  };
-   # };
-   # networking.interfaces.br0.useDHCP = true;
+   # Enable libvirt socket activation
+   systemd.sockets.libvirtd = {
+      enable = true;
+      wantedBy = [ "sockets.target" ];
+   };
 }
