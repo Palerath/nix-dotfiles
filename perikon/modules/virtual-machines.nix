@@ -9,8 +9,8 @@
       spice-protocol
       win-virtio
       win-spice
-      looking-glass-client  # For low-latency display
-      scream                # For audio passthrough
+      looking-glass-client
+      scream
    ];
 
    programs.adb.enable = true;
@@ -35,17 +35,19 @@
       kernelParams = [
          "amd_iommu=on"  
          "iommu=pt"
-         "vfio-pci.ids=10de:1f82"
+         "vfio-pci.ids=10de:1f82,10de:10fa"
          "default_hugepagesz=1G"
          "hugepagesz=1G"
-         "hugepages=16"  # Adjust based on your RAM
-         "pcie_acs_override=downstream"
+         "hugepages=16"
+         # CRITICAL: More aggressive ACS override to break up IOMMU groups
+         "pcie_acs_override=downstream,multifunction"
       ];
 
-      # Blacklist GPU driver for second GPU (replace with your GPU's PCI ID)
+      # Blacklist GPU drivers only
       extraModprobeConfig = ''
       softdep drm pre: vfio-pci
       options vfio-pci ids=10de:1f82,10de:10fa
+      blacklist nouveau
       '';
 
    };
@@ -84,9 +86,7 @@
 
    # Add environment variables for OpenGL support
    environment.sessionVariables = {
-      # Enable software rendering fallback if hardware acceleration fails
       LIBGL_ALWAYS_SOFTWARE = "0";
-      # Ensure proper OpenGL context
       MESA_GL_VERSION_OVERRIDE = "3.3";
    };
 }
