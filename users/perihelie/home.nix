@@ -26,7 +26,7 @@
       qolibri
       yt-dlp
       krita
-  ];
+   ];
 
    programs.git = {
       enable = true;
