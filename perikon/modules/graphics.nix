@@ -11,6 +11,9 @@
       glib-networking
       gsettings-desktop-schemas
       openssl
+      virglrenderer
+      mesa
+      libglvnd
    ];
 
    # Enable graphics support
@@ -19,6 +22,7 @@
       extraPackages = with pkgs; [
          vaapiVdpau
          libvdpau-va-gl
+         virglrenderer
       ];
       extraPackages32 = with pkgs.pkgsi686Linux; [ 
          libva 
@@ -29,7 +33,7 @@
    };
 
    hardware.nvidia = {
-      open = true;
+      open = false;
       videoAcceleration = true;
       powerManagement.enable = true;
       powerManagement.finegrained = false;
@@ -37,7 +41,7 @@
       nvidiaSettings = true;
       package = config.boot.kernelPackages.nvidiaPackages.stable;
 
-      prime.nvidiaBusId = "PCI:06:00.0";
+      #  prime.nvidiaBusId = "PCI:06:00.0";
    };
 
    services.xserver = {

@@ -12,7 +12,6 @@
 
       # Additional GUI tools
       qtemu          # QEMU GUI frontend
-      aqemu          # Another QEMU GUI
 
       # Wayland utilities
       wl-clipboard

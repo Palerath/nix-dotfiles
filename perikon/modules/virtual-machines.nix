@@ -22,6 +22,8 @@
          "vfio_iommu_type1"
       ];
 
+      initrd.availableKernelModules = [ "vfio_pci" "vfio" "vfio_iommu_type1" ];
+
       kernelModules = [ 
          "kvm-amd" 
          "vfio" 
@@ -33,21 +35,23 @@
       kernelParams = [
          "amd_iommu=on"  
          "iommu=pt"
-         "vfio-pci.ids=10de:10fa"
+         "vfio-pci.ids=10de:1f82"
          "default_hugepagesz=1G"
          "hugepagesz=1G"
          "hugepages=16"  # Adjust based on your RAM
+         "pcie_acs_override=downstream"
       ];
 
       # Blacklist GPU driver for second GPU (replace with your GPU's PCI ID)
       extraModprobeConfig = ''
       softdep drm pre: vfio-pci
-      options vfio-pci ids=10de:10fa
+      options vfio-pci ids=10de:1f82,10de:10fa
       '';
+
    };
 
    # Add user to required groups
-   users.users.perihelie.extraGroups = [ "libvirtd" "kvm" "input" "qemu-libvirtd" ];
+   users.users.perihelie.extraGroups = [ "libvirtd" "kvm" "qemu-libvirtd" ];
 
    # Enable KVM and virtualization
    virtualisation = {
@@ -76,5 +80,13 @@
    systemd.sockets.libvirtd = {
       enable = true;
       wantedBy = [ "sockets.target" ];
+   };
+
+   # Add environment variables for OpenGL support
+   environment.sessionVariables = {
+      # Enable software rendering fallback if hardware acceleration fails
+      LIBGL_ALWAYS_SOFTWARE = "0";
+      # Ensure proper OpenGL context
+      MESA_GL_VERSION_OVERRIDE = "3.3";
    };
 }
