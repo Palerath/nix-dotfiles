@@ -26,6 +26,8 @@ let
       ".." = "z ..";
       "..." = "z ../..";
 
+      core-ls = "ls";
+
       # virt-manager
       android-vm = "virt-manager";
       adb-connect = "adb connect localhost:5555";

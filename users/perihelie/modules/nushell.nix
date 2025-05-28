@@ -23,7 +23,7 @@ in
       extraConfig = ''
       # Direct alias integration
          ${nushellAliases}
-      
+
       # fastfetch
       fastfetch
 
@@ -33,10 +33,16 @@ in
         completions: {
           algorithm: "fuzzy"
           case_sensitive: false
+          quick: true
+          partial: true
         }
+      edit_mode: "vi"
       }
       '';
 
    };
+
+   programs.eza.enableNushellIntegration = true;
+   programs.carapace.enableNushellIntegration = true;
 
 }

@@ -51,7 +51,8 @@
    # Oh My Posh with M365 Princess theme
    programs.oh-my-posh = {
       enable = true;
-      useTheme = "M365Princess";
+      # useTheme = "M365Princess";
+      useTheme = "tokyo";
    };
 
 
