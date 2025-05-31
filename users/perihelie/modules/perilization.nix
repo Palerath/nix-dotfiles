@@ -14,7 +14,6 @@
       qtemu          # QEMU GUI frontend
 
       # Wayland utilities
-      wl-clipboard
       wlr-randr
 
       # Additional tools
