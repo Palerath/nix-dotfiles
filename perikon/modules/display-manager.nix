@@ -11,14 +11,6 @@
       defaultSession = "plasma";
    };
 
-   services.xserver.displayManager = {
-      gdm.enable = true;
-      lightdm.enable = false;
-   };
-
-   systemd.services."lightdm.service" = {
-      enable = false;
-      # masked = true;
-   };
+   services.displayManager.gdm.enable = true;
 
 }
