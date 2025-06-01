@@ -59,8 +59,6 @@
       # ./modules/gammastep.nix
       ./modules/cli-tools.nix
       ./modules/perilization.nix
-      ./modules/cider.nix
-
 
       inputs.zen-browser.homeModules.beta
    ];
