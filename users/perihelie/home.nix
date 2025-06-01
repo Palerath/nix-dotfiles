@@ -26,6 +26,7 @@
       qolibri
       yt-dlp
       krita
+      itch
    ];
 
    programs.git = {
@@ -58,6 +59,7 @@
       # ./modules/gammastep.nix
       ./modules/cli-tools.nix
       ./modules/perilization.nix
+      ./modules/cider.nix
 
 
       inputs.zen-browser.homeModules.beta

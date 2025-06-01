@@ -8,6 +8,7 @@
       unzip
       wget
       btop
+      htop
       nvtopPackages.nvidia
       glances
       slurp
