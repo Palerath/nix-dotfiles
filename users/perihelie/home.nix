@@ -1,4 +1,4 @@
-{  pkgs, ... }:
+{  pkgs, inputs, ... }:
 
 {
    # Home Manager needs a bit of information about you and the paths it should
@@ -35,6 +35,10 @@
 
    };
 
+   programs.zen-browser = {
+      enable = true;
+   };
+
    home.sessionVariables = {
       EDITOR = "nvim";
    };
@@ -54,6 +58,9 @@
       # ./modules/gammastep.nix
       ./modules/cli-tools.nix
       ./modules/perilization.nix
+
+
+      inputs.zen-browser.homeModules.beta
    ];
 
    fonts.fontconfig.enable = true;

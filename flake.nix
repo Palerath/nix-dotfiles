@@ -22,8 +22,14 @@
 
       nix-colors.url = "github:misterio77/nix-colors";
 
+      zen-browser = {
+         url = "github:0xc000022070/zen-browser-flake";
+         inputs.nixpkgs.follows = "nixpkgs";
+      };
+
    };
-   outputs = { self, nixpkgs, home-manager, nvf, hyprland, hyprland-plugins, nix-colors, ... }@inputs:
+
+   outputs = { self, nixpkgs, home-manager, nvf, hyprland, hyprland-plugins, nix-colors, zen-browser, ... }@inputs:
       let 
          lib = nixpkgs.lib;
       in
