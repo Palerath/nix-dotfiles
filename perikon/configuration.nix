@@ -20,7 +20,7 @@
          ./modules/gayming.nix
          ./modules/fonts.nix
          ./modules/keyboarding-fcitx5.nix
-         ./modules/virtual-machines.nix
+         # ./modules/virtual-machines.nix
       ];
 
    security.sudo.enable = true;

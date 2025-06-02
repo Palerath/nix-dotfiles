@@ -26,7 +26,7 @@
       qolibri
       yt-dlp
       krita
-      itch
+      appimage-run
    ];
 
    programs.git = {
@@ -58,7 +58,7 @@
       ./modules/desktop-entries.nix
       # ./modules/gammastep.nix
       ./modules/cli-tools.nix
-      ./modules/perilization.nix
+      # ./modules/perilization.nix
 
       inputs.zen-browser.homeModules.beta
    ];
