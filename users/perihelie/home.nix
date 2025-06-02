@@ -26,7 +26,7 @@
       qolibri
       yt-dlp
       krita
-      appimage-run
+      audacious
    ];
 
    programs.git = {

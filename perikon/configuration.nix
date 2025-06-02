@@ -105,6 +105,9 @@
       wl-clipboard
       uutils-coreutils-noprefix
       pciutils
+      flac
+      appimageupdate
+      appimage-run
    ];
    
    services.dbus.enable = true;

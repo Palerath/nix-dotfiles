@@ -13,6 +13,8 @@
       kdePackages.xdg-desktop-portal-kde
       kdePackages.plasma-desktop
       kdePackages.plasma-wayland-protocols
+      kdePackages.audiocd-kio
+      kdePackages.k3b
    ];
 
    environment.sessionVariables = {
