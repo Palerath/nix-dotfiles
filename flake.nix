@@ -44,13 +44,13 @@
                ];        
             };
 
-            linouce = lib.nixosSystem {
-               system = "x86_64-linux";
-               specialArgs = {inherit inputs;};
-               modules = [
-                  ./hosts/linouce/configuration.nix
-               ];
-            };
+           # linouce = lib.nixosSystem {
+           #    system = "x86_64-linux";
+           #    specialArgs = {inherit inputs;};
+           #    modules = [
+           #       ./hosts/linouce/configuration.nix
+           #    ];
+           # };
          };
 
          # STANDALONE CONFIG
@@ -58,20 +58,20 @@
             "perihelie" = home-manager.lib.homeManagerConfiguration {
                pkgs = nixpkgs.legacyPackages."x86_64-linux";
                modules = [ 
-                  ./users/perihelie/home.nix 
+                  ./users/perihelie/home.nix
                   nvf.homeManagerModules.nvf
                ];
                extraSpecialArgs = {inherit inputs;};
             };
 
-            "estelle" = home-manager.lib.homeManagerConfiguration {
-               pkgs = nixpkgs.legacyPackages."x86_64-linux";
-               modules = [
-                  ./users/estelle/home.nix
-                  nvf.homeManagerModules.nvf
-               ];
-               extraSpecialArgs = {inherit inputs;};
-            };
+            # "estelle" = home-manager.lib.homeManagerConfiguration {
+            #   pkgs = nixpkgs.legacyPackages."x86_64-linux";
+            #   modules = [
+            #      ./users/estelle/home.nix
+            #      nvf.homeManagerModules.nvf
+            #   ];
+            #   extraSpecialArgs = {inherit inputs;};
+            #};
          };
 
       };
