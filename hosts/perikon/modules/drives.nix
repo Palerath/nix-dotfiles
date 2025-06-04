@@ -19,6 +19,8 @@
          "fmask=000"
          "permissions"
          "no fail" "auto"
+         "big writes"
+         "windows_names"
       ];
    };
 
@@ -34,6 +36,9 @@
          "fmask=000"
          "permissions"
          "no fail" "auto"
+         "big writes"
+         "windows_names"
+
       ];
    };
 

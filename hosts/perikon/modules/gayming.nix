@@ -14,9 +14,9 @@
       protonup-ng
       protonup-qt
       protontricks
-      wineWowPackages.stable
-      winePackages.stable
-      wine64Packages.stable
+      wineWowPackages.unstableFull
+      winePackages.unstableFull
+      wine64Packages.unstableFull
 
       # Gaming utilities
       gamemode
