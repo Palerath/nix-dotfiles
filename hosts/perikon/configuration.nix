@@ -20,6 +20,7 @@
          ./modules/gayming.nix
          ./modules/fonts.nix
          ./modules/keyboarding-fcitx5.nix
+         ./modules/python-packages.nix
          # ./modules/virtual-machines.nix
       ];
 
