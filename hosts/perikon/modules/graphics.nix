@@ -53,7 +53,6 @@
    services.xserver = {
       enable = true;
       videoDrivers = [ "nvidia" ];
-      useGlamor = true;
     };
 
 
