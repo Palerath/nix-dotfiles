@@ -19,21 +19,27 @@
    # Enable graphics support
    hardware.graphics = {
       enable = true;
+      enable32Bit = true;
       extraPackages = with pkgs; [
          vaapiVdpau
+         nvidia-vaapi-driver
          libvdpau-va-gl
          virglrenderer
+         vulkan-loader
+         vulkan-validation-layers
       ];
       extraPackages32 = with pkgs.pkgsi686Linux; [ 
          libva 
          vaapiVdpau
          libvdpau-va-gl
+         vulkan-loader
+         nvidia-vaapi-driver
       ];
 
    };
 
    hardware.nvidia = {
-      open = false;
+      open = true;
       videoAcceleration = true;
       powerManagement.enable = true;
       powerManagement.finegrained = false;
@@ -47,6 +53,7 @@
    services.xserver = {
       enable = true;
       videoDrivers = [ "nvidia" ];
+      useGlamor = true;
     };
 
 

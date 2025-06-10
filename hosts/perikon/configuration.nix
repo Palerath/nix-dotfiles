@@ -114,8 +114,6 @@
    services.udisks2.enable = true;
    #   services.polkit.enable = true;
    services.gnome.glib-networking.enable = true;
-   services.xserver.enable = true;
-
    boot.kernelPackages = pkgs.linuxPackages_zen;
 
    #  system.autoUpgrade = {

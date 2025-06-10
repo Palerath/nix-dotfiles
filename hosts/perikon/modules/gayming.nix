@@ -5,11 +5,9 @@
       lutris
       bottles
       steam-run
+      steam-devices-udev-rules
 
       # Wine and Proton
-      wine
-      wine-wayland
-      wine64
       winetricks
       protonup-ng
       protonup-qt
@@ -25,12 +23,6 @@
       goverlay
       dxvk
 
-      # Graphics and system dependencies
-      vulkan-loader
-      vulkan-tools
-      libGL
-      libgcrypt
-
       # Desktop integration
       xdg-desktop-portal-gtk
       steam-devices-udev-rules
@@ -40,6 +32,8 @@
       libpulseaudio
       libvdpau
       pavucontrol
+      mono
+      glib-networking
    ];
 
    xdg.portal = {
@@ -58,25 +52,27 @@
       dedicatedServer.openFirewall = true;  
       localNetworkGameTransfers.openFirewall = true;
       protontricks.enable = true;
-      package = pkgs.steam.override {
-         extraPkgs = pkgs: with pkgs; [
-            libkrb5
-            keyutils
-            glib-networking
-            libgudev
-         ];
-      };
+      #package = pkgs.steam.override {
+      #   extraPkgs = pkgs: with pkgs; [
+      #      libkrb5
+      #      keyutils
+      #      glib-networking
+      #      libgudev
+      #   ];
+      #  };
    };
 
-   programs.gamemode = {
-      enable = true;
-      settings = {
-         general = {
-            renice = 10;  # Process priority when gaming
-         };
-      };
+   programs.gamemode.enable = true;
+
+   # Enable udev rules for game controllers
+   services.udev.packages = with pkgs; [
+      steam-devices-udev-rules
+   ];
+
+   environment.sessionVariables = {
+      LD_LIBRARY_PATH = [ 
+         "${pkgs.gamemode}/lib" 
+      ];
    };
-
-
 
 }
