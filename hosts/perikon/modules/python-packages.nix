@@ -5,6 +5,8 @@
       pipx
       (python3.withPackages (python-pkgs: with python-pkgs; [
          pandas
+         numpy
+         matplotlib
          requests
       ]))
    ];

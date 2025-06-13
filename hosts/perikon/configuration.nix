@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
    imports =
@@ -110,6 +110,17 @@
       appimageupdate
       appimage-run
    ];
+
+   programs.nh = {
+      enable = true;
+      # clean.enable = true;
+      # clean.extraArgs = "--keep-since 4d --keep 3";
+      flake = "/home/perihelie/dotfiles";
+   };
+
+   environment.sessionVariables = {
+      NH_FLAKE = lib.mkDefault "/home/perihelie/dotfiles";
+   };
    
    services.dbus.enable = true;
    services.udisks2.enable = true;

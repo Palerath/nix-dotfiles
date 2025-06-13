@@ -3,8 +3,8 @@
 let
    flakePath = "/home/perihelie/dotfiles";
    aliases = {
-      rebuild = "sudo nixos-rebuild switch --flake ${flakePath}";
-      hms = "home-manager switch --flake ${flakePath}";
+      rebuild = "nh os switch ${flakePath}";
+      hms = "nh home switch ${flakePath}";
 
       # Git aliases
       g = "git";

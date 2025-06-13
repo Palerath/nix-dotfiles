@@ -1,4 +1,3 @@
-{pkgs, lib, ... }:
 {
    home.sessionVariables = {
       XMODIFIERS = "@im=fcitx";

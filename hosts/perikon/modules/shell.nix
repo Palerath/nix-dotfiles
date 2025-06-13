@@ -10,8 +10,8 @@
          let
             flakePath = "/home/perihelie/dotfiles";
          in{
-            rebuild = "sudo nixos-rebuild switch --flake ${flakePath}";
-            hms = "home-manager switch --flake ${flakePath}";
+            rebuild = "nh os switch";
+            hms = "nh home switch";
             nv = "nvim";
             ls = "eza";
          };
