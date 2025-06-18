@@ -42,11 +42,15 @@
       sqlite
    ];
 
-   dconf.settings = {
-      "org.kde.keyboard" = {
-         layouts = [ "qwerty-fr" ];
-         defaultLayout = "qwerty-fr";
+   programs.dconf = {
+      enable = true;
+      settings = {
+         "org.kde.keyboard" = {
+            layouts = [ "qwerty-fr" ];
+            defaultLayout = "qwerty-fr";
+         };
       };
+
    };
 
    # Oh My Posh with M365 Princess theme

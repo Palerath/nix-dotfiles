@@ -1,92 +1,42 @@
 {pkgs, ...}:  
 {
-   environment.systemPackages = with pkgs; [
-      qemu_kvm
-      virt-manager
-      virt-viewer
-      spice
-      spice-gtk
-      spice-protocol
-      win-virtio
-      win-spice
-      looking-glass-client
-      scream
-   ];
-
-   programs.adb.enable = true;
-
-   boot = {
-      initrd.kernelModules = [
-         "vfio_pci"
-         "vfio"
-         "vfio_iommu_type1"
-      ];
-
-      initrd.availableKernelModules = [ "vfio_pci" "vfio" "vfio_iommu_type1" ];
-
-      kernelModules = [ 
-         "kvm-amd" 
-         "vfio" 
-         "vfio_iommu_type1" 
-         "vfio_pci" 
-         "vfio_virqfd" 
-      ];
-
-      kernelParams = [
-         "amd_iommu=on"  
-         "iommu=pt"
-         "vfio-pci.ids=10de:1f82,10de:10fa"
-         "default_hugepagesz=1G"
-         "hugepagesz=1G"
-         "hugepages=16"
-         # CRITICAL: More aggressive ACS override to break up IOMMU groups
-         "pcie_acs_override=downstream,multifunction"
-      ];
-
-      # Blacklist GPU drivers only
-      extraModprobeConfig = ''
-      softdep drm pre: vfio-pci
-      options vfio-pci ids=10de:1f82,10de:10fa
-      blacklist nouveau
-      '';
-
-   };
-
-   # Add user to required groups
-   users.users.perihelie.extraGroups = [ "libvirtd" "kvm" "qemu-libvirtd" ];
-
-   # Enable KVM and virtualization
+   # Enable virtualization support
+   # This enables the KVM kernel module which provides hardware acceleration
    virtualisation = {
+      # Enable libvirtd daemon - this manages virtual machines
       libvirtd = {
          enable = true;
+         # QEMU package selection - we want the full QEMU with KVM support
          qemu = {
             package = pkgs.qemu_kvm;
-            runAsRoot = true;
+            # Enable UEFI support for modern guest systems
+            ovmf.enable = true;
+            # Enable TPM emulation (useful for newer Android versions)
             swtpm.enable = true;
-            ovmf = {
-               enable = true;
-               packages = [ pkgs.OVMFFull.fd ];
-            };
          };
       };
+
+      # Enable SPICE USB redirection for better device support
       spiceUSBRedirection.enable = true;
    };
 
-   # Ensure libvirt daemon starts automatically
-   systemd.services.libvirtd = {
-      enable = true;
-      wantedBy = [ "multi-user.target" ];
-   };
+   # Install required packages system-wide
+   environment.systemPackages = with pkgs; [
+      # Main virtualization management GUI
+      virt-manager
+      # QEMU utilities (includes qemu-img for disk management)
+      qemu_kvm
+      # SPICE client for enhanced display and input
+      spice
+      # SPICE protocol support
+      spice-protocol
+      # USB redirection support
+      spice-gtk
+      # Additional QEMU tools
+      qemu-utils
+   ];
 
-   # Enable libvirt socket activation
-   systemd.sockets.libvirtd = {
-      enable = true;
-      wantedBy = [ "sockets.target" ];
-   };
-
-   # Add environment variables for OpenGL support
-   environment.sessionVariables = {
-      LIBGL_ALWAYS_SOFTWARE = "0";
-      MESA_GL_VERSION_OVERRIDE = "3.3";
-   };
+   # Add your user to the libvirtd group
+   # Replace "yourusername" with your actual username
+   users.users.yourusername.extraGroups = [ "libvirtd" ];
 }

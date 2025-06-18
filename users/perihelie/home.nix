@@ -56,9 +56,8 @@
       ./modules/fastfetch.nix
       ./modules/session-variables.nix
       ./modules/desktop-entries.nix
-      # ./modules/gammastep.nix
       ./modules/cli-tools.nix
-      # ./modules/perilization.nix
+      ./modules/perilization.nix
 
       inputs.zen-browser.homeModules.beta
    ];

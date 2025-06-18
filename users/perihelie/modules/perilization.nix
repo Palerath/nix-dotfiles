@@ -1,45 +1,41 @@
 { pkgs, ... }:
 {
+   # User-level packages for virtualization
    home.packages = with pkgs; [
-      # QEMU and virtualization
-      qemu_kvm
-      qemu
-      virt-manager
-      virt-viewer
-
-      # Android development tools
-      android-tools
-
-      # Additional GUI tools
-      qtemu          # QEMU GUI frontend
-
-      # Wayland utilities
-      wlr-randr
-
-      # Additional tools
+      # Alternative VM manager - more modern interface than virt-manager
+      gnome.gnome-boxes
+      # QEMU monitor console (useful for debugging)
+      qemu-utils
+      # Looking glass client (if you ever want to try GPU passthrough later)
       looking-glass-client
-      barrier  # For sharing keyboard/mouse
    ];
 
-   home.sessionVariables = {
-      QEMU_AUDIO_DRV = "spice";
-      DISPLAY = ":0";
-      WAYLAND_DISPLAY = "wayland-1";
-   };
-
-   # Desktop entry for virt-manager with Android focus
-   xdg.desktopEntries.android-virt-manager = {
-      name = "Android Virtual Machine Manager";
-      comment = "Create and manage Android VMs with GPU acceleration";
-      exec = "${pkgs.virt-manager}/bin/virt-manager";
-      icon = "virt-manager";
-      categories = [ "Development" "Emulator" "System" ];
-   };
-
-   # Enable services
-   services.gpg-agent = {
+   # Enable XDG desktop integration
+   # This ensures VM applications show up properly in your KDE menu
+   xdg = {
       enable = true;
-      pinentry.package = pkgs.pinentry-qt;
+      mimeApps.enable = true;
    };
 
+   # Optional: Create desktop shortcuts for common tasks
+   home.file.".local/share/applications/android-vm.desktop" = {
+      text = ''
+      [Desktop Entry]
+      Type=Application
+      Name=Android VM Manager
+      Comment=Manage Android Virtual Machines
+      Exec=virt-manager
+      Icon=virt-manager
+      Categories=System;Emulator;
+      Terminal=false
+      '';
+   };
+
+   # Configure environment variables for better Wayland support
+   home.sessionVariables = {
+      # Help Qt applications work better under Wayland
+      QT_QPA_PLATFORM = "wayland;xcb";
+      # Ensure QEMU can find its BIOS files
+      QEMU_SYSTEM_PREFIX = "${pkgs.qemu_kvm}";
+   };
 }

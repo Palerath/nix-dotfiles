@@ -22,7 +22,7 @@
          ./modules/keyboarding-fcitx5.nix
          ./modules/python-packages.nix
          ./modules/locales.nix
-         # ./modules/virtual-machines.nix
+         ./modules/virtual-machines.nix
       ];
 
    security.sudo.enable = true;
