@@ -38,5 +38,5 @@
 
    # Add your user to the libvirtd group
    # Replace "yourusername" with your actual username
-   users.users.yourusername.extraGroups = [ "libvirtd" ];
+   users.users.perihelie.extraGroups = [ "libvirtd" ];
 }
