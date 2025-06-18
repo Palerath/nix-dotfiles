@@ -1,5 +1,8 @@
 {pkgs, ...}:  
 {
+
+   boot.kernelModules = [ "kvm-amd" "vfio-pci" "vfio" "vfio_iommu_type1" ];
+
    # Enable virtualization support
    # This enables the KVM kernel module which provides hardware acceleration
    virtualisation = {
@@ -20,12 +23,15 @@
       spiceUSBRedirection.enable = true;
    };
 
+   programs.android-tools.enable = true;
+
    # Install required packages system-wide
    environment.systemPackages = with pkgs; [
       # Main virtualization management GUI
       virt-manager
       # QEMU utilities (includes qemu-img for disk management)
-      qemu_kvm
+      # qemu_kvm
+      qemu_full
       # SPICE client for enhanced display and input
       spice
       # SPICE protocol support
@@ -38,5 +44,5 @@
 
    # Add your user to the libvirtd group
    # Replace "yourusername" with your actual username
-   users.users.perihelie.extraGroups = [ "libvirtd" ];
+   users.users.perihelie.extraGroups = [ "libvirtd" "kvm" "adbusers" ];
 }

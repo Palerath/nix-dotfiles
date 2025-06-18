@@ -3,11 +3,14 @@
    # User-level packages for virtualization
    home.packages = with pkgs; [
       # Alternative VM manager - more modern interface than virt-manager
-      gnome.gnome-boxes
+      gnome-boxes
       # QEMU monitor console (useful for debugging)
       qemu-utils
       # Looking glass client (if you ever want to try GPU passthrough later)
       looking-glass-client
+
+      waydroid
+      android-studio
    ];
 
    # Enable XDG desktop integration
@@ -37,5 +40,6 @@
       QT_QPA_PLATFORM = "wayland;xcb";
       # Ensure QEMU can find its BIOS files
       QEMU_SYSTEM_PREFIX = "${pkgs.qemu_kvm}";
+      MOZ_ENABLE_WAYLAND = "1";
    };
 }

@@ -42,8 +42,7 @@
       sqlite
    ];
 
-   programs.dconf = {
-      enable = true;
+   dconf = {
       settings = {
          "org.kde.keyboard" = {
             layouts = [ "qwerty-fr" ];
