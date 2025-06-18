@@ -23,8 +23,6 @@
       spiceUSBRedirection.enable = true;
    };
 
-   programs.android-tools.enable = true;
-
    # Install required packages system-wide
    environment.systemPackages = with pkgs; [
       # Main virtualization management GUI

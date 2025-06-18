@@ -11,6 +11,7 @@
 
       waydroid
       android-studio
+      android-tools
    ];
 
    # Enable XDG desktop integration
