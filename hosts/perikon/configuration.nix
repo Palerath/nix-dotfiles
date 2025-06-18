@@ -21,6 +21,7 @@
          ./modules/fonts.nix
          ./modules/keyboarding-fcitx5.nix
          ./modules/python-packages.nix
+         ./modules/locales.nix
          # ./modules/virtual-machines.nix
       ];
 
@@ -37,24 +38,6 @@
    networking.networkmanager.enable = true;
 
    nix.settings.experimental-features = ["nix-command" "flakes"];
-
-   # Set your time zone.
-   time.timeZone = "Europe/Paris";
-
-   # Select internationalisation properties.
-   i18n.defaultLocale = "en_US.UTF-8";
-
-   i18n.extraLocaleSettings = {
-      LC_ADDRESS = "fr_FR.UTF-8";
-      LC_IDENTIFICATION = "fr_FR.UTF-8";
-      LC_MEASUREMENT = "fr_FR.UTF-8";
-      LC_MONETARY = "fr_FR.UTF-8";
-      LC_NAME = "fr_FR.UTF-8";
-      LC_NUMERIC = "fr_FR.UTF-8";
-      LC_PAPER = "fr_FR.UTF-8";
-      LC_TELEPHONE = "fr_FR.UTF-8";
-      LC_TIME = "fr_FR.UTF-8";
-   };
 
    # Enable CUPS to print documents.
    services.printing.enable = true;
@@ -109,6 +92,9 @@
       flac
       appimageupdate
       appimage-run
+      gcc
+      cmake
+      pkg-config
    ];
 
    programs.nh = {
@@ -121,7 +107,7 @@
    environment.sessionVariables = {
       NH_FLAKE = lib.mkDefault "/home/perihelie/dotfiles";
    };
-   
+
    services.dbus.enable = true;
    services.udisks2.enable = true;
    #   services.polkit.enable = true;

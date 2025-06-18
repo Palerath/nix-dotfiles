@@ -1,78 +1,63 @@
 {pkgs, ... }:
 {
+
    environment.systemPackages = with pkgs; [
-      # Gaming platforms and launchers
+      # Gaming platforms
       lutris
       bottles
-      steam-run
-      steam-devices-udev-rules
 
-      # Wine and Proton
-      winetricks
-      protonup-ng
-      protonup-qt
-      protontricks
-      wineWowPackages.unstableFull
-      winePackages.unstableFull
-      wine64Packages.unstableFull
-
-      # Gaming utilities
-      gamemode
+      # Steam utilities
       gamescope
       mangohud
       goverlay
-      dxvk
 
-      # Desktop integration
-      xdg-desktop-portal-gtk
-      steam-devices-udev-rules
+      # Wine and compatibility
+      wineWowPackages.unstable
+      winetricks
+      protonup-ng
+      protonup-qt
 
-      # Additional dependencies
-      dotnet-sdk
-      libpulseaudio
-      libvdpau
-      pavucontrol
-      mono
-      glib-networking
+      # Vulkan tools
+      vulkan-tools
+      vulkan-headers
+      vulkan-loader
+      vulkan-validation-layers
    ];
 
-   xdg.portal = {
-      enable = true;
-      extraPortals = with pkgs; [
-         xdg-desktop-portal-gtk
-      ];
-   };   
 
-
-   # Steam configuration
    programs.steam = {
       enable = true;
-      gamescopeSession.enable = true;
       remotePlay.openFirewall = true;
-      dedicatedServer.openFirewall = true;  
+      dedicatedServer.openFirewall = true;
       localNetworkGameTransfers.openFirewall = true;
+      gamescopeSession.enable = true;
       protontricks.enable = true;
-      #package = pkgs.steam.override {
-      #   extraPkgs = pkgs: with pkgs; [
-      #      libkrb5
-      #      keyutils
-      #      glib-networking
-      #      libgudev
-      #   ];
-      #  };
-   };
-
-   programs.gamemode.enable = true;
-
-   # Enable udev rules for game controllers
-   services.udev.packages = with pkgs; [
-      steam-devices-udev-rules
-   ];
-
-   environment.sessionVariables = {
-      LD_LIBRARY_PATH = [ 
-         "${pkgs.gamemode}/lib" 
+      # Additional Steam packages
+      extraCompatPackages = with pkgs; [
+         proton-ge-bin
       ];
    };
 
+   programs.gamemode = {
+      enable = true;
+      settings = {
+         general = {
+            renice = 10;
+         };
+         gpu = {
+            apply_gpu_optimisations = "accept-responsibility";
+            gpu_device = 0;
+            amd_performance_level = "high";
+         };
+      };
+   };
+
+   environment.sessionVariables = {
+      PROTON_ENABLE_NVAPI = "1";
+      PROTON_ENABLE_NGX_UPDATER = "1";
+   };
+
+   services.udev.packages = with pkgs; [
+      game-devices-udev-rules
+   ];
 }
