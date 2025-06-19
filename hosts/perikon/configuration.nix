@@ -95,6 +95,8 @@
       gcc
       cmake
       pkg-config
+      glib
+      rustup
    ];
 
    programs.nh = {
