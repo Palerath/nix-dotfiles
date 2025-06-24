@@ -5,6 +5,8 @@
       openssl
       pkg-config
       sqlite
+      # ollama
+      ollama-cuda
    ];
 
    home.sessionVariables = {

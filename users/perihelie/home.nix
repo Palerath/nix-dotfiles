@@ -27,6 +27,10 @@
       yt-dlp
       krita
       audacious
+      coolercontrol.coolercontrol-gui
+      coolercontrol.coolercontrold
+      coolercontrol.coolercontrol-ui-data
+      coolercontrol.coolercontrol-liqctld
    ];
 
    programs.git = {
