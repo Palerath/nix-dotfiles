@@ -36,32 +36,37 @@
 
    };
 
+   programs.coolercontrol = {
+      enable = true;
+      nvidiaSupport = true;
+   };
+
    services.xserver = {
-         enable = true;
-         videoDrivers = [ "nvidia" ];
-      };
+      enable = true;
+      videoDrivers = [ "nvidia" ];
+   };
 
    boot = {
       kernelParams = [
-      "nvidia_drm.modeset=1"
-      "nvidia.NVreg_PreserveVideoMemoryAllocations=1"  # For suspend/resume
-      "nvidia_drm.fbdev=1"
+         "nvidia_drm.modeset=1"
+         "nvidia.NVreg_PreserveVideoMemoryAllocations=1"  # For suspend/resume
+         "nvidia_drm.fbdev=1"
       ];
 
       kernelModules = [
-      "nvidia"
-      "nvidia_modeset"
-      "nvidia_uvm"
-      "nvidia_drm"
+         "nvidia"
+         "nvidia_modeset"
+         "nvidia_uvm"
+         "nvidia_drm"
       ];
    };
 
    environment.sessionVariables = {
-    # NVIDIA Wayland support
-    GBM_BACKEND = "nvidia-drm";
-    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-    LIBVA_DRIVER_NAME = "nvidia";
+      # NVIDIA Wayland support
+      GBM_BACKEND = "nvidia-drm";
+      __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+      LIBVA_DRIVER_NAME = "nvidia";
 
-  };
+   };
 
 }

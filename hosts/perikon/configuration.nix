@@ -96,6 +96,7 @@
       cmake
       pkg-config
       glib
+      lm_sensors
    ];
 
    programs.nh = {
