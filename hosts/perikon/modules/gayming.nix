@@ -5,6 +5,7 @@
       # Gaming platforms
       lutris
       bottles
+      ckan
 
       # Steam utilities
       gamescope
