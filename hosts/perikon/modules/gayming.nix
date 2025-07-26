@@ -6,6 +6,9 @@
       lutris
       bottles
       ckan
+      duckstation
+      rpcs3
+      pcsx2
 
       # Steam utilities
       gamescope
