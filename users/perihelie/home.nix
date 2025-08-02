@@ -27,6 +27,7 @@
       yt-dlp
       krita
       audacious
+      protonvpn-gui
    ];
 
    programs.git = {
