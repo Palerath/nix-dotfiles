@@ -21,6 +21,8 @@
          "nofail" "auto"
          "big_writes"
          "windows_names"
+         "user_xattr"
+         "streams_interface=windows"
       ];
    };
 
@@ -38,7 +40,8 @@
          "nofail" "auto"
          "big_writes"
          "windows_names"
-
+         "user_xattr"
+         "streams_interface=windows"
       ];
    };
 
