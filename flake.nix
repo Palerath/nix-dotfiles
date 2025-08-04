@@ -68,7 +68,7 @@
             "perihelie" = home-manager.lib.homeManagerConfiguration {
                pkgs = nixpkgs.legacyPackages."x86_64-linux";
                modules = [ 
-                  ./users/perihelie/home.nix
+                  /etc/nixos-dotfiles/users/perihelie/home.nix
                   nvf.homeManagerModules.nvf
                ];
                extraSpecialArgs = {inherit inputs;};
