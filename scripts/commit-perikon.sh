@@ -7,7 +7,7 @@ if [ -z "$COMMIT_MSG" ]; then
 fi
 
 # Base dotfiles directory
-DOTFILES_DIR=/etc/nixos-dotfiles
+DOTFILES_DIR=/home/perihelie/dotfiles
 
 # Function to commit and push a repo
 commit_and_push() {
