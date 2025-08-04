@@ -2,7 +2,7 @@
 {pkgs, inputs, ...}:
 {
    wayland.windowManager.hyprland = {
-      enable = true;
+      enable = false;
       systemd.enable = true;
 
       plugins = with inputs.hyprland-plugins.packages."${pkgs.system}"; [
