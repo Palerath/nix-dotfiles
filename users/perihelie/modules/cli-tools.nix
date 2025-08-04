@@ -40,6 +40,13 @@
       # presenterm
       oh-my-posh 
       sqlite
+      ripgrep           
+      fd                 
+      fzf          
+      glow         # Terminal markdown viewer
+      pandoc       # Document converter
+      eza
+
    ];
 
    dconf = {

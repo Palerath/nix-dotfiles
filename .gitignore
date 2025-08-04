@@ -1,0 +1,22 @@
+# Build results
+result
+result-*
+
+# Temporary files
+*~
+*.swp
+*.swo
+
+# User-specific secrets (never commit)
+users/*/secrets/*
+secrets/admin/*
+
+# But allow .gitkeep files
+!users/*/secrets/.gitkeep
+!secrets/admin/.gitkeep
+
+# Hardware-specific (regenerate on each machine)
+hosts/*/hardware-configuration.nix
+
+# Lock files (optional - some prefer to commit them)
+# flake.lock

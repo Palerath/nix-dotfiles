@@ -44,13 +44,22 @@
                ];        
             };
 
-           # linouce = lib.nixosSystem {
-           #    system = "x86_64-linux";
-           #    specialArgs = {inherit inputs;};
-           #    modules = [
-           #       ./hosts/linouce/configuration.nix
-           #    ];
-           # };
+            linouce = lib.nixosSystem {
+               system = "x86_64-linux";
+               specialArgs = {inherit inputs;};
+               modules = [
+                  ./hosts/linouce/configuration.nix
+                  home-manager.nixosModules.home-manager
+                  {
+                     home-manager = {
+                        useGlobalPkgs = true;
+                        useUserPackages = true;
+                        users.estelle = import ./users/estelle/home.nix;
+                        extraSpecialArgs = { inherit inputs; };
+                     };
+                  }
+               ];
+            };
          };
 
          # STANDALONE CONFIG
@@ -64,14 +73,6 @@
                extraSpecialArgs = {inherit inputs;};
             };
 
-            # "estelle" = home-manager.lib.homeManagerConfiguration {
-            #   pkgs = nixpkgs.legacyPackages."x86_64-linux";
-            #   modules = [
-            #      ./users/estelle/home.nix
-            #      nvf.homeManagerModules.nvf
-            #   ];
-            #   extraSpecialArgs = {inherit inputs;};
-            #};
          };
 
       };
