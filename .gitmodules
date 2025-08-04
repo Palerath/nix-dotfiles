@@ -1,0 +1,12 @@
+[submodule "users/estelle"]
+	path = users/estelle
+	url = git@github.com:Palerath/dotfiles-estelle
+[submodule "users/perihelie"]
+	path = users/perihelie
+	url = git@github.com:Palerath/dotfiles-perihelie
+[submodule "hosts/perikon"]
+	path = hosts/perikon
+	url = git@github.com:Palerath/dotfiles-perikon
+[submodule "hosts/linouce"]
+	path = hosts/linouce
+	url = git@github.com:Palerath/dotfiles-linouce
