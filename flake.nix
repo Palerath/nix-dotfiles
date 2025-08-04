@@ -34,7 +34,7 @@
          lib = nixpkgs.lib;
       in
          {
-
+         # PERIKON
          nixosConfigurations = {
             perikon = lib.nixosSystem {
                system = "x86_64-linux";
@@ -44,6 +44,20 @@
                ];        
             };
 
+            homeConfigurations = {
+               "perihelie" = home-manager.lib.homeManagerConfiguration {
+                  pkgs = nixpkgs.legacyPackages."x86_64-linux";
+                  modules = [ 
+                     ./users/perihelie/home.nix
+                     nvf.homeManagerModules.nvf
+                  ];
+                  extraSpecialArgs = {inherit inputs;};
+               };
+
+            };
+
+
+            # LINOUCE
             linouce = lib.nixosSystem {
                system = "x86_64-linux";
                specialArgs = {inherit inputs;};
@@ -61,20 +75,6 @@
                ];
             };
          };
-
-         # STANDALONE CONFIG
-         homeConfigurations = {
-            "perihelie" = home-manager.lib.homeManagerConfiguration {
-               pkgs = nixpkgs.legacyPackages."x86_64-linux";
-               modules = [ 
-                  ./users/perihelie/home.nix
-                  nvf.homeManagerModules.nvf
-               ];
-               extraSpecialArgs = {inherit inputs;};
-            };
-
-         };
-
       };
 
 }
