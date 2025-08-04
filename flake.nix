@@ -40,7 +40,7 @@
                system = "x86_64-linux";
                specialArgs = {inherit inputs;};
                modules = [ 
-                  ./hosts/perikon/configuration.nix
+                  /etc/nixos-dotfiles/hosts/perikon/configuration.nix
                ];        
             };
 
@@ -48,7 +48,7 @@
                "perihelie" = home-manager.lib.homeManagerConfiguration {
                   pkgs = nixpkgs.legacyPackages."x86_64-linux";
                   modules = [ 
-                     ./users/perihelie/home.nix
+                     /etc/nixos-dotfiles/users/perihelie/home.nix
                      nvf.homeManagerModules.nvf
                   ];
                   extraSpecialArgs = {inherit inputs;};
@@ -62,7 +62,7 @@
                system = "x86_64-linux";
                specialArgs = {inherit inputs;};
                modules = [
-                  ./hosts/linouce/configuration.nix
+                  /etc/nixos-dotfiles/hosts/linouce/configuration.nix
                   home-manager.nixosModules.home-manager
                   {
                      home-manager = {

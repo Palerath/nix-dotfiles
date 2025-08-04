@@ -7,7 +7,7 @@ if [ -z "$COMMIT_MSG" ]; then
 fi
 
 # Change to the dotfiles directory
-cd ~/dotfiles || { echo "dotfiles directory not found!"; exit 1; }
+cd /etc/nixos-dotfiles || { echo "dotfiles directory not found!"; exit 1; }
 
 # Function to commit and push a repo
 commit_and_push() {
@@ -28,11 +28,11 @@ commit_and_push() {
 }
 
 # Commit and push main repo
-commit_and_push ~/dotfiles
+commit_and_push /etc/nixos-dotfiles
 
 # Commit and push submodules
-commit_and_push ~/dotfiles/users/estelle
-commit_and_push ~/dotfiles/hosts/linouce
+commit_and_push /etc/nixos-dotfiles/users/estelle
+commit_and_push /etc/nixos-dotfiles/hosts/linouce
 
 # Update system with nh
 echo "Mise à jour"
