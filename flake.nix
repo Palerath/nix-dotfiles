@@ -27,14 +27,10 @@
          inputs.nixpkgs.follows = "nixpkgs";
       };
 
-      rust-overlay = {
-         url = "github:oxalica/rust-overlay";
-         inputs.nixpkgs.follows = "nixpkgs";
-      };
-
+      flake-utils.url = "github:numtide/flake-utils";
    };
 
-   outputs = { self, nixpkgs, home-manager, nvf, hyprland, hyprland-plugins, nix-colors, zen-browser, rust-overlay, ... }@inputs:
+   outputs = { self, nixpkgs, home-manager, nvf, hyprland, hyprland-plugins, nix-colors, zen-browser, flake-utils,  ... }@inputs:
       let 
          lib = nixpkgs.lib;
       in
@@ -46,11 +42,6 @@
                specialArgs = {inherit inputs;};
                modules = [ 
                   ./hosts/perikon/configuration.nix
-
-                  ({ pkgs, ... }: {
-                     nixpkgs.overlays = [ rust-overlay.overlays.default ];
-                     environment.systemPackages = [ pkgs.rust-bin.stable.latest.default ];
-                  })
                ];        
             };
 
