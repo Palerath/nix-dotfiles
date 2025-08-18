@@ -76,9 +76,9 @@
             # perikon
             perikon = mkSystem "perikon" "x86_64-linux" [
                {
-                  home-manager.users.perihelie = import ./users/perihelie/home.nix;
+                  # Home-manager as a module
+                  # home-manager.users.perihelie = import ./users/perihelie/home.nix;
                }
-               nvf.homeManagerModules.nvf
             ];
 
             # linouce
