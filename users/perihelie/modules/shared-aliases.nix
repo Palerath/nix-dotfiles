@@ -3,9 +3,9 @@
 let
    flakePath = "/home/perihelie/dotfiles";
    aliases = {
-      kumit = "bash ${flakePath}/scripts/kumit.sh";
-      rebuild = "nh os switch '.?submodules=1' --hostname perikon";
-      hms = "nh home switch '.?submodules=1'";
+      # kumit = "bash ${flakePath}/scripts/kumit.sh";
+      rebuild = "nh os switch '.' --hostname perikon";
+      hms = "nh home switch '.'";
 
       # Git aliases
       g = "git";
@@ -30,8 +30,8 @@ let
       core-ls = "ls";
 
       # virt-manager
-      android-vm = "virt-manager";
-      adb-connect = "adb connect localhost:5555";
+      # android-vm = "virt-manager";
+      # adb-connect = "adb connect localhost:5555";
    };
 in
    {
