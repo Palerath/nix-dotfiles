@@ -1,6 +1,6 @@
 {
    imports = [
       # ./services.nix
-      ./packages.nix
+      # ./packages.nix
    ];
 }
