@@ -7,16 +7,20 @@ result-*
 *.swp
 *.swo
 
-# User-specific secrets (never commit)
-users/*/secrets/*
-secrets/admin/*
+# Hardware-specific files (regenerate on each machine)
+# Commented out since we want to track these
+# hosts/*/hardware-configuration.nix
 
-# But allow .gitkeep files
-!users/*/secrets/.gitkeep
-!secrets/admin/.gitkeep
+# Secrets (if using sops-nix or similar)
+secrets/*
+!secrets/.gitkeep
 
-# Hardware-specific (regenerate on each machine)
-hosts/*/hardware-configuration.nix
+# Backup files
+*.old
+*.backup
 
-# Lock files (optional - some prefer to commit them)
+# Nix store links
+/nix/store
+
+# Lock files (optional - you may want to track this)
 # flake.lock
