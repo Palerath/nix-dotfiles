@@ -56,6 +56,7 @@
       ./modules/nvf.nix
       ./modules/alacritty.nix
       ./modules/wezterm.nix
+      ./modules/kitty.nix
       ./modules/mpv.nix
       ./modules/hypr/default.nix
       ./modules/fastfetch.nix
