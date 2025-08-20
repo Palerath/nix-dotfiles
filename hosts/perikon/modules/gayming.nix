@@ -8,6 +8,7 @@
     ckan
     rpcs3
     pcsx2
+    ryubing
 
     # Steam utilities
     gamescope
