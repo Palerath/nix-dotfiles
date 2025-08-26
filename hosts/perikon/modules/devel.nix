@@ -23,6 +23,7 @@
       openssl
       pkg-config
       sqlite
+      claude-code
    ];
 
    environment.sessionVariables = {
