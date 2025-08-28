@@ -15,6 +15,7 @@
       kdePackages.plasma-wayland-protocols
       kdePackages.audiocd-kio
       kdePackages.k3b
+      kdePackages.qtwebengine
    ];
 
    environment.sessionVariables = {

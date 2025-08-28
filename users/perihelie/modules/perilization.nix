@@ -38,7 +38,7 @@
    # Configure environment variables for better Wayland support
    home.sessionVariables = {
       # Help Qt applications work better under Wayland
-      # QT_QPA_PLATFORM = "wayland;xcb";
+      QT_QPA_PLATFORM = "wayland;xcb";
       # Ensure QEMU can find its BIOS files
       QEMU_SYSTEM_PREFIX = "${pkgs.qemu_kvm}";
       MOZ_ENABLE_WAYLAND = "1";
