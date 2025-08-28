@@ -1,7 +1,7 @@
 { pkgs, ...}:
 {
    services.desktopManager.plasma6.enable = true;
-   # services.desktopManager.plasma6.enableQt5Integration = true;
+   services.desktopManager.plasma6.enableQt5Integration = true;
 
    environment.systemPackages = with pkgs; [
       kdePackages.plasma-workspace
