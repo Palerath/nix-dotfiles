@@ -1,111 +1,244 @@
-# CLAUDE.md
+# CLAUDE.MD - NixOS Family Configuration Project Context
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
-## CUSTOM INSTRUCTIONS
+## Project Overview
 
-### Design Principles
+This is a NixOS configuration repository managing multiple family computers with varying technical expertise levels. The project transitioned from a complex submodule architecture to a unified repository with branch-based isolation, inspired by the Arch User Repository (AUR) model.
 
-1. Always refer back to the documentations (when available) 
-2. Don't overengineer: Simple beats complex
-3. No fallbacks: One correct path, no alternatives
-4. One way: One way to do things, not many
-5. Clarity over compatibility: Clear code beats backward compatibility
-6. Throw errors: Fail fast when preconditions aren't met
-7. No backups: Trust the primary mechanism
-8. Separation of concerns: Each function should have a single responsibility
+### Current Architecture Status
+- **Repository Structure**: Single unified repository (no more submodules)
+- **Branch Strategy**: Moving to AUR-style branch isolation where each user has their own permanent branch
+- **Deployment Tool**: Using `nh` for system switching (`nh os switch`)
+- **Target Users**: Mix of technical (admin/perihelie) and non-technical family members (estelle)
 
-### Development Methodology
+## Repository Structure
 
-9. Surgical changes only: Make minimal, focused fixes
-10. Evidence-based debugging: Add minimal, targeted logging
-11. Fix root causes: Address the underlying issue, not just symptoms
-12. Simple > Complex: Let TypeScript catch errors instead of excessive runtime checks
-13. Collaborative process: Work with user to identify most efficient solution
-
-### Styling 
-1. Avoid emojis
-2. Kaomojis are fine
-
-you are a detective, this is the crime, find the theory of the crime, then collect evidence, and only after evidence proves it, then fix it, has saved me some random fixes as it changes because it has a beautiful theory that is not backed by real evidence
-
-## Repository Overview
-
-This is a NixOS/Home Manager dotfiles repository using Nix Flakes to manage system and user configurations for multiple machines (perikon and linouce). The repository follows a modular architecture where system-level configurations are separated from user-level configurations.
-
-## Key Commands
-
-### System Rebuilds
-```bash
-# Rebuild perikon system
-./scripts/rebuild-perikon.sh
-# or: nh os switch '.' --hostname perikon
-
-# Rebuild linouce system  
-./scripts/rebuild-linouce.sh
-# or: nh os switch '.' --hostname linouce
-
-# Update all systems (commit + push + rebuild both)
-./scripts/update-all.sh
+```
+dotfiles/
+├── flake.nix                    # Main flake managing all configurations
+├── flake.lock                   # Shared dependency lock file
+├── common/                      # Shared configurations
+│   ├── default.nix
+│   └── packages.nix            # Common packages (vlc, nh enabled)
+├── hosts/                      # Machine-specific configurations
+│   ├── perikon/               # Perihelie's main machine
+│   │   └── configuration.nix
+│   ├── linouce/               # Estelle's machine
+│   │   └── configuration.nix
+│   └── [other machines]
+├── users/                      # User configurations
+│   ├── perihelie/             # Admin user config
+│   │   └── home.nix
+│   ├── estelle/               # Non-technical user config
+│   │   └── home.nix
+│   └── [other users]
+├── scripts/                    # Helper scripts
+│   ├── commit-perikon.sh     # Multi-repo commit script (deprecated)
+│   ├── kumit.sh              # Wrapper for commit script
+│   └── maj-ordi.sh          # Update script for Estelle's computer
+└── .gitignore                 # Excludes hardware-configuration.nix
 ```
 
-### Home Manager
-```bash
-# Update standalone home-manager config for perihelie
-home-manager switch --flake .#perihelie@perikon
+## Branch Architecture Design
 
-# Update standalone home-manager config for estelle
-home-manager switch --flake .#estelle@linouce
+### Planned Branch Structure
+```
+main                           # Admin-only, contains shared files
+├── shared-updates            # For flake.nix/flake.lock updates
+├── user-perihelie           # Perihelie's isolated configuration
+├── user-estelle             # Estelle's isolated configuration
+└── user-[username]          # Other family members
 ```
 
-### Development Workflow
+### Branch Contents
+Each user branch should contain:
+- Their specific host configuration (`hosts/[hostname]/`)
+- Their user configuration (`users/[username]/`)
+- Shared files (`flake.nix`, `flake.lock`, `common/`)
+- No other users' configurations
+
+## Implementation Tasks
+
+### Phase 1: Branch Setup (Current Priority)
+
+1. **Create branch structure**
+   ```bash
+   # Create shared-updates branch from main
+   git checkout -b shared-updates
+   
+   # Create user branches with only their files
+   git checkout -b user-estelle
+   # Remove other users' configs from this branch
+   git rm -r users/perihelie hosts/perikon
+   git commit -m "Initialize Estelle's isolated branch"
+   ```
+
+2. **Set up branch protection rules**
+   - Protect `main` branch (admin only)
+   - Protect user branches (user + admin access)
+   - Document in repository settings
+
+3. **Update deployment configuration**
+   - Modify each host to track its user branch
+   - Update `flake.nix` to work with branch-specific deployments
+
+### Phase 2: Automation Setup
+
+1. **Create synchronization workflow**
+   - Script to sync `flake.nix` and `flake.lock` from `shared-updates` to user branches
+   - GitHub Actions or local script for admin to run
+
+2. **Update helper scripts**
+   - Replace `commit-perikon.sh` with branch-aware version
+   - Update `maj-ordi.sh` to work with Estelle's branch
+
+3. **Conflict resolution procedures**
+   - Document admin workflow for resolving flake.lock conflicts
+   - Create merge helper scripts
+
+## Key Constraints and Considerations
+
+### Technical Constraints
+1. **Flake Limitations**: NixOS flakes don't support sparse checkouts or partial repositories
+2. **Lock File Synchronization**: `flake.lock` must be kept in sync across branches to prevent version conflicts
+3. **Git Sparse Checkout**: Does NOT provide security isolation - all history remains accessible
+
+### User Requirements
+1. **Non-technical Users**: Must be able to:
+   - Edit their own configuration files
+   - Test changes locally with `nh os switch`
+   - Commit and push changes without understanding git internals
+
+2. **Admin Requirements**:
+   - Handle all merge conflicts
+   - Maintain shared dependencies
+   - Push updates to user branches when needed
+
+### Security Considerations
+1. **No Secrets in Repository**: Never store passwords, API keys, or sensitive data
+2. **Branch Isolation**: For convenience, not security (git history is always accessible)
+3. **Future Secrets Management**: Consider sops-nix or agenix if needed
+
+## Common Tasks
+
+### For Users (e.g., Estelle)
+
 ```bash
-# Commit changes with optional message
-./scripts/commit.sh ["custom message"]
+# Update system after making changes
+cd ~/dotfiles
+git pull
+# Edit configuration files
+nh os switch '.?submodules=1' --hostname linouce
 
-# Test configuration before rebuilding
-nix flake check
+# Save changes
+git add .
+git commit -m "Update: description of changes"
+git push
+```
 
-# Update flake inputs
+### For Admin (Perihelie)
+
+```bash
+# Update shared dependencies
+git checkout shared-updates
 nix flake update
+git add flake.lock
+git commit -m "Update flake inputs"
+git push
+
+# Sync to user branches
+for branch in user-estelle user-perihelie; do
+  git checkout $branch
+  git checkout shared-updates -- flake.nix flake.lock
+  git commit -m "Sync shared files from shared-updates"
+  git push
+done
+
+# Resolve conflicts for users
+git checkout user-estelle
+git merge shared-updates
+# Resolve conflicts manually
+git add .
+git commit -m "Resolved conflicts for Estelle"
+git push
 ```
 
-## Architecture
+## Current Flake Structure
 
-### Directory Structure
-- `hosts/` - Machine-specific NixOS configurations
-  - `perikon/` - Desktop system configuration and modules
-  - `linouce/` - Secondary system configuration
-  - `common/` - Shared system configurations
-- `users/` - Home Manager configurations per user
-  - `perihelie/` - Main user configuration with desktop environment modules
-  - `estelle/` - Secondary user configuration
-- `modules/` - Reusable modules
-  - `nixos/` - System-level modules (desktop environments)
-  - `home-manager/` - User-level modules
-- `scripts/` - Build and deployment scripts
-- `flake.nix` - Main flake configuration defining inputs and outputs
+The main `flake.nix` currently defines:
+- **nixosConfigurations**: `perikon` and `linouce`
+- **homeConfigurations**: `perihelie`
+- **Inputs**: nixpkgs, home-manager, nvf, hyprland, nix-colors, zen-browser
 
-### Key Configuration Patterns
+### Important Modules
+- `nvf`: Neovim configuration framework
+- `hyprland`: Wayland compositor
+- `home-manager`: User environment management
 
-**System Configuration**: Each host imports modular configurations from `hosts/{hostname}/modules/` covering bootloader, graphics, desktop environments (Hyprland, KDE Plasma, XFCE), gaming, development tools, and services.
+## Migration Checklist
 
-**User Configuration**: Home Manager configurations in `users/{username}/` import modular configurations for shells (fish, nushell, zsh), terminal emulators (kitty, alacritty, wezterm), editors (neovim via nvf, emacs), and window managers.
+- [ ] Create branch structure
+- [ ] Move existing configurations to appropriate branches
+- [ ] Update deployment scripts
+- [ ] Test deployments from branches
+- [ ] Document new workflow for family members
+- [ ] Set up automation for shared file synchronization
+- [ ] Create conflict resolution procedures
+- [ ] Update backup strategies
 
-**Flake Architecture**: Uses a helper function `mkSystem` to create NixOS configurations with Home Manager integration. Defines both `nixosConfigurations` for full system builds and `homeConfigurations` for standalone user environment updates.
+## Design Principles for Implementation
 
-### Dependencies
-- **nh**: Modern Nix helper for system rebuilds
-- **nvf**: Neovim configuration framework
-- **Hyprland**: Wayland compositor with plugins
-- **nix-colors**: Color scheme management
-- **zen-browser**: Web browser via flake
+1. **Simplicity Over Complexity**: Keep workflows simple for non-technical users
+2. **Fail-Safe Operations**: All changes should be reversible
+3. **Clear Error Messages**: Scripts should provide helpful feedback
+4. **Minimal Manual Git**: Users shouldn't need to understand git internals
+5. **Automated Synchronization**: Reduce manual overhead for shared files
 
-## Development Notes
+## Testing Strategy
 
-The system uses NixOS unstable channel and enables flakes + nix-command experimental features. The NH_FLAKE environment variable is set to `/home/perihelie/dotfiles` for convenient system management.
+Before deploying changes:
+1. Test on a VM or spare machine first
+2. Create rollback points before major changes
+3. Document the rollback procedure
+4. Test user workflows with family members
 
-When modifying configurations, test with `nix flake check` before rebuilding systems. The repository supports both integrated Home Manager (as NixOS modules) and standalone Home Manager configurations.
+## References and Resources
 
-### Additional Scripts
-- `./scripts/commit.sh` - Simple commit with git add -A, commit, and push
-- `./scripts/kumit.sh`, `./scripts/maj-ordi.sh`, `./scripts/unification.sh` - Additional utility scripts
+- Current repository structure in `/home/perihelie/dotfiles/`
+- NixOS manual: https://nixos.org/manual/nixos/stable/
+- Home Manager manual: https://nix-community.github.io/home-manager/
+- Git branching strategies: https://www.atlassian.com/git/tutorials/comparing-workflows
+
+## Notes for Claude Code
+
+When working on this project:
+1. Always preserve existing functionality while implementing new features
+2. Create incremental, testable changes rather than large rewrites
+3. Add comments explaining complex Nix expressions
+4. Test branch operations on a test repository first
+5. Consider the non-technical users when designing workflows
+6. Maintain backwards compatibility during the transition period
+
+## Current Issues to Address
+
+1. **Submodule Removal**: Clean up references to old submodule structure
+2. **Branch Creation**: Initialize user branches with proper content
+3. **Script Updates**: Modernize helper scripts for branch-based workflow
+4. **Documentation**: Create user-friendly guides for family members
+5. **Automation**: Implement GitHub Actions or GitLab CI for synchronization
+
+## Command Aliases and Helpers
+
+Consider adding these to make operations easier:
+```bash
+# For users
+alias update-system="cd ~/dotfiles && git pull && nh os switch '.?submodules=1' --hostname $(hostname)"
+alias save-config="cd ~/dotfiles && git add . && git commit -m 'Update configuration' && git push"
+
+# For admin
+alias sync-flakes="~/dotfiles/scripts/sync-shared-files.sh"
+alias check-conflicts="git branch -r | xargs -I {} git log {}..shared-updates --oneline"
+```
+
+---
+
+This document should be kept updated as the migration progresses and new patterns emerge.

@@ -43,11 +43,6 @@
       "flakes"
    ];
 
-
-   nixpkgs.config.permittedInsecurePackages = [
-      "qtwebengine"
-   ];
-
    # Enable CUPS to print documents.
    services.printing.enable = true;
 

@@ -9,6 +9,9 @@
    home.stateVersion = "24.11"; # Please read the comment before changing.
 
    nixpkgs.config.allowUnfree = true;
+   nixpkgs.config.permittedInsecurePackages = [
+      "qtwebengine-5.15.19"
+   ];
 
    home.packages = with pkgs; [
       git
@@ -21,7 +24,7 @@
       vlc
       gnome-software
       flatpak
-      anki
+      anki-bin
       texlab
       qolibri
       yt-dlp
