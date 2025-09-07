@@ -15,6 +15,7 @@
 
    home.packages = with pkgs; [
       git
+      github-desktop
       discord
       prismlauncher
       vesktop
