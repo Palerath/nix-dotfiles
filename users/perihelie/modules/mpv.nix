@@ -44,7 +44,7 @@
 
          # subtitles
          alang = "jpn,jp,fra,fr,eng,en";
-         slang = "fra,fr,frFR,eng,en,enUS";
+         slang = "eng,en,enUS,fra,fr,frFR";
          sub-auto="fuzzy";
 
          # UI
@@ -65,7 +65,7 @@
          screenshot-format="png";
          screenshot-high-bit-depth="yes";
          # screenshot-png-compression=7 # Setting too high may lag the PC on weaker systems. Recommend 3 (weak systems) or 7.
-         screenshot-directory="/home/perihelie/drives/hdd/Pictures/mpv";
+         screenshot-directory="/home/perihelie/drives/hdd/Pictures/mpv/";
 
          # ytdlp
          # Default demuxer is 150/75 MB, note that this uses RAM so set a reasonable amount.
