@@ -43,7 +43,7 @@
          volume-max=100;
 
          # subtitles
-         alang = "jpn,jp,fra,fr,eng,en";
+         alang = "jpn,jp,eng,en,fra,fr";
          slang = "eng,en,enUS,fra,fr,frFR";
          sub-auto="fuzzy";
 
