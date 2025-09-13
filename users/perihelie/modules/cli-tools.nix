@@ -13,12 +13,10 @@
       glances
       slurp
       # lf
-      tmux
       zellij
       ffmpeg
       ffmpegthumbnailer
       chafa
-      kitty-img
       libsixel
       dconf
       ripgrep
@@ -32,15 +30,12 @@
       dust
       dua
       yazi
-      evil-helix
       cargo-info
       fselect
       delta
       tokei
       wiki-tui
       # presenterm
-      oh-my-posh 
-      sqlite
       fd                 
       fzf          
       glow         # Terminal markdown viewer
@@ -65,7 +60,6 @@
       enable = true;
       useTheme = "hul10";
    };
-
 
    programs.command-not-found.enable = false;
 

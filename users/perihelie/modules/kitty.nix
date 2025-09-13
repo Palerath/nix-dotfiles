@@ -1,6 +1,9 @@
 {pkgs, ...}:
 {
-   home.packages = with pkgs; [ kitty-themes ];
+   home.packages = with pkgs; [ 
+      kitty-themes
+      kitty-img
+   ];
    programs.kitty = {
       enable = true;
       package = pkgs.kitty;            
