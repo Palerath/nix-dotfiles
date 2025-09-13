@@ -2,7 +2,6 @@
 {
 
    environment.systemPackages = with pkgs; [ 
-      cudaPackages.cudatoolkit
       fan2go
    ];
 
