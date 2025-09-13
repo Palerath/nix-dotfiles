@@ -18,7 +18,7 @@
    };
 
    programs.emacs = {
-      enable = true;
+      enable = false;
    };
 
    home.activation.doom = lib.hm.dag.entryAfter [ "writeBoundary" ] ''

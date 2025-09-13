@@ -1,13 +1,13 @@
 {pkgs, ...}:
 {
    home.packages = with pkgs; [ 
-      kitty-themes
+      # kitty-themes
       kitty-img
    ];
    programs.kitty = {
       enable = true;
       package = pkgs.kitty;            
-      themeFile = "bright lights";           
+      # themeFile = "bright lights";           
 
       font = { name = "JetBrains Mono"; size = 14; };
 
