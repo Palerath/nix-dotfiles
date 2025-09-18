@@ -15,7 +15,7 @@
       eww
       dunst
       libnotify
-      rofi-wayland
+      rofi
       swww
    ];  
 
