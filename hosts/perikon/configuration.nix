@@ -19,7 +19,8 @@
       ./modules/flatpak.nix
       ./modules/gayming.nix
       ./modules/fonts.nix
-      ./modules/keyboarding-fcitx5.nix
+      # ./modules/keyboarding-fcitx5.nix
+      ./modules/keyboarding-ibus.nix
       ./modules/devel.nix
       ./modules/locales.nix
       # ./modules/virtual-machines.nix

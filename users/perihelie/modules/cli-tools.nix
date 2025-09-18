@@ -44,18 +44,8 @@
       unixtools.netstat
       prettierd
       nixfmt-rfc-style
+      tmux
    ];
-
-   dconf = {
-      settings = {
-         "org.kde.keyboard" = {
-            layouts = [ "qwerty-fr" ];
-            defaultLayout = "qwerty-fr";
-         };
-      };
-
-   };
-
    programs.oh-my-posh = {
       enable = true;
       useTheme = "hul10";

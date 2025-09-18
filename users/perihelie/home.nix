@@ -53,6 +53,16 @@
       EDITOR = "nvim";
    };
 
+   dconf = {
+      settings = {
+         "org.kde.keyboard" = {
+            layouts = [ "qwerty-fr" ];
+            defaultLayout = "qwerty-fr";
+         };
+      };
+
+   };
+
    imports = [
       ./modules/fish.nix
       ./modules/nushell.nix
@@ -67,6 +77,7 @@
       ./modules/session-variables.nix
       ./modules/desktop-entries.nix
       ./modules/cli-tools.nix
+      ./modules/tmux.nix
       # ./modules/perilization.nix
       # ./modules/emacs.nix
       inputs.zen-browser.homeModules.beta
