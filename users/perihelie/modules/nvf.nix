@@ -7,7 +7,7 @@
             vimAlias = true;
 
             # Theme & UI
-            theme = { enable = true; name = "gruvbox"; style = "dark"; transparent = true; };
+            theme = { enable = true; name = "gruvbox"; style = "dark"; transparent = false; };
             ui = {
                borders.enable = true;
                noice.enable = true;
@@ -90,13 +90,13 @@
                rust = {
                   enable = true;
                   lsp.opts = ''
-              ['rust-analyzer'] = {
-                cargo = {allFeatures = true},
-                checkOnSave = true,
-                procMacro = {enable = true},
-                inlayHints = {enable = true},
-              },
-                  '';
+                  ['rust-analyzer'] = {
+                  cargo = {allFeatures = true},
+                  checkOnSave = true,
+                  procMacro = {enable = true},
+                  inlayHints = {enable = true},
+                  },
+               '';
                };
                python.enable = true;
                lua.enable = true;
