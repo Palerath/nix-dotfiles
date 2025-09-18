@@ -15,7 +15,7 @@ in
    programs.fish = {
       enable = true;
       shellInit = ''
-         fastfetch
+         tmux && fastfetch
       '';
 
       # Import shared aliases
@@ -31,6 +31,9 @@ in
    };
 
    programs.fish.interactiveShellInit = ''
+      # Disable welcome message
+      set fish_greeting
+
       # Disable command-not-found to avoid database errors
       set -e fish_command_not_found_handler
 
