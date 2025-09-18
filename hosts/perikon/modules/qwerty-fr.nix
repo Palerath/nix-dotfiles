@@ -19,6 +19,5 @@
          # XKB_DEFAULT_VARIANT = "";
       };
    };
-  
-   console.keyMap = "fr";
+
 }
