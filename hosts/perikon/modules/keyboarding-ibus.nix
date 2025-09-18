@@ -1,6 +1,6 @@
 {pkgs, lib, ...}:
 {
-   il8n.inputMethod = {
+   i18n.inputMethod = {
       enable = true;
       type = "ibus";
       ibus.engines = with pkgs.ibus-engines; [ mozc-ut ];

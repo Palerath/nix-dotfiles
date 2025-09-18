@@ -10,9 +10,6 @@
       # Start window numbering at 1
       baseIndex = 1;
 
-      # Renumber windows when one is closed
-      renumberWindows = true;
-
       # Increase scrollback buffer
       historyLimit = 10000;
 
@@ -21,6 +18,10 @@
 
       # Custom key bindings
       extraConfig = ''
+      
+      # Renumber windows when one is closed
+      set -g renumber-windows on
+
       # Reload config with prefix + r
       bind r source-file ~/.config/tmux/tmux.conf \; display "Config reloaded!"
 
