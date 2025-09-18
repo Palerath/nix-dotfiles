@@ -33,6 +33,7 @@ in
    programs.fish.interactiveShellInit = ''
       # Disable welcome message
       set fish_greeting
+      set fish_handle_reflow 0
 
       # Disable command-not-found to avoid database errors
       set -e fish_command_not_found_handler

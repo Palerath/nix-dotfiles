@@ -12,7 +12,7 @@
 
          # Window
          background_opacity = 0.9;
-         background_blur = 1;
+         # background_blur = 1;
       };
 
       enableGitIntegration = true;
