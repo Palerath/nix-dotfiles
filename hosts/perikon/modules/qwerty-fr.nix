@@ -1,6 +1,7 @@
 {pkgs, ...}:
 {
    environment.systemPackages = [ pkgs.qwerty-fr ];
+
    services.xserver.xkb = {
       extraLayouts.qwerty-fr = {
          description = "QWERTY-FR layout";
@@ -15,8 +16,9 @@
    systemd.services.display-manager = {
       environment = {
          XKB_DEFAULT_LAYOUT = "qwerty-fr";
-         XKB_DEFAULT_VARIANT = "";
+         # XKB_DEFAULT_VARIANT = "";
       };
    };
+  
    console.keyMap = "fr";
 }
