@@ -21,6 +21,7 @@
       ./modules/fonts.nix
       # ./modules/keyboarding-fcitx5.nix
       ./modules/keyboarding-ibus.nix
+      ./modules/qwerty-fr.nix
       ./modules/devel.nix
       ./modules/locales.nix
       # ./modules/virtual-machines.nix
