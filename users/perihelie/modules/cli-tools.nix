@@ -45,6 +45,7 @@
       prettierd
       nixfmt-rfc-style
       tmux
+      pipes-rs
    ];
    programs.oh-my-posh = {
       enable = true;
