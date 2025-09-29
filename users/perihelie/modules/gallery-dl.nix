@@ -1,5 +1,5 @@
 {
-   progams.gallery-dl = {
+   programs.gallery-dl = {
       enable = true;
       settings = {
          base-directory = "/home/perihelie/Documents/gallery-dl";
@@ -51,28 +51,26 @@
             # Metadata
             metadata = true;
          };
-      };
+         output = {
+            mode = "terminal";
+            progress = true;
+            shorten = true;
+            log = {
+               level = "info";
+               format = "{name}: {message}";
+            };
+         };
 
-      output = {
-         mode = "terminal";
-         progress = true;
-         shorten = true;
-         log = {
-            level = "info";
-            format = "{name}: {message}";
+         downloader = {
+            rate = "null";  # Rate limit (1MB/s), remove or set to null for unlimited
+            retries = 3;
+            timeout = 30.0;
+            verify = true;  # SSL certificate verification
+
+            # Parallel downloads
+            part = true;
+            part-directory = "/tmp/.gallery-dl";
          };
       };
-
-      downloader = {
-         rate = "null";  # Rate limit (1MB/s), remove or set to null for unlimited
-         retries = 3;
-         timeout = 30.0;
-         verify = true;  # SSL certificate verification
-
-         # Parallel downloads
-         part = true;
-         part-directory = "/tmp/.gallery-dl";
-      };
-
    };
 }
