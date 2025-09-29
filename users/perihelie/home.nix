@@ -75,6 +75,7 @@
       ./modules/desktop-entries.nix
       ./modules/cli-tools.nix
       ./modules/tmux.nix
+      ./modules/gallery-dl.nix
       # ./modules/perilization.nix
       # ./modules/emacs.nix
       inputs.zen-browser.homeModules.beta
