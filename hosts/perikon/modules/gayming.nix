@@ -64,8 +64,9 @@
    ];
 
    # temporary fix else it does not compile
-  programs.argagg = pkgs.argagg.override {
-      cmake = pkgs.cmake_3_4;  
-   };
-
+   argagg = pkgs.argagg.overrideAttrs (oldAttrs: {
+      cmakeFlags = (oldAttrs.cmakeFlags or []) ++ [
+         "-DCMAKE_POLICY_VERSION_MINIMUM=3.5"
+      ];
+   });
 }
