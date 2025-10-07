@@ -63,4 +63,9 @@
       game-devices-udev-rules
    ];
 
+   # temporary fix else it does not compile
+   argagg = pkgs.argagg.override {
+      cmake = pkgs.cmake_3_4;  
+   };
+
 }
