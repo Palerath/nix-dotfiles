@@ -64,9 +64,14 @@
    ];
 
    # temporary fix else it does not compile
-   argagg = pkgs.argagg.overrideAttrs (oldAttrs: {
-      cmakeFlags = (oldAttrs.cmakeFlags or []) ++ [
-         "-DCMAKE_POLICY_VERSION_MINIMUM=3.5"
-      ];
-   });
+   nixpkgs.overlays = [
+      (final: prev: {
+         argagg = prev.argagg.overrideAttrs (oldAttrs: {
+            postPatch = ''
+          substituteInPlace CMakeLists.txt \
+          --replace-fail "cmake_minimum_required(VERSION 2.8.12)" "cmake_minimum_required(VERSION 3.5)"
+          '';
+         });
+      })
+   ];
 }
