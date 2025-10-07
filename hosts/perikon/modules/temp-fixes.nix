@@ -20,6 +20,10 @@
             cmakeFlags = (old.cmakeFlags or []) ++ [ "-DCMAKE_POLICY_VERSION_MINIMUM=3.5" ];
          });
 
+         zsync2=  prev.zsync2.overrideAttrs (old: {
+            cmakeFlags = (old.cmakeFlags or []) ++ [ "-DCMAKE_POLICY_VERSION_MINIMUM=3.5" ];
+         });
+
       })
    ];
 
