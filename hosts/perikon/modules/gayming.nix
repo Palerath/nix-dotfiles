@@ -77,6 +77,11 @@
                "-DCMAKE_POLICY_VERSION_MINIMUM=3.5"
             ];
          });
+         allegro = prev.allegro.overrideAttrs (oldAttrs: {
+            cmakeFlags = (oldAttrs.cmakeFlags or []) ++ [
+               "-DCMAKE_POLICY_VERSION_MINIMUM=3.5"
+            ];
+         });
       })
    ];
 }
