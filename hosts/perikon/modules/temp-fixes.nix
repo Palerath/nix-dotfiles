@@ -14,6 +14,7 @@
          # Fix known problematic packages
          argagg = final.fixCmake prev.argagg;
          slop = final.fixCmake prev.slop;
+         allegro = final.fixCmake.prev.allegro;
       })
    ];
 
