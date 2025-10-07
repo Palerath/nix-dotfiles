@@ -17,4 +17,5 @@
             allegro = fixCmake.prev.allegro;
          }
       )
-   ];}
+   ];
+}
