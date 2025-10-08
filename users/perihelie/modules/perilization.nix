@@ -13,8 +13,6 @@
       android-tools
    ];
 
-   virtualisation.waydroid.enable = true;
-
    # Enable XDG desktop integration
    # This ensures VM applications show up properly in your KDE menu
    xdg = {

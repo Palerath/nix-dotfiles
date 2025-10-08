@@ -54,6 +54,8 @@
       };
    };
 
+   virtualisation.waydroid.enable = true;
+
    environment.sessionVariables = {
       PROTON_ENABLE_NVAPI = "1";
       PROTON_ENABLE_NGX_UPDATER = "1";
@@ -63,4 +65,4 @@
       game-devices-udev-rules
    ];
 
-  }
+}
