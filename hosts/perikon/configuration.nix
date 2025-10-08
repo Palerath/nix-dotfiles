@@ -98,7 +98,6 @@
       lm_sensors
       rage
       ssh-to-age
-      dconf
    ];
 
    programs.nh = {
@@ -107,6 +106,8 @@
       # clean.extraArgs = "--keep-since 4d --keep 3";
       flake = "/home/perihelie/dotfiles";
    };
+
+   programs.dconf.enable = true;
 
    environment.sessionVariables = {
       NH_FLAKE = lib.mkDefault "/home/perihelie/dotfiles";
