@@ -16,6 +16,7 @@
       kdePackages.audiocd-kio
       kdePackages.k3b
       kdePackages.qtwebengine
+      kdePackages.filelight
    ];
 
    environment.sessionVariables = {
