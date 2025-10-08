@@ -2,17 +2,18 @@
 {
    # User-level packages for virtualization
    home.packages = with pkgs; [
-      # Alternative VM manager - more modern interface than virt-manager
-      gnome-boxes
-      # QEMU monitor console (useful for debugging)
+      #  QEMU monitor console (useful for debugging)
       qemu-utils
+      
       # Looking glass client (if you ever want to try GPU passthrough later)
       looking-glass-client
-
-      waydroid
+      
+      # waydroid
       android-studio
       android-tools
    ];
+
+   virtualisation.waydroid.enable = true;
 
    # Enable XDG desktop integration
    # This ensures VM applications show up properly in your KDE menu

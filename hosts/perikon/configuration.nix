@@ -97,7 +97,6 @@
       appimage-run
       lm_sensors
       rage
-      ssh-to-age
    ];
 
    programs.nh = {
