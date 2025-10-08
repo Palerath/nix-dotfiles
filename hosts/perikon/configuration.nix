@@ -24,7 +24,7 @@
       ./modules/qwerty-fr.nix
       ./modules/devel.nix
       ./modules/locales.nix
-      ./modules/virtual-machines.nix
+      # ./modules/virtual-machines.nix
       ./modules/services.nix
       ./modules/temp-fixes.nix
    ];
@@ -48,7 +48,7 @@
 
    # Enable CUPS to print documents.
    services.printing.enable = true;
- 
+
    # Enable sound with pipewire.
    services.pulseaudio.enable = false;
    security.rtkit.enable = true;
@@ -59,6 +59,11 @@
       pulse.enable = true;
       audio.enable = true;
       wireplumber.enable = true;
+   };
+
+   networking.firewall = {
+      enable = true;
+      allowedTCPPorts = [ 67 53 ];
    };
 
    # Define a user account. Don't forget to set a password with ‘passwd’.

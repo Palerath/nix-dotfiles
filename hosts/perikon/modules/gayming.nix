@@ -54,10 +54,9 @@
       };
    };
 
-   virtualisation.waydroid.enable = true;
+   virtualisation.waydroid.enable = false;
    systemd = {
       packages = [ pkgs.waydroid-helper ];
-      services.waydroid-mount.wantedBy = [ "multi‑user.target" ];
    };
 
    environment.sessionVariables = {

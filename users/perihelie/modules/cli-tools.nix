@@ -45,6 +45,7 @@
       nixfmt-rfc-style
       tmux
       pipes-rs
+      dysk
    ];
    programs.oh-my-posh = {
       enable = true;
