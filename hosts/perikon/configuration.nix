@@ -97,6 +97,7 @@
       appimage-run
       lm_sensors
       rage
+      cider-2
    ];
 
    programs.nh = {
