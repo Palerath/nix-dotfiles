@@ -24,7 +24,7 @@
       ./modules/qwerty-fr.nix
       ./modules/devel.nix
       ./modules/locales.nix
-      # ./modules/virtual-machines.nix
+      ./modules/virtual-machines.nix
       ./modules/services.nix
       ./modules/temp-fixes.nix
    ];
@@ -98,6 +98,7 @@
       lm_sensors
       rage
       ssh-to-age
+      dconf
    ];
 
    programs.nh = {

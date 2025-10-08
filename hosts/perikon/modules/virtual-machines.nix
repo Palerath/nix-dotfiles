@@ -1,46 +1,41 @@
 {pkgs, ...}:  
 {
+   programs.virt-manager.enable = true;
+   programs.dconf = true;
 
-   boot.kernelModules = [ "kvm-amd" "vfio-pci" "vfio" "vfio_iommu_type1" ];
+   environment.systemPackages = with pkgs; [
+      virt-manager
+      virt-viewer
+      spice 
+      spice-gtk
+      spice-protocol
+      win-virtio
+      win-spice
+      gnome.adwaita-icon-theme
+   ];
 
-   # Enable virtualization support
-   # This enables the KVM kernel module which provides hardware acceleration
+   users.groups.libvirtd.members = ["perihelie"];
+   users.users.perihelie.extraGroups = ["libvirtd"];
+
    virtualisation = {
-      # Enable libvirtd daemon - this manages virtual machines
       libvirtd = {
          enable = true;
-         # QEMU package selection - we want the full QEMU with KVM support
          qemu = {
-            package = pkgs.qemu_kvm;
-            # Enable UEFI support for modern guest systems
-            ovmf.enable = true;
-            # Enable TPM emulation (useful for newer Android versions)
             swtpm.enable = true;
+            ovmf.enable = true;
+            ovmf.packages = [ pkgs.OVMFFull.fd ];
          };
       };
-
-      # Enable SPICE USB redirection for better device support
       spiceUSBRedirection.enable = true;
    };
 
-   # Install required packages system-wide
-   environment.systemPackages = with pkgs; [
-      # Main virtualization management GUI
-      virt-manager
-      # QEMU utilities (includes qemu-img for disk management)
-      # qemu_kvm
-      qemu_full
-      # SPICE client for enhanced display and input
-      spice
-      # SPICE protocol support
-      spice-protocol
-      # USB redirection support
-      spice-gtk
-      # Additional QEMU tools
-      qemu-utils
-   ];
+   dconf.settings = {
+      "org/virt-manager/virt-manager/connections" = {
+         autoconnect = ["qemu:///system"];
+         uris = ["qemu:///system"];
+      };
+   };
 
-   # Add your user to the libvirtd group
-   # Replace "yourusername" with your actual username
-   users.users.perihelie.extraGroups = [ "libvirtd" "kvm" "adbusers" ];
+   services.spice-vdagentd.enable = true;
+
 }

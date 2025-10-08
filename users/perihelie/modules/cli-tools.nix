@@ -18,7 +18,6 @@
       ffmpegthumbnailer
       chafa
       libsixel
-      dconf
       ripgrep
       ripgrep-all
       fd
