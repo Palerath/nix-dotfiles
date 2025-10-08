@@ -55,6 +55,10 @@
    };
 
    virtualisation.waydroid.enable = true;
+   systemd = {
+      packages = [ pkgs.waydroid-helper ];
+      services.waydroid-mount.wantedBy = [ "multi‑user.target" ];
+   };
 
    environment.sessionVariables = {
       PROTON_ENABLE_NVAPI = "1";
