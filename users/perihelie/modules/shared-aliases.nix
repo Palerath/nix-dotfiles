@@ -5,7 +5,7 @@ let
    aliases = {
       # kumit = "bash ${flakePath}/scripts/kumit.sh";
       rebuild = "nh os switch '.' --hostname perikon";
-      hms = "nh home switch '.'";
+      # hms = "nh home switch '.'";
 
       # Git aliases
       g = "git";
