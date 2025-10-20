@@ -63,7 +63,6 @@
                      home-manager = {
                         useGlobalPkgs = true;
                         useUserPackages = true;
-                        modules = [ nvf.homeManagerModules.nvf];
                         extraSpecialArgs = { inherit inputs; };
                      };
                   }
@@ -79,6 +78,7 @@
                {
                   # Home-manager as a module
                   home-manager.users.perihelie = import ./users/perihelie/home.nix;
+                  home-manager.users.perihelie.modules = [nvf.home-manager.nvf];
                }
             ];
 
