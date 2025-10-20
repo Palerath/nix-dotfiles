@@ -16,7 +16,10 @@
       goverlay
 
       # Wine and compatibility
-      wineWowPackages.unstable
+      wine
+      wine64
+      wineWowPackages.full
+      wineWow64Packages.full
       winetricks
       protonup-ng
       protonup-qt
