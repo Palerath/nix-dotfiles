@@ -31,83 +31,84 @@
    };
 
    outputs =
-   {
-   self,
-   nixpkgs,
-   home-manager,
-   nvf,
-   hyprland,
-   hyprland-plugins,
-   nix-colors,
-   zen-browser,
-   flake-utils,
-   ...
-   }@inputs:
-   let
-      lib = nixpkgs.lib;
-
-      # Helper function to create NixOS systems
-      mkSystem =
-         hostname: system: extraModules:
-         lib.nixosSystem {
-            inherit system;
-            specialArgs = { inherit inputs; };
-            modules = [
-               # Core system configuration
-               ./hosts/${hostname}/configuration.nix
-               ./hosts/common
-
-               # Home Manager as NixOS module
-               home-manager.nixosModules.home-manager
-               {
-                  home-manager = {
-                     useGlobalPkgs = true;
-                     useUserPackages = true;
-                     extraSpecialArgs = { inherit inputs; };
-                  };
-               }
-            ]
-               ++ extraModules;
-         };
-   in
       {
-      # NixOS configurations for each machine
-      nixosConfigurations = {
-         # perikon
-         perikon = mkSystem "perikon" "x86_64-linux" [
-            {
-               # Home-manager as a module
-               home-manager.users.perihelie = import ./users/perihelie/home.nix;
-            }
-         ];
+      self,
+      nixpkgs,
+      home-manager,
+      nvf,
+      hyprland,
+      hyprland-plugins,
+      nix-colors,
+      zen-browser,
+      flake-utils,
+      ...
+      }@inputs:
+      let
+         lib = nixpkgs.lib;
 
-         # linouce
-         #            linouce = mkSystem "linouce" "x86_64-linux" [
-         #{
-         #      home-manager.users.estelle = import ./users/estelle/home.nix;
-         #  }
-         #];
-         #};
+         # Helper function to create NixOS systems
+         mkSystem =
+            hostname: system: extraModules:
+            lib.nixosSystem {
+               inherit system;
+               specialArgs = { inherit inputs; };
+               modules = [
+                  # Core system configuration
+                  ./hosts/${hostname}/configuration.nix
+                  ./hosts/common
 
-         # Standalone home-manager configurations
-         # Useful for updating user configs independently
-         #homeConfigurations = {
-         #  "perihelie@perikon" = home-manager.lib.homeManagerConfiguration {
-         #     pkgs = nixpkgs.legacyPackages."x86_64-linux";
-         #     modules = [
-         #     ./users/perihelie/home.nix
-         #        nvf.homeManagerModules.nvf
-         #     ];
-         #     extraSpecialArgs = { inherit inputs; };
-         #  };
+                  # Home Manager as NixOS module
+                  home-manager.nixosModules.home-manager
+                  {
+                     home-manager = {
+                        useGlobalPkgs = true;
+                        useUserPackages = true;
+                        modules = [ nvf.homeManagerModules.nvf];
+                        extraSpecialArgs = { inherit inputs; };
+                     };
+                  }
+               ]
+                  ++ extraModules;
+            };
+      in
+         {
+         # NixOS configurations for each machine
+         nixosConfigurations = {
+            # perikon
+            perikon = mkSystem "perikon" "x86_64-linux" [
+               {
+                  # Home-manager as a module
+                  home-manager.users.perihelie = import ./users/perihelie/home.nix;
+               }
+            ];
 
-         #  "estelle@linouce" = home-manager.lib.homeManagerConfiguration {
-         #     pkgs = nixpkgs.legacyPackages."x86_64-linux";
-         #     modules = [
-         #     ./users/estelle/home.nix
-         #     ];
-         #     extraSpecialArgs = { inherit inputs; };
-         #  };
+            # linouce
+            #            linouce = mkSystem "linouce" "x86_64-linux" [
+            #{
+            #      home-manager.users.estelle = import ./users/estelle/home.nix;
+            #  }
+            #];
+            #};
+
+            # Standalone home-manager configurations
+            # Useful for updating user configs independently
+            #homeConfigurations = {
+            #  "perihelie@perikon" = home-manager.lib.homeManagerConfiguration {
+            #     pkgs = nixpkgs.legacyPackages."x86_64-linux";
+            #     modules = [
+            #     ./users/perihelie/home.nix
+            #        nvf.homeManagerModules.nvf
+            #     ];
+            #     extraSpecialArgs = { inherit inputs; };
+            #  };
+
+            #  "estelle@linouce" = home-manager.lib.homeManagerConfiguration {
+            #     pkgs = nixpkgs.legacyPackages."x86_64-linux";
+            #     modules = [
+            #     ./users/estelle/home.nix
+            #     ];
+            #     extraSpecialArgs = { inherit inputs; };
+            #  };
          };
       };
-   }
+}
