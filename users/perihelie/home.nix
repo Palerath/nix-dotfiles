@@ -37,9 +37,10 @@
 
    programs.git = {
       enable = true;
-      userName = "perihelie";
-      userEmail = "archibaldmk4@gmail.com";
-
+      settings.user = {
+         name = "perihelie";
+         email = "archibaldmk4@gmail.com";
+      };
    };
 
    programs.zen-browser = {
