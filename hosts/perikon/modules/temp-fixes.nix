@@ -1,7 +1,4 @@
 {
-   # CMake < 3.5
-
-
    nixpkgs.overlays = [
       (final: prev: {
          argagg = prev.argagg.overrideAttrs (old: {
