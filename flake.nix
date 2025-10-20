@@ -79,7 +79,6 @@
                   # Home-manager as a module
                   home-manager.users.perihelie = import [
                      ./users/perihelie/home.nix
-                     nvf.home-manager.nvf
                   ];
                }
             ];

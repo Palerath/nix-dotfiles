@@ -79,6 +79,7 @@
       ./modules/gallery-dl.nix
       # ./modules/emacs.nix
       inputs.zen-browser.homeModules.beta
+      inputs.nvf.homeManagerModules.default
    ];
 
    fonts.fontconfig.enable = true;
