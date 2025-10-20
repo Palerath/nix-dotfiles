@@ -26,7 +26,7 @@
       ./modules/locales.nix
       # ./modules/virtual-machines.nix
       ./modules/services.nix
-      # ./modules/temp-fixes.nix
+      ./modules/temp-fixes.nix
    ];
 
    security.sudo.enable = true;
