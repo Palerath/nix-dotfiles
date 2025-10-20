@@ -77,9 +77,7 @@
             perikon = mkSystem "perikon" "x86_64-linux" [
                {
                   # Home-manager as a module
-                  home-manager.users.perihelie = import [
-                     ./users/perihelie/home.nix
-                  ];
+                  home-manager.users.perihelie = import ./users/perihelie/home.nix;
                }
             ];
 
