@@ -4,7 +4,6 @@
    environment.systemPackages = with pkgs; [
       # Gaming platforms
       lutris
-      bottles
       ckan
       rpcs3
       pcsx2
