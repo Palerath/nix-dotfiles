@@ -70,6 +70,38 @@
          end)
       end
    })
+
+      -- Function to force Visual highlight
+   local function force_visual()
+      vim.api.nvim_set_hl(0, 'Visual', {
+         bg = '#ff0000',  -- Pure red, impossible to miss
+         fg = '#ffffff',  -- White text
+         reverse = false
+      })
+      vim.api.nvim_set_hl(0, 'VisualNOS', {
+         bg = '#ff0000',
+         fg = '#ffffff',
+         reverse = false
+      })
+   end
+
+   -- Apply immediately
+   force_visual()
+
+   -- Reapply on every colorscheme change
+   vim.api.nvim_create_autocmd("ColorScheme", {
+      callback = force_visual
+   })
+
+   -- Reapply after everything loads
+   vim.api.nvim_create_autocmd("VimEnter", {
+      callback = function()
+         vim.defer_fn(force_visual, 0)
+         vim.defer_fn(force_visual, 50)
+         vim.defer_fn(force_visual, 200)
+      end
+   })
+
             '';
 
             # Telescope

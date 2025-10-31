@@ -21,7 +21,8 @@
       
       # Terminal colors
       set -g default-terminal "tmux-256color"
-      set -ga terminal-overrides ",*256col*:Tc"
+      set -ag terminal-overrides ",xterm-256color:RGB"
+      set -ag terminal-overrides ",xterm-kitty:RGB"
       
       # Renumber windows when one is closed
       set -g renumber-windows on

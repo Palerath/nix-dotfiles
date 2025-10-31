@@ -12,9 +12,7 @@
       ./modules/graphics.nix
       ./modules/drives.nix
       ./modules/bootloader.nix
-      ../../modules/nixos/desktop/plasma.nix
-      # ../../modules/nixos/desktop/hyprland.nix
-      ../../modules/nixos/desktop/xfce.nix
+      ./modules/desktop/plasma.nix
       ./modules/display-manager.nix
       ./modules/flatpak.nix
       ./modules/gayming.nix

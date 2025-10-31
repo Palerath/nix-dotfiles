@@ -22,5 +22,8 @@
          enableFishIntegration = true;
          enableZshIntegration = true;
       };
+
+      extraConfig = ''term xterm-kitty'';
+
    };
 }
