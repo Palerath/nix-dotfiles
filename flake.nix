@@ -55,7 +55,6 @@
                modules = [
                   # Core system configuration
                   ./hosts/${hostname}/configuration.nix
-                  ./hosts/common
 
                   # Home Manager as NixOS module
                   home-manager.nixosModules.home-manager
