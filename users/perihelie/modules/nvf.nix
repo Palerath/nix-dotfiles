@@ -13,7 +13,7 @@
                noice.enable = true;
                colorizer.enable = true;
                modes-nvim.enable = true;
-               illuminate.enable = true;
+               illuminate.enable = false;
                breadcrumbs = { enable = true; navbuddy.enable = true; };
                smartcolumn = {
                   enable = true;
@@ -36,6 +36,41 @@
 
             statusline.lualine = { enable = true; theme = "gruvbox"; };
             tabline.nvimBufferline.enable = true;
+
+            # Visual highlight fix
+            luaConfigRC.force-visual = ''
+   -- Set Visual highlight immediately
+   vim.api.nvim_set_hl(0, 'Visual', { 
+      bg = '#fe8019',
+      fg = '#282828',
+      bold = true 
+   })
+
+   -- Re-apply after colorscheme loads
+   vim.api.nvim_create_autocmd("ColorScheme", {
+      pattern = "*",
+      callback = function()
+         vim.api.nvim_set_hl(0, 'Visual', { 
+            bg = '#fe8019',
+            fg = '#282828',
+            bold = true 
+         })
+      end
+   })
+
+   -- Also re-apply on VimEnter as a fallback
+   vim.api.nvim_create_autocmd("VimEnter", {
+      callback = function()
+         vim.schedule(function()
+            vim.api.nvim_set_hl(0, 'Visual', { 
+               bg = '#fe8019',
+               fg = '#282828',
+               bold = true 
+            })
+         end)
+      end
+   })
+            '';
 
             # Telescope
             telescope = {
@@ -96,7 +131,7 @@
                   procMacro = {enable = true},
                   inlayHints = {enable = true},
                   },
-               '';
+                  '';
                };
                python.enable = true;
                lua.enable = true;
@@ -207,6 +242,7 @@
                sidescrolloff = 8;
                updatetime = 50;
                timeoutlen = 300;
+               termguicolors = true;
             };
          };
       };

@@ -65,7 +65,8 @@
       ./modules/fish.nix
       ./modules/nushell.nix
       ./modules/zsh.nix
-      ./modules/nvf.nix
+      #      ./modules/nvf.nix
+      ./modules/test.nix
       ./modules/alacritty.nix
       ./modules/wezterm.nix
       ./modules/kitty.nix

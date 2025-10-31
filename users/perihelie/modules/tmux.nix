@@ -19,6 +19,10 @@
       # Custom key bindings
       extraConfig = ''
       
+      # Terminal colors
+      set -g default-terminal "tmux-256color"
+      set -ga terminal-overrides ",*256col*:Tc"
+      
       # Renumber windows when one is closed
       set -g renumber-windows on
 

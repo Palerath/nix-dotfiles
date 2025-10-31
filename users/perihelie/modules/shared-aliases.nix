@@ -9,7 +9,7 @@ let
 
       # Git aliases
       g = "git";
-      ga = "git add *";
+      ga = "git add .";
       gc = "git commit -am";
       gco = "git checkout";
       gd = "git diff";
