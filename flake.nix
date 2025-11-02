@@ -17,6 +17,16 @@
             inputs.nixpkgs.follows = "nixpkgs";
         };
 
+        hyprland = {
+            url = "github:hyprwm/Hyprland";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
+
+        hyprland-plugins = {
+            url = "github:hyprwm/hyprland-plugins";
+            inputs.hyprland.follows = "hyprland";
+        };
+
         zen-browser = {
             url = "github:0xc000022070/zen-browser-flake";
             inputs.nixpkgs.follows = "nixpkgs";
@@ -29,22 +39,25 @@
 
             flake = {
                 # Import each host's flake and merge their nixosConfigurations
-
                 nixosConfigurations =
                     let
                         # Helper to import host if it exists
                         importHost = name:
                             let 
-                                hostPath = ./hosts/${name}/flake.nix;
-                                hostFlake = import hostPath;
-                            in if builtins.pathExists hostPath
-                                then (hostFlake.outputs {
-                                    inherit inputs self;
-                                    commonModules = self.nixosModules;
-                                    homeModules = self.homeModules;
-                                }).nixosConfigurations or {}
-                            else {};
-
+                                hostPath = ./hosts/${name};
+                                flakePath = hostPath + "/flake.nix";
+                            in if builtins.pathExists flakePath
+                                then 
+                                let
+                                    hostFlake = import flakePath;
+                                    hostOutputs = hostFlake.outputs {
+                                        inherit inputs self;
+                                        commonModules = self.nixosModules;
+                                        homeModules = self.homeModules;
+                                    };
+                                in hostOutputs.nixosConfigurations or {}
+                            else 
+                                builtins.trace "Warning: Host ${name} not found at ${toString hostPath}" {};
 
                         # List your hosts here
                         hosts = [ "perikon" ];
@@ -65,6 +78,7 @@
                 # Shared user configurations
                 homeModules = {
                     perihelie = import ./common/users/perihelie.nix;
+                    # anotheruser = import ./common/users/anotheruser.nix;
                 };
             };
 
