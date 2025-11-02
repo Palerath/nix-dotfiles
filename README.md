@@ -101,8 +101,10 @@ cat > common/users/perihelie.nix << 'EOF'
   # Your shared user configuration...
   programs.git = {
     enable = true;
-    userName = "perihelie";
-    userEmail = "perihelie@example.com";
+    user = {
+        name = "perihelie";
+        email = "archibaldmk4@gmail.com";
+    };
   };
   
   programs.home-manager.enable = true;
