@@ -1,0 +1,3 @@
+[submodule "hosts/perikon"]
+	path = hosts/perikon
+	url = git@github.com:Palerath/dotfiles-perikon.git
