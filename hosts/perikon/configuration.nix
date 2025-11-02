@@ -6,9 +6,11 @@
 
 {
     imports = [
-        ./users.nix
+        # User(s) modules
+        ./perihelie.nix
+        ./overrides/perihelie-locales.nix
 
-        # Include the results of the hardware scan.
+        # Host modules
         ./hardware-configuration.nix
         ./modules/shell.nix
         ./modules/graphics.nix
@@ -108,14 +110,14 @@
         cider-2
     ];
 
+    programs.dconf.enable = true;
+
     programs.nh = {
         enable = true;
         # clean.enable = true;
         # clean.extraArgs = "--keep-since 4d --keep 3";
         flake = "/home/perihelie/dotfiles";
     };
-
-    programs.dconf.enable = true;
 
     environment.sessionVariables = {
         NH_FLAKE = lib.mkDefault "/home/perihelie/dotfiles";

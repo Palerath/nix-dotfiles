@@ -19,22 +19,30 @@
     ];
 
     home.packages = with pkgs; [
-      vesktop
-      qbittorrent
-      obsidian
-      vlc
-      flatpak
-      anki-bin
-      texlab
-      qolibri
-      yt-dlp
-      krita
-      audacious
-      protonvpn-gui
-      sqlite
-      dbeaver-bin
-      localsend
+        vesktop
+        qbittorrent
+        obsidian
+        vlc
+        flatpak
+        anki-bin
+        texlab
+        qolibri
+        yt-dlp
+        krita
+        audacious
+        protonvpn-gui
+        sqlite
+        dbeaver-bin
+        localsend
     ];
+
+    programs.zen-browser = {
+        enable = true;
+    };
+
+    home.sessionVariables = {
+        EDITOR = "nvim";
+    };
 
     fonts.fontconfig.enable = true;
 }

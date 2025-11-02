@@ -29,18 +29,22 @@
 
             flake = {
                 # Import each host's flake and merge their nixosConfigurations
+
                 nixosConfigurations =
                     let
                         # Helper to import host if it exists
                         importHost = name:
-                            let hostPath = ./hosts/${name}/flake.nix;
+                            let 
+                                hostPath = ./hosts/${name}/flake.nix;
+                                hostFlake = import hostPath;
                             in if builtins.pathExists hostPath
-                                then (import hostPath {
+                                then (hostFlake.outputs {
                                     inherit inputs self;
                                     commonModules = self.nixosModules;
                                     homeModules = self.homeModules;
                                 }).nixosConfigurations or {}
                             else {};
+
 
                         # List your hosts here
                         hosts = [ "perikon" ];
