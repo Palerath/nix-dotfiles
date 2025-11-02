@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ pkgs, lib, ... }:
+{ pkgs, lib, config, hostName, homeModules, ... }:
 
 {
     imports = [
@@ -31,7 +31,7 @@
 
     security.sudo.enable = true;
 
-    networking.hostName = "perikon"; # Define your hostname.
+    networking.hostName = hostName;
     # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
     # Configure network proxy if necessary
@@ -80,7 +80,10 @@
         ];
     };
 
+    home-manager.users.perihelie = homeModules.perihelie;
+
     nixpkgs.config.allowUnfree = true;
+
     programs.firefox.enable = true;
     programs.ssh.askPassword = "";
 

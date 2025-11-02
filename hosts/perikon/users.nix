@@ -1,4 +1,4 @@
-{ self, pkgs }:
+{ self, pkgs, ... }:
 
 {
     # Import shared user from main repo
