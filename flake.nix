@@ -1,84 +1,77 @@
 {
-   description = "A very basic flake";
+    description = "Multi-hosts and users main flake";
 
-   inputs = {
-      nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    inputs = {
+        nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
 
-      home-manager = {
-         url = "github:nix-community/home-manager";
-         inputs.nixpkgs.follows = "nixpkgs";
-      };
+        home-manager = {
+            url = "github:nix-community/home-manager";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
 
-      nvf = {
-         url = "github:notashelf/nvf";
-         inputs.nixpkgs.follows = "nixpkgs";
-      };
+        flake-parts.url = "github:hercules-ci/flake-parts";
 
-      hyprland.url = "github:hyprwm/Hyprland";
-      hyprland-plugins = {
-         url = "github:hyprwm/hyprland-plugins";
-         inputs.hyprland.follows = "hyprland";
-      };
+        # ======================================================================
+        
+        nvf = {
+            url = "github:notashelf/nvf";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
 
-      nix-colors.url = "github:misterio77/nix-colors";
+        hyprland = {
+            url = "github:hyprwm/Hyprland";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
 
-      zen-browser = {
-         url = "github:0xc000022070/zen-browser-flake";
-         inputs.nixpkgs.follows = "nixpkgs";
-      };
+        hyprland-plugins = {
+            url = "github:hyprwm/hyprland-plugins";
+            inputs.hyprland.follows = "hyprland";
+        };
 
-      flake-utils.url = "github:numtide/flake-utils";
-   };
+        zen-browser = {
+            url = "github:0xc000022070/zen-browser-flake";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
 
-   outputs =
-      {
-      self,
-      nixpkgs,
-      home-manager,
-      nvf,
-      hyprland,
-      hyprland-plugins,
-      nix-colors,
-      zen-browser,
-      flake-utils,
-      ...
-      }@inputs:
-      let
-         lib = nixpkgs.lib;
+        flake-utils = {
+            url = "github:numtide/flake-utils";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
 
-         # Helper function to create NixOS systems
-         mkSystem =
-            hostname: system: extraModules:
-            lib.nixosSystem {
-               inherit system;
-               specialArgs = { inherit inputs; };
-               modules = [
-                  # Core system configuration
-                  ./hosts/${hostname}/configuration.nix
 
-                  # Home Manager as NixOS module
-                  home-manager.nixosModules.home-manager
-                  {
-                     home-manager = {
-                        useGlobalPkgs = false;
-                        useUserPackages = true;
-                        extraSpecialArgs = { inherit inputs; };
-                     };
-                  }
-               ]
-                  ++ extraModules;
+    };
+
+    outputs =
+        inputs @ {self, flake-parts, ... }: 
+        flake-parts.lib.mkFlake { inherit inputs; } 
+        {
+
+            systems = [ "x86_64-linux" "aarch64-darwin"];
+
+            nixosModules = {
+                commons = import ./commons;
+                hardware = import ./commons/hardware;
             };
-      in
-         {
-         # NixOS configurations for each machine
-         nixosConfigurations = {
-            # perikon
-            perikon = mkSystem "perikon" "x86_64-linux" [
-               {
-                  # Home-manager as a module
-                  home-manager.users.perihelie = import ./users/perihelie/home.nix;
-               }
-            ];
-         };
-      };
+
+            nixosConfigurations = {
+                perikon = import ./hosts/perikon { inherit inputs self; };
+                latitude = import ./hosts/latitude { inherit inputs self; };
+            };
+
+            homeModules = {
+                perihelie = import ./users/perihelie;
+            };
+
+            perSystem = { config, self', inputs', pkgs, system, ... }: {
+                devShells.default = pkgs.mkShell {
+                    buildInputs = with pkgs; [
+                        git
+                        nixos-rebuild
+                        home-manager
+                    ];
+
+                };
+            };
+
+        };
 }

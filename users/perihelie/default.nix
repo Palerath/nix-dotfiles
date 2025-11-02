@@ -12,15 +12,10 @@
 
    home.packages = with pkgs; [
       git
-      github-desktop
-      discord
-      prismlauncher
       vesktop
       qbittorrent
       obsidian
-      go
       vlc
-      gnome-software
       flatpak
       anki-bin
       texlab
@@ -31,7 +26,6 @@
       protonvpn-gui
       sqlite
       dbeaver-bin
-      # ladybird
       localsend
    ];
 
