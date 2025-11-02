@@ -9,7 +9,6 @@
         ./wezterm.nix
         ./kitty.nix
         ./mpv.nix
-        ./hypr/default.nix
         ./fastfetch.nix
         ./session-variables.nix
         ./desktop-entries.nix
