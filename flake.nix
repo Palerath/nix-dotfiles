@@ -11,7 +11,7 @@
 
         flake-parts.url = "github:hercules-ci/flake-parts";
 
-        # Optional: shared inputs for all hosts
+        # Optional: shared inputs
         nvf = {
             url = "github:notashelf/nvf";
             inputs.nixpkgs.follows = "nixpkgs";
@@ -28,10 +28,15 @@
             systems = [ "x86_64-linux" ];
 
             flake = {
-                # Import each host's flake and merge their nixosConfigurations
+                # User configurations (as submodules in users/)
+                # Each user has their own private repo
+                userConfigs = {
+                    perihelie = import ./users/perihelie/home.nix;
+                };
+
+                # Import each host's flake
                 nixosConfigurations =
                     let
-                        # Helper to import host if it exists
                         importHost = name:
                             let 
                                 hostPath = ./hosts/${name};
@@ -42,17 +47,14 @@
                                     hostFlake = import flakePath;
                                     hostOutputs = hostFlake.outputs {
                                         inherit inputs self;
-                                        commonModules = self.nixosModules;
-                                        homeModules = self.homeModules;
+                                        userConfigs = self.userConfigs;
                                     };
                                 in hostOutputs.nixosConfigurations or {}
                             else 
-                                builtins.trace "Warning: Host ${name} not found at ${toString hostPath}" {};
+                                builtins.trace "Warning: Host ${name} not found" {};
 
-                        # List your hosts here
                         hosts = [ "perikon" ];
 
-                        # Merge all host configurations
                         allConfigs = builtins.foldl'
                             (acc: host: acc // (importHost host))
                             {}
@@ -62,13 +64,6 @@
                 # Common modules available to all hosts
                 nixosModules = {
                     common = import ./common;
-                    common-packages = import ./common/packages.nix;
-                };
-
-                # Shared user configurations
-                homeModules = {
-                    perihelie = import ./common/users/perihelie.nix;
-                    # anotheruser = import ./common/users/anotheruser.nix;
                 };
             };
 
