@@ -19,5 +19,7 @@
     environment.variables = {
         EDITOR = "vim";
     };
+
+    imports = [ ./vim.nix ];
 }
 
