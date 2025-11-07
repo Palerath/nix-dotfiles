@@ -21,7 +21,7 @@ fi
 COMMIT_MSG="$1"
 MAIN_REPO_UPDATED=false
 
-echo -e "${BLUE}🔍 Checking for changes in submodules...${NC}\n"
+echo -e "${BLUE}Checking for changes in submodules...${NC}\n"
 
 # Function to commit and push submodule
 commit_submodule() {
@@ -32,7 +32,7 @@ commit_submodule() {
     
     # Check if there are changes
     if [[ -n $(git status -s) ]]; then
-        echo -e "${YELLOW}📦 Changes detected in: ${submodule_name}${NC}"
+        echo -e "${YELLOW}Changes detected in: ${submodule_name}${NC}"
         git status -s
         
         # Add all changes
@@ -40,18 +40,18 @@ commit_submodule() {
         
         # Commit
         git commit -m "$COMMIT_MSG"
-        echo -e "${GREEN}✓ Committed in ${submodule_name}${NC}"
+        echo -e "${GREEN}Committed in ${submodule_name}${NC}"
         
         # Push
         if git push; then
-            echo -e "${GREEN}✓ Pushed ${submodule_name}${NC}\n"
+            echo -e "${GREEN}Pushed ${submodule_name}${NC}\n"
             MAIN_REPO_UPDATED=true
         else
-            echo -e "${RED}✗ Failed to push ${submodule_name}${NC}\n"
+            echo -e "${RED}Failed to push ${submodule_name}${NC}\n"
             exit 1
         fi
     else
-        echo -e "${BLUE}• No changes in ${submodule_name}${NC}"
+        echo -e "${BLUE}No changes in ${submodule_name}${NC}"
     fi
     
     cd - > /dev/null
@@ -93,7 +93,7 @@ find_main_repo() {
 }
 
 REPO_ROOT=$(find_main_repo)
-echo -e "${BLUE}📂 Main repository: ${REPO_ROOT}${NC}\n"
+echo -e "${BLUE}Main repository: ${REPO_ROOT}${NC}\n"
 cd "$REPO_ROOT"
 
 # Process all submodules
@@ -111,7 +111,7 @@ else
 fi
 
 # Update main repository
-echo -e "\n${BLUE}🔍 Checking main repository...${NC}"
+echo -e "\n${BLUE}Checking main repository...${NC}"
 
 # Update submodule references if any submodule was updated
 if [ "$MAIN_REPO_UPDATED" = true ]; then
@@ -127,7 +127,7 @@ fi
 
 # Check for other changes in main repo
 if [[ -n $(git status -s) ]]; then
-    echo -e "${YELLOW}📦 Changes detected in main repository${NC}"
+    echo -e "${YELLOW}Changes detected in main repository${NC}"
     git status -s
     
     # Add all changes
@@ -135,17 +135,17 @@ if [[ -n $(git status -s) ]]; then
     
     # Commit
     git commit -m "$COMMIT_MSG"
-    echo -e "${GREEN}✓ Committed in main repository${NC}"
+    echo -e "${GREEN}Committed in main repository${NC}"
     
     # Push
     if git push; then
-        echo -e "${GREEN}✓ Pushed main repository${NC}"
+        echo -e "${GREEN}Pushed main repository${NC}"
     else
-        echo -e "${RED}✗ Failed to push main repository${NC}"
+        echo -e "${RED}Failed to push main repository${NC}"
         exit 1
     fi
 else
-    echo -e "${BLUE}• No changes in main repository${NC}"
+    echo -e "${BLUE}No changes in main repository${NC}"
 fi
 
-echo -e "\n${GREEN}✨ All changes committed and pushed!${NC}"
+echo -e "\n${GREEN}All changes committed and pushed!${NC}"
