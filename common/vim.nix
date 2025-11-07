@@ -85,7 +85,7 @@
     };
 
     # Install additional tools needed for the setup
-    home.packages = with pkgs; [
+    environment.systemPackages = with pkgs; [
         fzf
         ripgrep  
         rust-analyzer
