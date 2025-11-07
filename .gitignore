@@ -7,10 +7,6 @@ result-*
 *.swp
 *.swo
 
-# Hardware-specific files (regenerate on each machine)
-# Commented out since we want to track these
-# hosts/*/hardware-configuration.nix
-
 # Secrets (if using sops-nix or similar)
 secrets/*
 !secrets/.gitkeep
@@ -21,6 +17,5 @@ secrets/*
 
 # Nix store links
 /nix/store
-
-# Lock files (optional - you may want to track this)
-# flake.lock
+# Vim config
+/common/vim/plugged

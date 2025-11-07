@@ -1,0 +1,5 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =3
+let g:netrw_dirhist_3='/Users/perihelie/.vim'
+let g:netrw_dirhist_2='/Users/perihelie/Documents/Obsidian/Cocoon'
+let g:netrw_dirhist_1='/Users/perihelie/Documents/Obsidian/Cocoon/100 - AREAS'
