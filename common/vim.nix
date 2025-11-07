@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 let
-    vimConfigDir = ./.; # Points to the vim/ directory
+    vimConfigDir = ./vim/.; # Points to the vim/ directory
 in
     {
     environment.systemPackages = with pkgs; [
