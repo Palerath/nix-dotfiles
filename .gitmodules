@@ -4,3 +4,6 @@
 [submodule "users/perihelie"]
 	path = users/perihelie
 	url = git@github.com:Palerath/dotfiles-perihelie.git
+[submodule "hosts/latitude"]
+	path = hosts/latitude
+	url = git@github.com:Palerath/dotfiles-latitude.git

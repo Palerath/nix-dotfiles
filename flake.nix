@@ -53,7 +53,7 @@
                             else 
                                 builtins.trace "Warning: Host ${name} not found" {};
 
-                        hosts = [ "perikon" ];
+                        hosts = [ "perikon" "latitude"];
 
                         allConfigs = builtins.foldl'
                             (acc: host: acc // (importHost host))
