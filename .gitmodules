@@ -4,3 +4,6 @@
 [submodule "hosts/perikon"]
 	path = hosts/perikon
 	url = git@github.com:Palerath/dotfiles-perikon.git
+[submodule "hosts/latitude"]
+	path = hosts/latitude
+	url = git@github.com:Palerath/dotfiles-latitude.git
