@@ -11,7 +11,6 @@
 
         flake-parts.url = "github:hercules-ci/flake-parts";
 
-        # Optional: shared inputs
         nvf = {
             url = "github:notashelf/nvf";
             inputs.nixpkgs.follows = "nixpkgs";
@@ -28,41 +27,49 @@
             systems = [ "x86_64-linux" ];
 
             flake = {
-                # User configurations (as submodules in users/)
-                # Each user has their own private repo
+                # User configurations
                 userConfigs = {
                     perihelie = import ./users/perihelie/home.nix;
-                    # userB = import ./users/userB/home.nix;
                 };
 
-                # Import each host's flake
-                nixosConfigurations =
-                    let
-                        importHost = name:
-                            let 
-                                hostPath = ./hosts/${name};
-                                flakePath = hostPath + "/flake.nix";
-                            in if builtins.pathExists flakePath
-                                then 
-                                let
-                                    hostFlake = import flakePath;
-                                    hostOutputs = hostFlake.outputs {
-                                        inherit inputs self;
-                                        userConfigs = self.userConfigs;
-                                    };
-                                in hostOutputs.nixosConfigurations or {}
-                            else 
-                                builtins.trace "Warning: Host ${name} not found" {};
+                # Define each host directly in main flake
+                nixosConfigurations = {
 
-                        hosts = [ "perikon" ];
+                    # Perikon host
+                    perikon = nixpkgs.lib.nixosSystem {
+                        system = "x86_64-linux";
+                        specialArgs = {
+                            inherit inputs;
+                            hostName = "perikon";
+                            userConfigs = self.userConfigs;
+                        };
+                        modules = [
+                            home-manager.nixosModules.home-manager
+                            { _module.args = { inherit inputs; }; }
+                            ./hosts/perikon/hardware-configuration.nix
+                            ./hosts/perikon/configuration.nix
+                        ];
+                    };
 
-                        allConfigs = builtins.foldl'
-                            (acc: host: acc // (importHost host))
-                            {}
-                            hosts;
-                    in allConfigs;
+                    # Latitude host
+                    latitude = nixpkgs.lib.nixosSystem {
+                        system = "x86_64-linux";
+                        specialArgs = {
+                            inherit inputs;
+                            hostName = "latitude";
+                            userConfigs = self.userConfigs;
+                        };
+                        modules = [
+                            home-manager.nixosModules.home-manager
+                            { _module.args = { inherit inputs; }; }
+                            ./hosts/latitude/hardware-configuration.nix
+                            ./hosts/latitude/configuration.nix
+                        ];
+                    };
 
-                # Common modules available to all hosts
+                };
+
+                # Common modules
                 nixosModules = {
                     common = import ./common;
                 };
