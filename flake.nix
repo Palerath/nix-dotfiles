@@ -45,7 +45,7 @@
                             home-manager.nixosModules.home-manager
                             {
                                 _module.args = { inherit inputs; };
-                                home-manager.extraSpecialArgs = { inherit inputs; };
+                                home-manager.extraSpecialArgs = { inherit inputs hostName; };
                             }
                             (self + /hosts/${hostName}/hardware-configuration.nix)
                             (self + /hosts/${hostName}/configuration.nix)
