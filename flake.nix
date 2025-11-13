@@ -29,49 +29,40 @@
             flake = {
                 # User configurations
                 userConfigs = {
-                    perihelie = import ./users/perihelie/home.nix;
+                    perihelie = import (self + /users/perihelie/home.nix);
                 };
 
-                # Define each host directly in main flake
+                # Helper function to create host configurations
+                lib.mkHost = { hostName, system ? "x86_64-linux" }: 
+                    nixpkgs.lib.nixosSystem {
+                        inherit system;
+                        specialArgs = {
+                            inherit inputs;
+                            inherit hostName;
+                            userConfigs = self.userConfigs;
+                        };
+                        modules = [
+                            home-manager.nixosModules.home-manager
+                            {
+                                _module.args = { inherit inputs; };
+                                home-manager.extraSpecialArgs = { inherit inputs; };
+                            }
+                            (self + /hosts/${hostName}/hardware-configuration.nix)
+                            (self + /hosts/${hostName}/configuration.nix)
+                            # Optionally add common modules
+                            self.nixosModules.common
+                        ];
+                    };
+
+                # Define each host using the helper
                 nixosConfigurations = {
-
-                    # Perikon host
-                    perikon = nixpkgs.lib.nixosSystem {
-                        system = "x86_64-linux";
-                        specialArgs = {
-                            inherit inputs;
-                            hostName = "perikon";
-                            userConfigs = self.userConfigs;
-                        };
-                        modules = [
-                            home-manager.nixosModules.home-manager
-                            { _module.args = { inherit inputs; }; }
-                            ./hosts/perikon/hardware-configuration.nix
-                            ./hosts/perikon/configuration.nix
-                        ];
-                    };
-
-                    # Latitude host
-                    latitude = nixpkgs.lib.nixosSystem {
-                        system = "x86_64-linux";
-                        specialArgs = {
-                            inherit inputs;
-                            hostName = "latitude";
-                            userConfigs = self.userConfigs;
-                        };
-                        modules = [
-                            home-manager.nixosModules.home-manager
-                            { _module.args = { inherit inputs; }; }
-                            ./hosts/latitude/hardware-configuration.nix
-                            ./hosts/latitude/configuration.nix
-                        ];
-                    };
-
+                    perikon = self.lib.mkHost { hostName = "perikon"; };
+                    latitude = self.lib.mkHost { hostName = "latitude"; };
                 };
 
                 # Common modules
                 nixosModules = {
-                    common = import ./common;
+                    common = import (self + /common);
                 };
             };
 
