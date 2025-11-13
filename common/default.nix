@@ -20,6 +20,9 @@
         EDITOR = "vim";
     };
 
-    imports = [ ./vim.nix ];
+    imports = [ 
+        ./vim.nix 
+        ./shell.nix
+    ];
 }
 
