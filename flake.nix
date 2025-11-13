@@ -32,6 +32,7 @@
                 # Each user has their own private repo
                 userConfigs = {
                     perihelie = import ./users/perihelie/home.nix;
+                    # userB = import ./users/userB/home.nix;
                 };
 
                 # Import each host's flake
@@ -53,7 +54,7 @@
                             else 
                                 builtins.trace "Warning: Host ${name} not found" {};
 
-                        hosts = [ "perikon" "latitude"];
+                        hosts = [ "perikon" "latitude" ];
 
                         allConfigs = builtins.foldl'
                             (acc: host: acc // (importHost host))
