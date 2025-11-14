@@ -19,6 +19,4 @@ call s:ensure('junegunn/fzf')
 call s:ensure('junegunn/fzf.vim')
 call s:ensure('itchyny/lightline.vim')
 call s:ensure('yegappan/lsp')
-call s:ensure('Yggdroot/indentLine')
-call s:ensure('preservim/vim-indent-guides')
 
