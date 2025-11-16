@@ -84,33 +84,38 @@
                     # AI coding shell
                     ai = pkgs.mkShell {
                         buildInputs = with pkgs; [
-                            aider-chat
+                            aider-chat-full
                             llm
                             ollama
                             python313
+                            pipx
                             git  # Aider needs git
                             fish
                         ];
 
                         shellHook = ''
-                            echo "AI coding environment loaded"
-                            echo "---"
-                            export OLLAMA_API_BASE=http://localhost:11434
-                            # Check if ollama is already running
-                            if ! pgrep -x ollama > /dev/null; then
-                            echo "Starting Ollama server..."
-                            ollama serve > /tmp/ollama.log 2>&1 &
-                            echo $! > /tmp/ollama.pid
-                            sleep 2  # Give it time to start
-                            fi 
+                            # Start Ollama in background if not running
+                            if ! pgrep -x "ollama" > /dev/null; then
+                                echo "Starting Ollama server..."
+                                ollama serve &
+                                OLLAMA_PID=$!
+                                echo "Ollama PID: $OLLAMA_PID"
+                                sleep 2
+                            fi
+
+                            echo "================================"
+                            echo "Aider + Ollama Environment Ready"
+                            echo "================================"
+                            echo "Available commands:"
+                            echo "  aider --model ollama/codellama:13b"
+                            echo "  ollama list"
+                            echo "  ollama pull <model>"
                             echo ""
-                            echo "Aider: $(aider --version 2>/dev/null || echo 'available')"
-                            echo "LLM: $(llm --version 2>/dev/null || echo 'available')"
-                            echo "Quick start:"
-                            echo "  ollama serve                                            # Start Ollama server"
-                            echo "  ollama pull qwen2.5-coder:7b                            # Download a model"
-                            echo "  aider --model ollama/qwen2.5-coder:7b --subtree-only    # Start aider"
-                            '';
+
+                            # Set environment variables
+                            export OLLAMA_API_BASE="http://localhost:11434"
+                            export AIDER_MODEL="ollama/codellama:13b"        
+                        '';
                     };
                 };
             };
