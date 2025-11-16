@@ -68,53 +68,16 @@
 
             perSystem = { pkgs, ... }: {
                 devShells = {
-                    # Default shell with NixOS rebuild tools
                     default = pkgs.mkShell {
                         buildInputs = with pkgs; [
                             git
                             nh
                             nixos-rebuild
                         ];
+
                         shellHook = ''
                             echo "NixOS development environment loaded"
                             echo "Tools: nh, nixos-rebuild, git"
-                            '';
-                    };
-
-                    # AI coding shell
-                    ai = pkgs.mkShell {
-                        buildInputs = with pkgs; [
-                            aider-chat-full
-                            llm
-                            ollama
-                            python313
-                            pipx
-                            git  # Aider needs git
-                            fish
-                        ];
-
-                        shellHook = ''
-                            # Start Ollama in background if not running
-                            if ! pgrep -x "ollama" > /dev/null; then
-                                echo "Starting Ollama server..."
-                                ollama serve &
-                                OLLAMA_PID=$!
-                                echo "Ollama PID: $OLLAMA_PID"
-                                sleep 2
-                            fi
-
-                            echo "================================"
-                            echo "Aider + Ollama Environment Ready"
-                            echo "================================"
-                            echo "Available commands:"
-                            echo "  aider --model ollama/codellama:13b"
-                            echo "  ollama list"
-                            echo "  ollama pull <model>"
-                            echo ""
-
-                            # Set environment variables
-                            export OLLAMA_API_BASE="http://localhost:11434"
-                            export AIDER_MODEL="ollama/codellama:13b"        
                         '';
                     };
                 };
