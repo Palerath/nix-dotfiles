@@ -76,10 +76,11 @@
                             nixos-rebuild
                         ];
                         shellHook = ''
-                echo "NixOS development environment loaded"
-                echo "Tools: nh, nixos-rebuild, git"
-                '';
+                            echo "NixOS development environment loaded"
+                            echo "Tools: nh, nixos-rebuild, git"
+                        '';
                     };
+
                     # AI coding shell
                     ai = pkgs.mkShell {
                         buildInputs = with pkgs; [
@@ -88,19 +89,22 @@
                             ollama
                             python313
                             git  # Aider needs git
+                            fish
                         ];
                         shellHook = ''
-                echo "AI coding environment loaded"
-                echo "---"
-                echo "Aider: $(aider --version 2>/dev/null || echo 'not available')"
-                echo "LLM: $(llm --version 2>/dev/null || echo 'not available')"
-                echo "Ollama: available"
-                echo ""
-                echo "Quick start:"
-                echo "  ollama serve          # Start Ollama server"
-                echo "  ollama pull llama3.2  # Download a model"
-                echo "  aider                 # Start aider"
-                '';
+                            fish
+                            echo "AI coding environment loaded"
+                            echo "---"
+                            export OLLAMA_API_BASE=http://localhost:11434
+                            echo "Aider: $(aider --version 2>/dev/null || echo 'not available')"
+                            echo "LLM: $(llm --version 2>/dev/null || echo 'not available')"
+                            echo "Ollama: available"
+                            echo ""
+                            echo "Quick start:"
+                            echo "  ollama serve                                            # Start Ollama server"
+                            echo "  ollama pull qwen2.5-coder:7b                            # Download a model"
+                            echo "  aider --model ollama/qwen2.5-coder:7b --subtree-only    # Start aider"
+                        '';
                     };
                 };
             };
