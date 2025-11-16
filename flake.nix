@@ -23,72 +23,89 @@
     };
 
     outputs = inputs @ { self, flake-parts, nixpkgs, home-manager, ... }:
-        flake-parts.lib.mkFlake { inherit inputs; } {
-            systems = [ "x86_64-linux" ];
+    flake-parts.lib.mkFlake { inherit inputs; } {
+        systems = [ "x86_64-linux" ];
 
-            flake = {
-                # User configurations
-                userConfigs = {
-                    perihelie = import (self + /users/perihelie/home.nix);
-                };
-
-                # Helper function to create host configurations
-                lib.mkHost = { hostName, system ? "x86_64-linux" }: 
-                    nixpkgs.lib.nixosSystem {
-                        inherit system;
-                        specialArgs = {
-                            inherit inputs;
-                            inherit hostName;
-                            userConfigs = self.userConfigs;
-                        };
-                        modules = [
-                            home-manager.nixosModules.home-manager
-                            {
-                                _module.args = { inherit inputs; };
-                                home-manager.extraSpecialArgs = { inherit inputs hostName; };
-                            }
-                            (self + /hosts/${hostName}/hardware-configuration.nix)
-                            (self + /hosts/${hostName}/configuration.nix)
-                            # Optionally add common modules
-                            self.nixosModules.common
-                        ];
-                    };
-
-                # Define each host using the helper
-                nixosConfigurations = {
-                    perikon = self.lib.mkHost { hostName = "perikon"; };
-                    latitude = self.lib.mkHost { hostName = "latitude"; };
-                };
-
-                # Common modules
-                nixosModules = {
-                    common = import (self + /common);
-                };
+        flake = {
+            # User configurations
+            userConfigs = {
+                perihelie = import (self + /users/perihelie/home.nix);
             };
 
-            perSystem = { pkgs, ... }: {
-                devShells.default = pkgs.mkShell {
+            # Helper function to create host configurations
+            lib.mkHost = { hostName, system ? "x86_64-linux" }: 
+                nixpkgs.lib.nixosSystem {
+                    inherit system;
+                    specialArgs = {
+                        inherit inputs;
+                        inherit hostName;
+                        userConfigs = self.userConfigs;
+                    };
+                    modules = [
+                        home-manager.nixosModules.home-manager
+                        {
+                            _module.args = { inherit inputs; };
+                            home-manager.extraSpecialArgs = { inherit inputs hostName; };
+                        }
+                        (self + /hosts/${hostName}/hardware-configuration.nix)
+                        (self + /hosts/${hostName}/configuration.nix)
+                        # Optionally add common modules
+                        self.nixosModules.common
+                    ];
+                };
+
+            # Define each host using the helper
+            nixosConfigurations = {
+                perikon = self.lib.mkHost { hostName = "perikon"; };
+                latitude = self.lib.mkHost { hostName = "latitude"; };
+            };
+
+            # Common modules
+            nixosModules = {
+                common = import (self + /common);
+            };
+        };
+
+        perSystem = { pkgs, ... }: {
+            devShells.default = pkgs.mkShell {
+                # Default shell with NixOS rebuild tools
+                default = pkgs.mkShell {
                     buildInputs = with pkgs; [
                         git
                         nh
                         nixos-rebuild
-                        # AI coding tools
-                        aider-chat
-                        llm
-                        ollama
-                        python313 
                     ];
 
                     shellHook = ''
-                        echo "Development environment loaded"
-                        echo "NixOS rebuild tools available"
+                        echo "NixOS development environment loaded"
+                        echo "Tools: nh, nixos-rebuild, git"
+                    '';
+                };
+
+                # AI coding shell
+                ai = pkgs.mkShell {
+                    buildInputs = with pkgs; [
+                        aider-chat
+                        llm
+                        ollama
+                        python313
+                        git  # Aider needs git
+                    ];
+
+                    shellHook = ''
+                        echo "AI coding environment loaded"
                         echo "---"
-                        echo "AI coding environment:"
-                        echo "  Aider: $(aider --version 2>/dev/null || echo 'not in PATH')"
-                        echo "  LLM: $(llm --version 2>/dev/null || echo 'not in PATH')"
-                        echo "  Ollama available"
-                        '';
+                        echo "Aider: $(aider --version 2>/dev/null || echo 'not available')"
+                        echo "LLM: $(llm --version 2>/dev/null || echo 'not available')"
+                        echo "Ollama: available"
+                        echo ""
+                        echo "Quick start:"
+                        echo "  ollama serve          # Start Ollama server"
+                        echo "  ollama pull llama3.2  # Download a model"
+                        echo "  aider                 # Start aider"
+                    '';
                 };
             };
         };
+    };
 }
