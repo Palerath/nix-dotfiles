@@ -75,5 +75,22 @@
                     ];
                 };
             };
+
+            devShells.x86_64-linux.default = nixpkgs.legacyPackages.x86_64-linux.mkShell {
+                packages = with nixpkgs.legacyPackages.x86_64-linux; [
+                    aider-chat
+                    llm
+                    ollama
+                    python313 
+                ];
+
+                shellHook = ''
+                    echo "AI coding environment loaded"
+                    echo "Aider: $(aider --version)"
+                    echo "LLM: $(llm --version)"
+                '';
+            };
+
         };
+
 }
