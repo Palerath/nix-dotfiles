@@ -19,3 +19,4 @@ secrets/*
 /nix/store
 # Vim config
 /common/vim/plugged
+.aider*
