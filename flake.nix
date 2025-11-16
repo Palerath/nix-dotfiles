@@ -78,7 +78,7 @@
                         shellHook = ''
                             echo "NixOS development environment loaded"
                             echo "Tools: nh, nixos-rebuild, git"
-                        '';
+                            '';
                     };
 
                     # AI coding shell
@@ -91,20 +91,26 @@
                             git  # Aider needs git
                             fish
                         ];
+
                         shellHook = ''
-                            fish
                             echo "AI coding environment loaded"
                             echo "---"
                             export OLLAMA_API_BASE=http://localhost:11434
-                            echo "Aider: $(aider --version 2>/dev/null || echo 'not available')"
-                            echo "LLM: $(llm --version 2>/dev/null || echo 'not available')"
-                            echo "Ollama: available"
+                            # Check if ollama is already running
+                            if ! pgrep -x ollama > /dev/null; then
+                            echo "Starting Ollama server..."
+                            ollama serve > /tmp/ollama.log 2>&1 &
+                            echo $! > /tmp/ollama.pid
+                            sleep 2  # Give it time to start
+                            fi 
                             echo ""
+                            echo "Aider: $(aider --version 2>/dev/null || echo 'available')"
+                            echo "LLM: $(llm --version 2>/dev/null || echo 'available')"
                             echo "Quick start:"
                             echo "  ollama serve                                            # Start Ollama server"
                             echo "  ollama pull qwen2.5-coder:7b                            # Download a model"
                             echo "  aider --model ollama/qwen2.5-coder:7b --subtree-only    # Start aider"
-                        '';
+                            '';
                     };
                 };
             };
