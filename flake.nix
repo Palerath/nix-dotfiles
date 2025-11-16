@@ -72,25 +72,23 @@
                         git
                         nh
                         nixos-rebuild
+                        # AI coding tools
+                        aider-chat
+                        llm
+                        ollama
+                        python313 
                     ];
+
+                    shellHook = ''
+                        echo "Development environment loaded"
+                        echo "NixOS rebuild tools available"
+                        echo "---"
+                        echo "AI coding environment:"
+                        echo "  Aider: $(aider --version 2>/dev/null || echo 'not in PATH')"
+                        echo "  LLM: $(llm --version 2>/dev/null || echo 'not in PATH')"
+                        echo "  Ollama available"
+                        '';
                 };
             };
-
-            devShells.x86_64-linux.default = nixpkgs.legacyPackages.x86_64-linux.mkShell {
-                packages = with nixpkgs.legacyPackages.x86_64-linux; [
-                    aider-chat
-                    llm
-                    ollama
-                    python313 
-                ];
-
-                shellHook = ''
-                    echo "AI coding environment loaded"
-                    echo "Aider: $(aider --version)"
-                    echo "LLM: $(llm --version)"
-                '';
-            };
-
         };
-
 }
