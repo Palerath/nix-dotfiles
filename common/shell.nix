@@ -42,9 +42,6 @@ in
         enable = true;
         enableBashIntegration = true;  
         enableFishIntegration = true;  
-        options = [
-            "--cmd z"  # Use 'z' as the command (default is 'z')
-        ];
-    };
+   };
 
 }
