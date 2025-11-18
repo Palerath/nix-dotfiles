@@ -7,3 +7,6 @@
 [submodule "hosts/latitude"]
 	path = hosts/latitude
 	url = git@github.com:Palerath/dotfiles-latitude.git
+[submodule "common/vim"]
+	path = common/vim
+	url = git@github.com:Palerath/vim-config.git
