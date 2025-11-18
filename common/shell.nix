@@ -26,6 +26,9 @@ let
         "..." = "z ../..";
 
         core-ls = "ls";
+
+        # Zoxide aliases
+        zi = "zi";
     };
 in
     {
@@ -33,6 +36,15 @@ in
     programs.bash = {
         enable = true;
         shellAliases = aliases;
+    };
+
+     programs.zoxide = {
+        enable = true;
+        enableBashIntegration = true;  
+        enableFishIntegration = true;  
+        options = [
+            "--cmd z"  # Use 'z' as the command (default is 'z')
+        ];
     };
 
 }
