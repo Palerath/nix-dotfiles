@@ -20,6 +20,13 @@
             url = "github:0xc000022070/zen-browser-flake";
             inputs.nixpkgs.follows = "nixpkgs";
         };
+
+        hyprland.url = "github:hyprwm/Hyprland";
+
+        hyprland-plugins = {
+            url = "github:hyprwm/hyprland-plugins";
+            inputs.hyprland.follows = "hyprland";
+        };
     };
 
     outputs = inputs @ { self, flake-parts, nixpkgs, home-manager, ... }:
