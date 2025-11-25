@@ -4,6 +4,7 @@ let
     aliases = {
         kumit = "bash ${flakePath}/scripts/kumit.sh";
         rebuild = "sudo nixos-rebuild switch --flake 'path:${flakePath}#${hostName}'";
+        rebuild-nh = "nh os switch --update '${flakePath}' --hostname '${hostName}'";
 
         # Git aliases
         g = "git";
