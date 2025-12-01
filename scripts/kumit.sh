@@ -34,9 +34,15 @@ commit_submodule() {
         return 0
     fi
 
-    cd "$submodule_path"
+    # Save current directory
+    local parent_dir="$PWD"
+    
+    cd "$submodule_path" || {
+        echo -e "${RED}Failed to enter ${submodule_name}${NC}"
+        return 1
+    }
 
-    # Check if there are changes
+    # Check if there are changes (only in this submodule, not parent repo)
     if [[ -n $(git status -s) ]]; then
         echo -e "${YELLOW}Changes detected in: ${submodule_name}${NC}"
         git status -s
@@ -44,24 +50,28 @@ commit_submodule() {
         # Add all changes
         git add -A
 
-        # Commit
-        git commit -m "$COMMIT_MSG"
-        echo -e "${GREEN}Committed in ${submodule_name}${NC}"
-
-        # Push
-        if git push; then
-            echo -e "${GREEN}Pushed ${submodule_name}${NC}\n"
-            MAIN_REPO_UPDATED=true
+        # Commit (only if there's something staged)
+        if git diff --cached --quiet; then
+            echo -e "${BLUE}No changes to commit in ${submodule_name}${NC}"
         else
-            echo -e "${RED}Failed to push ${submodule_name}${NC}\n"
-            cd - > /dev/null
-            exit 1
+            git commit -m "$COMMIT_MSG"
+            echo -e "${GREEN}Committed in ${submodule_name}${NC}"
+
+            # Push
+            if git push; then
+                echo -e "${GREEN}Pushed ${submodule_name}${NC}\n"
+                MAIN_REPO_UPDATED=true
+            else
+                echo -e "${RED}Failed to push ${submodule_name}${NC}\n"
+                cd "$parent_dir" > /dev/null
+                exit 1
+            fi
         fi
     else
         echo -e "${BLUE}No changes in ${submodule_name}${NC}"
     fi
 
-    cd - > /dev/null
+    cd "$parent_dir" > /dev/null
 }
 
 # Find the main repository root (not submodule root)
@@ -109,8 +119,11 @@ if [ -f .gitmodules ]; then
     SUBMODULES=$(git config --file .gitmodules --get-regexp path | awk '{print $2}')
 
     for submodule in $SUBMODULES; do
-        if [ -d "$submodule" ]; then
+        # Only process if directory exists AND is initialized
+        if [ -d "$submodule" ] && [ -e "$submodule/.git" ]; then
             commit_submodule "$submodule"
+        elif [ -d "$submodule" ]; then
+            echo -e "${BLUE}Skipping uninitialized submodule: $(basename "$submodule")${NC}"
         fi
     done
 else
