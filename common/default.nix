@@ -8,6 +8,8 @@
 
     # Auto-upgrade (optional)
     # system.autoUpgrade.enable = true;
+    nix.optimise.automatic = true;
+    nix.settings.auto-optimise-store = true;
 
     # Common services
     services.openssh = {
