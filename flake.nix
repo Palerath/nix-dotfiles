@@ -10,6 +10,7 @@
         };
 
         flake-parts.url = "github:hercules-ci/flake-parts";
+        determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
 
         nvf = {
             url = "github:notashelf/nvf";
@@ -30,7 +31,7 @@
         };
     };
 
-    outputs = inputs @ { self, flake-parts, nixpkgs, home-manager, ... }:
+    outputs = inputs @ { self, flake-parts, nixpkgs, home-manager, determinate, ... }:
         flake-parts.lib.mkFlake { inherit inputs; } {
             systems = [ "x86_64-linux" ];
 
@@ -59,6 +60,7 @@
                             (self + /hosts/${hostName}/configuration.nix)
                             # Optionally add common modules
                             self.nixosModules.common
+                            determinate.nixosModules.default
                         ];
                     };
 
