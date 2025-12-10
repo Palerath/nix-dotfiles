@@ -3,8 +3,8 @@ let
     flakePath = "/home/perihelie/dotfiles";
     aliases = {
         kumit = "bash ${flakePath}/scripts/kumit.sh";
-        rebuild = "sudo nixos-rebuild switch --flake 'path:${flakePath}#${hostName}'";
-        rebuild-nh = "nh os switch ${flakePath} -H ${hostName}";
+        rebuild-nix = "sudo nixos-rebuild switch --flake 'path:${flakePath}#${hostName}'";
+        rebuild = "nh os switch ${flakePath} -H ${hostName}";
 
         # Git aliases
         g = "git";
