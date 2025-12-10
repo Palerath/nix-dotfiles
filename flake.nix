@@ -2,6 +2,7 @@
     description = "Multi-host NixOS configuration";
 
     inputs = {
+        self.submodules = true;
         nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
         home-manager = {
