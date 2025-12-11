@@ -4,5 +4,16 @@
         wl-clipboard
         uutils-coreutils-noprefix
         ffmpeg-full
+        tree
+        wget
+        ripgrep
+        fd
+        bat
+        eza
+        zoxide
+        fzf
+
+        unzip
+        p7zip
     ];
 }
