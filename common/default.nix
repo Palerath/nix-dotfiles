@@ -1,5 +1,3 @@
-{ config, pkgs, ... }:
-
 {
     # Shared settings across all hosts
 
@@ -25,6 +23,7 @@
     imports = [ 
         ./vim.nix 
         ./shell.nix
+        ./packages.nix
     ];
 }
 
