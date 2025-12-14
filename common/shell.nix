@@ -6,6 +6,8 @@ let
         rebuild-nix = "sudo nixos-rebuild switch --flake 'path:${flakePath}#${hostName}'";
         rebuild = "nh os switch ${flakePath} -H ${hostName}";
 
+        update-flakes = "nix flake update && kumit ${"update flakes.lock"}";
+
         # Git aliases
         g = "git";
         ga = "git add .";
