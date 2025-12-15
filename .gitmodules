@@ -10,3 +10,9 @@
 [submodule "common/vim"]
 	path = common/vim
 	url = git@github.com:Palerath/vim-config.git
+[submodule "hosts/linouce"]
+	path = hosts/linouce
+	url = git@github.com:Palerath/dotfiles-linouce.git
+[submodule "users/estelle"]
+	path = users/estelle
+	url = git@github.com:Palerath/dotfiles-estelle.git
