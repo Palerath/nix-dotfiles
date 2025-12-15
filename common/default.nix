@@ -4,7 +4,7 @@
 
     # Security
     security.sudo.wheelNeedsPassword = true;
-
+    security.sudo.extraConfig = "Defaults pwfeedback";
     # Auto-upgrade (optional)
     # system.autoUpgrade.enable = true;
     nix.optimise.automatic = true;
@@ -12,19 +12,19 @@
 
     # Common services
     services.openssh = {
-        enable = true;
-        settings.PermitRootLogin = "no";
+      enable = true;
+      settings.PermitRootLogin = "no";
     };
 
     # Shared environment variables
     environment.variables = {
-        EDITOR = "vim";
+      EDITOR = "vim";
     };
 
     imports = [ 
-        ./vim.nix 
-        ./shell.nix
-        ./packages.nix
+      ./vim.nix 
+      ./shell.nix
+      ./packages.nix
     ];
-}
+  }
 
