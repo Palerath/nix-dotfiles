@@ -5,7 +5,7 @@
     rebuild = "nh os switch /home/${username}/dotfiles -H ${hostName}";
 
     update-flakes = "nix flake update && kumit 'update flakes.lock'";
-    maj = "git pull && git submodule update --remote && update-flakes && rebuild";
+    maj = "z dotfiles && git pull && git submodule update --remote && update-flakes && rebuild";
 
     # Git aliases
     g = "git";
