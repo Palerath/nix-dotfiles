@@ -40,6 +40,7 @@
                 # User configurations
                 userConfigs = {
                     perihelie = import (self + /users/perihelie/home.nix);
+                    estelle = import (self + /users/estelle/home.nix);
                 };
 
                 # Helper function to create host configurations
@@ -69,6 +70,7 @@
                 nixosConfigurations = {
                     perikon = self.lib.mkHost { hostName = "perikon"; };
                     latitude = self.lib.mkHost { hostName = "latitude"; };
+                    linouce = self.lib.mkHost { hostName = "linouce"; };
                 };
 
                 # Common modules

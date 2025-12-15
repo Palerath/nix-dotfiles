@@ -1,12 +1,15 @@
-{ hostName, ... }:
+{ hostName, lib, config, ... }:
 let
-    flakePath = "/home/perihelie/dotfiles";
+    normalUsers = lib.filterAttrs (_: user: user.isNormalUser) config.users.users;
+    primaryUser = lib.head (lib.attrNames normalUsers);
+    flakePath = "/home/${primaryUser}/dotfiles";
     aliases = {
         kumit = "bash ${flakePath}/scripts/kumit.sh";
         rebuild-nix = "sudo nixos-rebuild switch --flake 'path:${flakePath}#${hostName}'";
         rebuild = "nh os switch ${flakePath} -H ${hostName}";
 
         update-flakes = "nix flake update && kumit ${"update flakes.lock"}";
+        maj = "git submodule update --remote && update-flakes && rebuild";
 
         # Git aliases
         g = "git";
@@ -41,10 +44,10 @@ in
         shellAliases = aliases;
     };
 
-     programs.zoxide = {
+    programs.zoxide = {
         enable = true;
         enableBashIntegration = true;  
         enableFishIntegration = true;  
-   };
+    };
 
 }
