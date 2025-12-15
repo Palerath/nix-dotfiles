@@ -24,7 +24,7 @@
     imports = [ 
         ./vim.nix 
         ./shell.nix
-        ./aliasses.nix
+        ./aliases.nix
         ./packages.nix
     ];
 }
