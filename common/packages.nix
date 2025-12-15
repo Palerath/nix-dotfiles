@@ -15,5 +15,7 @@
 
         unzip
         p7zip
-    ];
+      ];
+
+      programs.nh.enable = true;
 }
