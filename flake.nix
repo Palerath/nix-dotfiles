@@ -4,10 +4,16 @@
     inputs = {
         self.submodules = true;
         nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+        nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
 
         home-manager = {
             url = "github:nix-community/home-manager";
             inputs.nixpkgs.follows = "nixpkgs";
+        };
+
+        home-manager-stable = {
+            url = "github:nix-community/home-manager/release-25.11";
+            inputs.nixpkgs.follows = "nixpkgs-stable";
         };
 
         flake-parts.url = "github:hercules-ci/flake-parts";
@@ -32,7 +38,7 @@
         };
     };
 
-    outputs = inputs @ { self, flake-parts, nixpkgs, home-manager, determinate, ... }:
+    outputs = inputs @ { self, flake-parts, nixpkgs, nixpkgs-stable, home-manager, home-manager-stable, determinate, ... }:
         flake-parts.lib.mkFlake { inherit inputs; } {
             systems = [ "x86_64-linux" ];
 
@@ -44,33 +50,45 @@
                 };
 
                 # Helper function to create host configurations
-                lib.mkHost = { hostName, system ? "x86_64-linux" }: 
-                    nixpkgs.lib.nixosSystem {
-                        inherit system;
-                        specialArgs = {
-                            inherit inputs;
-                            inherit hostName;
-                            userConfigs = self.userConfigs;
+                lib.mkHost = { 
+                    hostName, 
+                    system ? "x86_64-linux",
+                    useStable ? false
+                    }: 
+                    let
+                        # Choose nixpkgs and home-manager based on stability preference
+                        pkgsInput = if useStable then nixpkgs-stable else nixpkgs;
+                        hmInput = if useStable then home-manager-stable else home-manager;
+                    in
+                        pkgsInput.lib.nixosSystem {
+                            inherit system;
+                            specialArgs = {
+                                inherit inputs;
+                                inherit hostName;
+                                userConfigs = self.userConfigs;
+                            };
+                            modules = [
+                                hmInput.nixosModules.home-manager
+                                {
+                                    _module.args = { inherit inputs; };
+                                    home-manager.extraSpecialArgs = { inherit inputs hostName; };
+                                }
+                                (self + /hosts/${hostName}/hardware-configuration.nix)
+                                (self + /hosts/${hostName}/configuration.nix)
+                                # Optionally add common modules
+                                self.nixosModules.common
+                                determinate.nixosModules.default
+                            ];
                         };
-                        modules = [
-                            home-manager.nixosModules.home-manager
-                            {
-                                _module.args = { inherit inputs; };
-                                home-manager.extraSpecialArgs = { inherit inputs hostName; };
-                            }
-                            (self + /hosts/${hostName}/hardware-configuration.nix)
-                            (self + /hosts/${hostName}/configuration.nix)
-                            # Optionally add common modules
-                            self.nixosModules.common
-                            determinate.nixosModules.default
-                        ];
-                    };
 
                 # Define each host using the helper
                 nixosConfigurations = {
                     perikon = self.lib.mkHost { hostName = "perikon"; };
                     latitude = self.lib.mkHost { hostName = "latitude"; };
-                    linouce = self.lib.mkHost { hostName = "linouce"; };
+                    linouce = self.lib.mkHost { 
+                        hostName = "linouce"; 
+                        useStable = true;  
+                    };
                 };
 
                 # Common modules
@@ -95,5 +113,4 @@
                     };
                 };
             };
-        };
-}
+        };}
