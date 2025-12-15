@@ -1,3 +1,4 @@
+{ ... }:
 {
     # Shared settings across all hosts
 
