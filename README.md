@@ -120,5 +120,5 @@ flake = {
 
 
 # Setup host / user
-After install of nixos: `nix-shell -p git  --experimental-features 'nix-command flakes'` then `git clone git@github.com:Palerath/nix-dotfiles.git <path/to/dotfiles>` 
+After install of nixos: `nix-shell -p git vim --experimental-features 'nix-command flakes'` then `git clone git@github.com:Palerath/nix-dotfiles.git <path/to/dotfiles>` 
 To import a submodule, use `git submodule update --init <path/to/submodule>` then inside the imported submodule `git checkout <branch>`
