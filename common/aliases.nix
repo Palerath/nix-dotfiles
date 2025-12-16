@@ -1,8 +1,8 @@
 { hostName, username }:
 {
     kumit = "bash /home/${username}/dotfiles/scripts/kumit.sh";
-    rebuild-nix = "sudo nixos-rebuild switch --flake 'path:/home/${username}/dotfiles#${hostName}'";
-    rebuild = "nh os switch /home/${username}/dotfiles -H ${hostName}";
+    rebuild-nix = "ga . && sudo nixos-rebuild switch --flake 'path:/home/${username}/dotfiles#${hostName}'";
+    rebuild = "ga . && nh os switch /home/${username}/dotfiles -H ${hostName}";
 
     update-flakes = "nix flake update && kumit 'update flakes.lock'";
     maj = "z dotfiles && git pull && git submodule update --remote && update-flakes && rebuild";
