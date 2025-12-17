@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # kumit - Commit and push changes in submodules and main repo
-# Usage: kumit "commit message"
+# Usage: kumit ["commit message"]
+# If no message provided, uses "update: <epoch_timestamp>"
 
 set -e
 
@@ -11,14 +12,14 @@ YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
-# Check if commit message provided
+# Set commit message: use provided message or generate default
 if [ -z "$1" ]; then
-    echo -e "${RED}Error: Commit message required${NC}"
-    echo "Usage: kumit \"your commit message\""
-    exit 1
+    COMMIT_MSG="update: $(date -Iseconds)"
+    echo -e "${BLUE}No message provided, using: ${COMMIT_MSG}${NC}\n"
+else
+    COMMIT_MSG="$1"
 fi
 
-COMMIT_MSG="$1"
 MAIN_REPO_UPDATED=false
 
 echo -e "${BLUE}Checking for changes in submodules...${NC}\n"
@@ -36,43 +37,43 @@ commit_submodule() {
 
     # Save current directory
     local parent_dir="$PWD"
-    
+
     cd "$submodule_path" || {
         echo -e "${RED}Failed to enter ${submodule_name}${NC}"
-        return 1
-    }
+            return 1
+        }
 
-    # Check if there are changes (only in this submodule, not parent repo)
-    if [[ -n $(git status -s) ]]; then
-        echo -e "${YELLOW}Changes detected in: ${submodule_name}${NC}"
-        git status -s
+        # Check if there are changes (only in this submodule, not parent repo)
+        if [[ -n $(git status -s) ]]; then
+            echo -e "${YELLOW}Changes detected in: ${submodule_name}${NC}"
+            git status -s
 
-        # Add all changes
-        git add -A
+            # Add all changes
+            git add -A
 
-        # Commit (only if there's something staged)
-        if git diff --cached --quiet; then
-            echo -e "${BLUE}No changes to commit in ${submodule_name}${NC}"
-        else
-            git commit -m "$COMMIT_MSG"
-            echo -e "${GREEN}Committed in ${submodule_name}${NC}"
-
-            # Push
-            if git push; then
-                echo -e "${GREEN}Pushed ${submodule_name}${NC}\n"
-                MAIN_REPO_UPDATED=true
+            # Commit (only if there's something staged)
+            if git diff --cached --quiet; then
+                echo -e "${BLUE}No changes to commit in ${submodule_name}${NC}"
             else
-                echo -e "${RED}Failed to push ${submodule_name}${NC}\n"
-                cd "$parent_dir" > /dev/null
-                exit 1
-            fi
-        fi
-    else
-        echo -e "${BLUE}No changes in ${submodule_name}${NC}"
-    fi
+                git commit -m "$COMMIT_MSG"
+                echo -e "${GREEN}Committed in ${submodule_name}${NC}"
 
-    cd "$parent_dir" > /dev/null
-}
+                # Push
+                if git push; then
+                    echo -e "${GREEN}Pushed ${submodule_name}${NC}\n"
+                    MAIN_REPO_UPDATED=true
+                else
+                    echo -e "${RED}Failed to push ${submodule_name}${NC}\n"
+                    cd "$parent_dir" > /dev/null
+                    exit 1
+                fi
+            fi
+        else
+            echo -e "${BLUE}No changes in ${submodule_name}${NC}"
+        fi
+
+        cd "$parent_dir" > /dev/null
+    }
 
 # Find the main repository root (not submodule root)
 find_main_repo() {
