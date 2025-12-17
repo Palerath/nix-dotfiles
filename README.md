@@ -105,13 +105,13 @@ flake = {
 
         nixosConfigurations = {
         ...
-        HOSTNAME = self.lib.mkHost { 
-            hostName = "HOSTNAME";
-            useStable = false;
-        }
+            HOSTNAME = self.lib.mkHost { 
+                hostName = "HOSTNAME";
+                useStable = false;
+            }
         };
-};
-    }
+    };
+}
 ```
 
 ## Git process
