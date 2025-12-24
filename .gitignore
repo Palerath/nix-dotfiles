@@ -19,4 +19,7 @@ secrets/*
 /nix/store
 # Vim config
 /common/vim/plugged
+
+# AI
 .aider*
+/github
