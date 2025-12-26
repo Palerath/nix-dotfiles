@@ -12,6 +12,7 @@
         eza
         zoxide
         fzf
+        file
 
         unzip
         p7zip
