@@ -104,6 +104,10 @@
             hostName = "linouce";
             useStable = true;
           };
+          periserver = self.lib.mkHost {
+            hostName = "periserver";
+            useStable = true;
+          };
         };
 
         # Common modules
