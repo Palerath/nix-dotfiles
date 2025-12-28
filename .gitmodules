@@ -16,3 +16,6 @@
 [submodule "users/estelle"]
 	path = users/estelle
 	url = git@github.com:Palerath/dotfiles-estelle.git
+[submodule "hosts/periserver"]
+	path = hosts/periserver
+	url = git@github.com:Palerath/periserver.git
