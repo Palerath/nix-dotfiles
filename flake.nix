@@ -52,6 +52,7 @@
     home-manager,
     home-manager-stable,
     determinate,
+    aagl,
     ...
   }:
     flake-parts.lib.mkFlake {inherit inputs;} {
