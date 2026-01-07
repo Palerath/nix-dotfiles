@@ -85,7 +85,7 @@
             then home-manager-stable
             else home-manager;
 
-          pkgs-stable = import <nixpkgs-stable> {
+          pkgs-stable = import nixpkgs-stable {
             inherit system;
             config.allowUnfree = true;
           };
