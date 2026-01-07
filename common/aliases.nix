@@ -3,7 +3,7 @@
   username,
 }: {
   kumit = "bash /home/${username}/dotfiles/scripts/kumit.sh";
-  rebuild-nix = "sudo nixos-rebuild switch --flake 'path:'/home/${username}/dotfiles#${hostName}'";
+  rebuild-nix = "sudo nixos-rebuild switch --flake 'path:/home/${username}/dotfiles#${hostName}'";
   rebuild = "nh os switch /home/${username}/dotfiles -H ${hostName}";
 
   update-flakes = "nix flake update && kumit 'update flakes.lock'";
