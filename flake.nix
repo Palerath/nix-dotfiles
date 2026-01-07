@@ -84,12 +84,18 @@
             if useStable
             then home-manager-stable
             else home-manager;
+
+          pkgs-stable = import <nixpkgs-stable> {
+            inherit system;
+            config.allowUnfree = true;
+          };
         in
           pkgsInput.lib.nixosSystem {
             inherit system;
             specialArgs = {
               inherit inputs;
               inherit hostName;
+              inherit pkgs-stable;
               userConfigs = self.userConfigs;
             };
             modules = [
