@@ -1,15 +1,13 @@
 {
   hostName,
   username,
-}: let
-  dotifilesPath = "/home/${username}/dotfiles";
-in {
-  kumit = "bash ${dotifilesPath}/scripts/kumit.sh";
-  rebuild-nix = "sudo nixos-rebuild switch --flake 'path:'${dotifilesPath}#${hostName}'";
-  rebuild = "nh os switch ${dotifilesPath} -H ${hostName}";
+}: {
+  kumit = "bash /home/${username}/dotfiles/scripts/kumit.sh";
+  rebuild-nix = "sudo nixos-rebuild switch --flake 'path:'/home/${username}/dotfiles#${hostName}'";
+  rebuild = "nh os switch /home/${username}/dotfiles -H ${hostName}";
 
   update-flakes = "nix flake update && kumit 'update flakes.lock'";
-  maj = "cd ${dotifilesPath} && git pull && git submodule update --remote && update-flakes && rebuild";
+  maj = "cd /home/${username}/dotfiles && git pull && git submodule update --remote && update-flakes && rebuild";
 
   # Git aliases
   g = "git";
