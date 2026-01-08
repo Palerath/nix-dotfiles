@@ -1,16 +1,3 @@
-# Build results
-result
-result-*
-
-# Temporary files
-*~
-*.swp
-*.swo
-
-# Secrets (if using sops-nix or similar)
-secrets/*
-!secrets/.gitkeep
-
 # Backup files
 *.old
 *.backup
@@ -19,6 +6,7 @@ secrets/*
 /nix/store
 # Vim config
 /common/vim/plugged
+/users/perihelie/perihelie-modules/wallpaper-engine
 
 # AI
 .aider*
