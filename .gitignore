@@ -6,7 +6,6 @@
 /nix/store
 # Vim config
 /common/vim/plugged
-/users/perihelie/perihelie-modules/wallpaper-engine
 
 # AI
 .aider*
