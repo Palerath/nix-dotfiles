@@ -7,7 +7,6 @@
 # Vim config
 /common/vim/plugged
 
-# AI
-.aider*
-/.github/
+# Secrets
+smb-secrets
 *.key
