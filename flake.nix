@@ -70,13 +70,11 @@
           miyuyu = import (self + /users/miyuyu/home.nix);
         };
 
-        # Helper function to create host configurations
         lib.mkHost = {
           hostName,
           system ? "x86_64-linux",
           useStable ? false,
         }: let
-          # Choose nixpkgs and home-manager based on stability preference
           pkgsInput =
             if useStable
             then nixpkgs-stable
@@ -107,13 +105,13 @@
               }
               (self + /hosts/${hostName}/hardware-configuration.nix)
               (self + /hosts/${hostName}/configuration.nix)
-              # Optionally add common modules
+
+              # Common modules
               self.nixosModules.common
               determinate.nixosModules.default
             ];
           };
 
-        # Define each host using the helper
         nixosConfigurations = {
           perikon = self.lib.mkHost {hostName = "perikon";};
           latitude = self.lib.mkHost {hostName = "latitude";};
