@@ -1,9 +1,14 @@
 #!/usr/bin/env bash
-# kumit - Commit and push changes in submodules and main repo
+# kumit - Pull, update submodules, commit and push changes in submodules and main repo
 # Usage: kumit ["commit message"]
 # If no message provided, uses "update: <epoch_timestamp>"
 
 set -e
+
+# Find the dotfiles repository root
+# This script assumes it's in dotfiles/scripts/
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+DOTFILES_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 
 # Colors
 RED='\033[0;31m'
@@ -21,6 +26,28 @@ else
 fi
 
 MAIN_REPO_UPDATED=false
+
+echo -e "${BLUE}=== Dotfiles Repository: ${DOTFILES_ROOT} ===${NC}\n"
+
+# Navigate to dotfiles root
+cd "$DOTFILES_ROOT"
+
+# Pull latest changes from main repo
+echo -e "${BLUE}Pulling latest changes from main repository...${NC}"
+if git pull; then
+    echo -e "${GREEN}Main repository updated${NC}\n"
+else
+    echo -e "${RED}Failed to pull from main repository${NC}"
+    exit 1
+fi
+
+# Update all initialized submodules
+echo -e "${BLUE}Updating initialized submodules...${NC}"
+if git submodule update --remote --merge; then
+    echo -e "${GREEN}Submodules updated${NC}\n"
+else
+    echo -e "${YELLOW}Warning: Some submodules may have failed to update${NC}\n"
+fi
 
 echo -e "${BLUE}Checking for changes in submodules...${NC}\n"
 
@@ -40,79 +67,40 @@ commit_submodule() {
 
     cd "$submodule_path" || {
         echo -e "${RED}Failed to enter ${submodule_name}${NC}"
-            return 1
-        }
-
-        # Check if there are changes (only in this submodule, not parent repo)
-        if [[ -n $(git status -s) ]]; then
-            echo -e "${YELLOW}Changes detected in: ${submodule_name}${NC}"
-            git status -s
-
-            # Add all changes
-            git add -A
-
-            # Commit (only if there's something staged)
-            if git diff --cached --quiet; then
-                echo -e "${BLUE}No changes to commit in ${submodule_name}${NC}"
-            else
-                git commit -m "$COMMIT_MSG"
-                echo -e "${GREEN}Committed in ${submodule_name}${NC}"
-
-                # Push
-                if git push; then
-                    echo -e "${GREEN}Pushed ${submodule_name}${NC}\n"
-                    MAIN_REPO_UPDATED=true
-                else
-                    echo -e "${RED}Failed to push ${submodule_name}${NC}\n"
-                    cd "$parent_dir" > /dev/null
-                    exit 1
-                fi
-            fi
-        else
-            echo -e "${BLUE}No changes in ${submodule_name}${NC}"
-        fi
-
-        cd "$parent_dir" > /dev/null
+        return 1
     }
 
-# Find the main repository root (not submodule root)
-find_main_repo() {
-    local current_dir="$PWD"
+    # Check if there are changes (only in this submodule, not parent repo)
+    if [[ -n $(git status -s) ]]; then
+        echo -e "${YELLOW}Changes detected in: ${submodule_name}${NC}"
+        git status -s
 
-    # Check if we're in a git repo
-    if ! git rev-parse --git-dir > /dev/null 2>&1; then
-        echo -e "${RED}Error: Not in a git repository${NC}"
-        exit 1
-    fi
+        # Add all changes
+        git add -A
 
-    # Get current repo root
-    local repo_root=$(git rev-parse --show-toplevel)
-
-    # Check if this is a submodule by looking for .git file (not directory)
-    if [ -f "$repo_root/.git" ]; then
-        # We're in a submodule, find parent repo
-        local git_dir=$(cat "$repo_root/.git" | sed 's/gitdir: //')
-        # git_dir is relative to repo_root, so resolve it
-        local abs_git_dir="$repo_root/$git_dir"
-
-        # Parent repo is typically two levels up from .git/modules/submodule/path
-        # Extract main repo path from gitdir
-        local main_repo=$(echo "$abs_git_dir" | sed 's|/.git/modules/.*||')
-
-        if [ -d "$main_repo/.git" ] && [ ! -f "$main_repo/.git" ]; then
-            echo "$main_repo"
+        # Commit (only if there's something staged)
+        if git diff --cached --quiet; then
+            echo -e "${BLUE}No changes to commit in ${submodule_name}${NC}"
         else
-            echo "$repo_root"
+            git commit -m "$COMMIT_MSG"
+            echo -e "${GREEN}Committed in ${submodule_name}${NC}"
+
+            # Push
+            if git push; then
+                echo -e "${GREEN}Pushed ${submodule_name}${NC}\n"
+                MAIN_REPO_UPDATED=true
+            else
+                echo -e "${RED}Failed to push ${submodule_name}${NC}\n"
+                cd "$parent_dir" > /dev/null
+                exit 1
+            fi
         fi
     else
-        # We're in the main repo
-        echo "$repo_root"
+        echo -e "${BLUE}No changes in ${submodule_name}${NC}"
     fi
-}
 
-REPO_ROOT=$(find_main_repo)
-echo -e "${BLUE}Main repository: ${REPO_ROOT}${NC}\n"
-cd "$REPO_ROOT"
+    cd "$parent_dir" > /dev/null
+}
 
 # Process all submodules
 if [ -f .gitmodules ]; then
