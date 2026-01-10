@@ -19,3 +19,6 @@
 [submodule "hosts/periserver"]
 	path = hosts/periserver
 	url = git@github.com:Palerath/periserver.git
+[submodule "users/miyuyu"]
+	path = users/miyuyu
+	url = git@github.com:Palerath/dotfiles-miyuyu.git

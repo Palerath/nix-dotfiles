@@ -67,6 +67,7 @@
         userConfigs = {
           perihelie = import (self + /users/perihelie/home.nix);
           estelle = import (self + /users/estelle/home.nix);
+          miyuyu = import (self + /users/miyuyu/home.nix);
         };
 
         # Helper function to create host configurations
