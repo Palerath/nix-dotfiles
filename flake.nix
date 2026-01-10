@@ -101,7 +101,7 @@
               hmInput.nixosModules.home-manager
               {
                 _module.args = {inherit inputs;};
-                home-manager.extraSpecialArgs = {inherit inputs hostName;};
+                home-manager.extraSpecialArgs = {inherit inputs hostName self;};
               }
               (self + /hosts/${hostName}/hardware-configuration.nix)
               (self + /hosts/${hostName}/configuration.nix)
