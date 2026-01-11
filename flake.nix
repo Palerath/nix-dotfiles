@@ -20,11 +20,6 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
 
-    nvf = {
-      url = "github:notashelf/nvf";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -41,11 +36,6 @@
     aagl = {
       url = "github:ezKEa/aagl-gtk-on-nix";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    sops-nix = {
-      url = "github:Mic92/sops-nix";
-      inputs.nixpkgs.follows = "nixpkgs-stable";
     };
   };
 
@@ -75,7 +65,7 @@
           system ? "x86_64-linux",
           useStable ? false,
         }: let
-          pkgsInput =
+          pkgs-unstable =
             if useStable
             then nixpkgs-stable
             else nixpkgs;
@@ -86,10 +76,13 @@
 
           pkgs-stable = import nixpkgs-stable {
             inherit system;
+            specialArgs = {
+              inherit pkgs-unstable;
+            };
             config.allowUnfree = true;
           };
         in
-          pkgsInput.lib.nixosSystem {
+          pkgs-unstable.lib.nixosSystem {
             inherit system;
             specialArgs = {
               inherit inputs;
