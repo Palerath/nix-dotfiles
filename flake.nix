@@ -65,7 +65,19 @@
           system ? "x86_64-linux",
           useStable ? false,
         }: let
-          pkgs-unstable =
+          # Always import both stable and unstable
+          pkgs-stable = import nixpkgs-stable {
+            inherit system;
+            config.allowUnfree = true;
+          };
+
+          pkgs-unstable = import nixpkgs {
+            inherit system;
+            config.allowUnfree = true;
+          };
+
+          # Choose which one to use as the main pkgs
+          basePkgs =
             if useStable
             then nixpkgs-stable
             else nixpkgs;
@@ -73,21 +85,14 @@
             if useStable
             then home-manager-stable
             else home-manager;
-
-          pkgs-stable = import nixpkgs-stable {
-            inherit system;
-            specialArgs = {
-              inherit pkgs-unstable;
-            };
-            config.allowUnfree = true;
-          };
         in
-          pkgs-unstable.lib.nixosSystem {
+          basePkgs.lib.nixosSystem {
             inherit system;
             specialArgs = {
               inherit inputs;
               inherit hostName;
               inherit pkgs-stable;
+              inherit pkgs-unstable; 
               userConfigs = self.userConfigs;
             };
             modules = [
