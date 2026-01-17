@@ -13,9 +13,10 @@
         zoxide
         fzf
         file
-
         unzip
         p7zip
+        toybox
+        net-tools
       ];
 
       programs.nh.enable = true;
