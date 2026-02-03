@@ -6,7 +6,6 @@
 
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
-    nixpkgs-cosmic = "nixos-cosmic/nixpkgs";
     flake-parts.url = "github:hercules-ci/flake-parts";
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
     hyprland.url = "github:hyprwm/Hyprland";
@@ -29,7 +28,6 @@
 
     nixos-cosmic = {
       url = "github:lilyinstarlight/nixos-cosmic";
-      inputs.nixpkgs-cosmic.follows = "nixpkgs-cosmic";
     };
 
     hyprland-plugins = {
