@@ -27,6 +27,7 @@
     };
 
     hyprland.url = "github:hyprwm/Hyprland";
+    nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
 
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";
@@ -92,7 +93,7 @@
               inherit inputs;
               inherit hostName;
               inherit pkgs-stable;
-              inherit pkgs-unstable; 
+              inherit pkgs-unstable;
               userConfigs = self.userConfigs;
             };
             modules = [
