@@ -127,7 +127,7 @@
 
         # Common modules
         nixosModules = {
-          common = import (self + /common);
+          common = import (self + ./common);
         };
       };
 
