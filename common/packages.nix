@@ -2,6 +2,7 @@
   environment.systemPackages = with pkgs; [
     wl-clipboard
     uutils-coreutils-noprefix
+    findutils
     ffmpeg-full
     tree
     wget
@@ -16,6 +17,10 @@
     p7zip
     toybox
     net-tools
+
+    # File formats
+    rar
+    zip
   ];
 
   programs.nh.enable = true;
