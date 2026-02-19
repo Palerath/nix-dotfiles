@@ -107,7 +107,7 @@
               (self + /hosts/${hostName}/configuration.nix)
 
               # Common modules
-              self.nixosModules.common
+              (self + /common)
               determinate.nixosModules.default
             ];
           };
@@ -123,11 +123,6 @@
             hostName = "periserver";
             useStable = true;
           };
-        };
-
-        # Common modules
-        nixosModules = {
-          common = import (self + ./common);
         };
       };
 
