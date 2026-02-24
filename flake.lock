@@ -266,6 +266,26 @@
         "type": "github"
       }
     },
+    "hy3": {
+      "inputs": {
+        "hyprland": [
+          "hyprland"
+        ]
+      },
+      "locked": {
+        "lastModified": 1769305838,
+        "narHash": "sha256-f052D0lVIKCSiBVcOaw8/L5L8nF1z/WjWOMfkRGQKRo=",
+        "owner": "outfoxxed",
+        "repo": "hy3",
+        "rev": "962580115a99d5fb29c22ae4098353cf39a56e6f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "outfoxxed",
+        "repo": "hy3",
+        "type": "github"
+      }
+    },
     "hyprcursor": {
       "inputs": {
         "hyprlang": [
@@ -861,6 +881,7 @@
         "flake-parts": "flake-parts_2",
         "home-manager": "home-manager",
         "home-manager-stable": "home-manager-stable",
+        "hy3": "hy3",
         "hyprland": "hyprland",
         "hyprland-plugins": "hyprland-plugins",
         "hyprland-virtual-desktops": "hyprland-virtual-desktops",
