@@ -35,10 +35,16 @@
       inputs.hyprland.follows = "hyprland";
     };
 
-    aagl = {
-      url = "github:ezKEa/aagl-gtk-on-nix";
+    hyprland-virtual-desktops = {
+      url = "github:levnikmyskin/hyprland-virtual-desktops";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.hyprland.follows = "hyprland";
     };
+
+    #  aagl = {
+    #    url = "github:ezKEa/aagl-gtk-on-nix";
+    #    inputs.nixpkgs.follows = "nixpkgs";
+    #  };
   };
 
   outputs = inputs @ {
