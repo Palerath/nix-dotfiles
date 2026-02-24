@@ -38,6 +38,10 @@
     hyprland-virtual-desktops = {
       url = "github:levnikmyskin/hyprland-virtual-desktops";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    hy3 = {
+      url = "github:outfoxxed/hy3";
       inputs.hyprland.follows = "hyprland";
     };
 
