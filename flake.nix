@@ -7,7 +7,6 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
     flake-parts.url = "github:hercules-ci/flake-parts";
-    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
     hyprland.url = "github:hyprwm/Hyprland";
 
     home-manager = {
@@ -53,7 +52,6 @@
     nixpkgs-stable,
     home-manager,
     home-manager-stable,
-    determinate,
     ...
   }:
     flake-parts.lib.mkFlake {inherit inputs;} {
@@ -113,7 +111,6 @@
 
               # Common modules
               (self + /common)
-              determinate.nixosModules.default
             ];
           };
 
