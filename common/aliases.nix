@@ -15,6 +15,8 @@ in {
   update-flakes = "cd ${dotfilesPath} && nix flake update && kumit 'update flakes.lock'";
   maj = "cd ${dotfilesPath} && git pull && git submodule update --remote && update-flakes && rebuild";
 
+  dot = "z dot && tmux";
+
   # Git aliases
   g = "git";
   ga = "git add .";
