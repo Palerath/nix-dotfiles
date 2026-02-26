@@ -79,7 +79,12 @@
             pkgs-stable = mkPkgs nixpkgs-stable;
           };
 
-          specialArgs = {inherit inputs hostName self;} // extraPkgs;
+          specialArgs =
+            {
+              inherit inputs hostName self;
+              userConfigs = self.userConfigs;
+            }
+            // extraPkgs;
         in
           basePkgs.lib.nixosSystem {
             inherit system;
