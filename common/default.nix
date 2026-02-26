@@ -4,16 +4,21 @@
   # Security
   security.sudo.wheelNeedsPassword = true;
   security.sudo.extraConfig = "Defaults pwfeedback";
-  # Auto-upgrade (optional)
-  # system.autoUpgrade.enable = true;
-  nix.optimise.automatic = true;
+
+  system.autoUpgrade.enable = true;
   nix.settings.auto-optimise-store = true;
 
-  # Common services
   services.openssh = {
     enable = true;
     settings.PermitRootLogin = "no";
   };
+
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 15d";
+  };
+  nix.optimise.automatic = true;
 
   # Shared environment variables
   environment.variables = {
