@@ -95,6 +95,7 @@
             inherit system;
             specialArgs = specialArgs;
             modules = [
+              inputs.sops-nix.nixosModules.sops
               hmInput.nixosModules.home-manager
               {
                 _module.args = {inherit inputs;};
