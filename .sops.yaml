@@ -8,10 +8,6 @@ keys:
   # periserver host key (run: ssh-keyscan periserver | ssh-to-age)
   - &periserver age1a8wy7xq8xs7l00vkq7ehtp5dupal08u588xjxedyaw5c39ju8umsmxh8v0
 
-  # perikon host key
-  - &perikon age107mf2xs77yseuaelwnvr8kuk6xygxznlrmdmqfsa0tz2uhd4pafs22n9dp
-
-  # Your personal age key for editing secrets from your workstation
   # Generate with: age-keygen -o ~/.config/sops/age/keys.txt
   - &perihelie age1szv0yeg8f0gf2v0n5hd8pmuuc82fez9mg5neclfpmtq2mfezdfwsqcqfew
 
@@ -21,11 +17,4 @@ creation_rules:
     key_groups:
       - age:
           - *periserver
-          - *perihelie
-
-  # perikon secrets (add when needed)
-  - path_regex: hosts/perikon/secrets\.yaml$
-    key_groups:
-      - age:
-          - *perikon
           - *perihelie
