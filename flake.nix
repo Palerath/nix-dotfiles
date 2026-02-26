@@ -25,10 +25,6 @@
       inputs.home-manager.follows = "home-manager";
     };
 
-    nixos-cosmic = {
-      url = "github:lilyinstarlight/nixos-cosmic";
-    };
-
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";
       inputs.hyprland.follows = "hyprland";
@@ -38,27 +34,21 @@
       url = "github:levnikmyskin/hyprland-virtual-desktops";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    #  aagl = {
-    #    url = "github:ezKEa/aagl-gtk-on-nix";
-    #    inputs.nixpkgs.follows = "nixpkgs";
-    #  };
   };
 
   outputs = inputs @ {
-    self,
     flake-parts,
     nixpkgs,
     nixpkgs-stable,
     home-manager,
     home-manager-stable,
+    self,
     ...
   }:
     flake-parts.lib.mkFlake {inherit inputs;} {
       systems = ["x86_64-linux"];
 
       flake = {
-        # User configurations
         userConfigs = {
           perihelie = import (self + /users/perihelie/home.nix);
           estelle = import (self + /users/estelle/home.nix);
@@ -70,18 +60,6 @@
           system ? "x86_64-linux",
           useStable ? false,
         }: let
-          # Always import both stable and unstable
-          pkgs-stable = import nixpkgs-stable {
-            inherit system;
-            config.allowUnfree = true;
-          };
-
-          pkgs-unstable = import nixpkgs {
-            inherit system;
-            config.allowUnfree = true;
-          };
-
-          # Choose which one to use as the main pkgs
           basePkgs =
             if useStable
             then nixpkgs-stable
@@ -90,37 +68,44 @@
             if useStable
             then home-manager-stable
             else home-manager;
+
+          mkPkgs = chan:
+            import chan {
+              inherit system;
+              config.allowUnfree = true;
+            };
+
+          extraPkgs = nixpkgs.lib.optionalAttrs (!useStable) {
+            pkgs-stable = mkPkgs nixpkgs-stable;
+          };
+
+          specialArgs = {inherit inputs hostName self;} // extraPkgs;
         in
           basePkgs.lib.nixosSystem {
             inherit system;
-            specialArgs = {
-              inherit inputs;
-              inherit hostName;
-              inherit pkgs-stable;
-              inherit pkgs-unstable;
-              userConfigs = self.userConfigs;
-            };
+            specialArgs = specialArgs;
             modules = [
               hmInput.nixosModules.home-manager
               {
                 _module.args = {inherit inputs;};
-                home-manager.extraSpecialArgs = {inherit inputs hostName self;};
+                home-manager.extraSpecialArgs = specialArgs;
               }
               (self + /hosts/${hostName}/hardware-configuration.nix)
               (self + /hosts/${hostName}/configuration.nix)
-
-              # Common modules
               (self + /common)
             ];
           };
 
         nixosConfigurations = {
           perikon = self.lib.mkHost {hostName = "perikon";};
+
           latitude = self.lib.mkHost {hostName = "latitude";};
+
           linouce = self.lib.mkHost {
             hostName = "linouce";
             useStable = true;
           };
+
           periserver = self.lib.mkHost {
             hostName = "periserver";
             useStable = true;
@@ -129,19 +114,12 @@
       };
 
       perSystem = {pkgs, ...}: {
-        devShells = {
-          default = pkgs.mkShell {
-            buildInputs = with pkgs; [
-              git
-              nh
-              nixos-rebuild
-            ];
-
-            shellHook = ''
-              echo "NixOS development environment loaded"
-              echo "Tools: nh, nixos-rebuild, git"
-            '';
-          };
+        devShells.default = pkgs.mkShell {
+          buildInputs = with pkgs; [git nh nixos-rebuild];
+          shellHook = ''
+            echo "NixOS development environment loaded"
+            echo "Tools: nh, nixos-rebuild, git"
+          '';
         };
       };
     };

@@ -21,6 +21,7 @@
     # File formats
     rar
     zip
+    xz 
   ];
 
   programs.nh.enable = true;
