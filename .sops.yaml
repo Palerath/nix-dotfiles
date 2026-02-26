@@ -13,7 +13,7 @@ keys:
 
   # Your personal age key for editing secrets from your workstation
   # Generate with: age-keygen -o ~/.config/sops/age/keys.txt
-  - &perihelie age1REPLACE_WITH_YOUR_PERSONAL_AGE_PUBKEY
+  - &perihelie age1szv0yeg8f0gf2v0n5hd8pmuuc82fez9mg5neclfpmtq2mfezdfwsqcqfew
 
 creation_rules:
   # periserver secrets: decryptable by periserver and by you personally
