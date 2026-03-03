@@ -125,6 +125,7 @@
           shellHook = ''
             echo "NixOS development environment loaded"
             echo "Tools: nh, nixos-rebuild, git"
+            export NIXPKGS_ALLOW_UNFREE=1
           '';
         };
       };
