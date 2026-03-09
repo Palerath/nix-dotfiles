@@ -3,7 +3,7 @@
   username,
 }: let
   # Define dotfiles path based on hostname
-  dotfilesPath = 
+  dotfilesPath =
     if hostName == "periserver"
     then "/opt/dotfiles"
     else "/home/${username}/dotfiles";
