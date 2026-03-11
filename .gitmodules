@@ -22,3 +22,6 @@
 [submodule "users/miyuyu"]
 	path = users/miyuyu
 	url = git@github.com:Palerath/dotfiles-miyuyu.git
+[submodule "hosts/airhelie"]
+	path = hosts/airhelie
+	url = git@github.com:Palerath/dotfiles-airhelie.git

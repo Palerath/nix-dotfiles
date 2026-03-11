@@ -29,5 +29,6 @@
     ./vim.nix
     ./shell.nix
     ./packages.nix
+    ./user.nix
   ];
 }

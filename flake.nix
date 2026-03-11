@@ -9,6 +9,11 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
     hyprland.url = "github:hyprwm/Hyprland";
 
+    nix-darwin = {
+      url = "github:nix-darwin/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -45,13 +50,14 @@
     flake-parts,
     nixpkgs,
     nixpkgs-stable,
+    nix-darwin,
     home-manager,
     home-manager-stable,
     self,
     ...
   }:
     flake-parts.lib.mkFlake {inherit inputs;} {
-      systems = ["x86_64-linux"];
+      systems = ["x86_64-linux" "aarch64-darwin" "x86_64-darwin"];
 
       flake = {
         userConfigs = {
@@ -107,6 +113,34 @@
             ];
           };
 
+        lib.mkDarwinHost = {
+          hostName,
+          system ? "aarch64-darwin",
+        }: let
+          pkgs = import nixpkgs {
+            inherit system;
+            config.allowUnfree = true;
+          };
+
+          specialArgs = {
+            inherit inputs hostName self;
+            userConfigs = self.userConfigs;
+          };
+        in
+          nix-darwin.lib.darwinSystem {
+            inherit system;
+            specialArgs = specialArgs;
+            modules = [
+              home-manager.darwinModules.home-manager
+              {
+                _module.args = {inherit inputs;};
+                home-manager.extraSpecialArgs = specialArgs;
+              }
+              (self + /hosts/${hostName}/configuration.nix)
+              (self + /common/darwin.nix)
+            ];
+          };
+
         nixosConfigurations = {
           perikon = self.lib.mkHost {hostName = "perikon";};
 
@@ -122,15 +156,42 @@
             useStable = true;
           };
         };
+
+        darwinConfigurations = {
+          airhelie = self.lib.mkDarwinHost {hostName = "airhelie";};
+        };
       };
 
       perSystem = {pkgs, ...}: {
         devShells.default = pkgs.mkShell {
-          buildInputs = with pkgs; [git nh nixos-rebuild];
+          buildInputs = with pkgs; [
+            git
+            nh
+            nixos-rebuild
+            alejandra
+            nil
+
+            rustup
+            pkg-config
+            openssl
+
+            python3
+            uv
+
+            just
+            jq
+            curl
+            httpie
+          ];
           shellHook = ''
-            echo "NixOS development environment loaded"
-            echo "Tools: nh, nixos-rebuild, git"
+            echo "Dev environment loaded"
             export NIXPKGS_ALLOW_UNFREE=1
+            export PKG_CONFIG_PATH="${pkgs.openssl.dev}/lib/pkgconfig"
+
+            # Rust: use rustup-managed toolchains in project-local dir
+            export RUSTUP_HOME="$PWD/.rustup"
+            export CARGO_HOME="$PWD/.cargo"
+            export PATH="$CARGO_HOME/bin:$PATH"
           '';
         };
       };
