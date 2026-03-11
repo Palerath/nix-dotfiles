@@ -6,6 +6,8 @@
   dotfilesPath =
     if hostName == "periserver"
     then "/opt/dotfiles"
+    else if isDarwin
+    then "/Users/${username}/dotfiles"
     else "/home/${username}/dotfiles";
 
   rebuildCmd =
@@ -28,22 +30,22 @@ in {
 
     dot = "z dot && tmux";
 
-    g   = "git";
-    ga  = "git add .";
-    gc  = "git commit -am";
+    g = "git";
+    ga = "git add .";
+    gc = "git commit -am";
     gco = "git checkout";
-    gd  = "git diff";
-    gl  = "git log";
-    gp  = "git push";
+    gd = "git diff";
+    gl = "git log";
+    gp = "git push";
     gpl = "git pull";
-    gs  = "git status";
-    gb  = "git branch";
+    gs = "git status";
+    gb = "git branch";
 
-    ls  = "eza";
-    ll  = "eza -la";
-    la  = "eza -la";
-    l   = "eza -l";
-    ".."  = "z ..";
+    ls = "eza";
+    ll = "eza -la";
+    la = "eza -la";
+    l = "eza -l";
+    ".." = "z ..";
     "..." = "z ../..";
 
     core-ls = "ls";
