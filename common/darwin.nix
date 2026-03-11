@@ -42,6 +42,7 @@ in {
     nix.optimise.automatic = true;
 
     nixpkgs.config.allowBroken = true;
+    nixpkgs.config.allowUnfree = true;
 
     environment.systemPackages = with pkgs; [
       git
