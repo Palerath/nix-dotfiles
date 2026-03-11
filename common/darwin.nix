@@ -41,6 +41,8 @@ in {
     };
     nix.optimise.automatic = true;
 
+    nixpkgs.config.allowBroken = true;
+
     environment.systemPackages = with pkgs; [
       git
       eza
