@@ -113,34 +113,29 @@
             ];
           };
 
-        lib.mkDarwinHost = {
-          hostName,
-          system ? "aarch64-darwin",
-        }: let
-          pkgs = import nixpkgs {
-            inherit system;
-            config.allowUnfree = true;
-          };
+lib.mkDarwinHost = {
+  hostName,
+  system ? "aarch64-darwin",
+}: let
+  pkgs-stable = import nixpkgs-stable {
+    inherit system;
+    config.allowUnfree = true;
+  };
 
-          specialArgs = {
-            inherit inputs hostName self;
-            userConfigs = self.userConfigs;
-          };
-        in
-          nix-darwin.lib.darwinSystem {
-            inherit system;
-            specialArgs = specialArgs;
-            modules = [
-              home-manager.darwinModules.home-manager
-              {
-                _module.args = {inherit inputs;};
-                home-manager.extraSpecialArgs = specialArgs;
-              }
-              (self + /hosts/${hostName}/configuration.nix)
-              (self + /common/darwin.nix)
-            ];
-          };
-
+  specialArgs = {
+    inherit inputs hostName self pkgs-stable;
+    userConfigs = self.userConfigs;
+  };
+in
+  nix-darwin.lib.darwinSystem {
+    inherit system specialArgs;
+    modules = [
+      home-manager.darwinModules.home-manager
+      { _module.args = {inherit inputs;}; home-manager.extraSpecialArgs = specialArgs; }
+      (self + /hosts/${hostName}/configuration.nix)
+      (self + /common/darwin.nix)
+    ];
+  };
         nixosConfigurations = {
           perikon = self.lib.mkHost {hostName = "perikon";};
 
