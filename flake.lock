@@ -168,6 +168,22 @@
         "type": "github"
       }
     },
+    "homebrew-cask": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1773269683,
+        "narHash": "sha256-WXcF3sVSjGyxF+EG7aILTB326GNiXMjZycph2u/eiAc=",
+        "owner": "homebrew",
+        "repo": "homebrew-cask",
+        "rev": "3ab18268401e852875c008270b5f4189e727700c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "homebrew",
+        "repo": "homebrew-cask",
+        "type": "github"
+      }
+    },
     "hyprcursor": {
       "inputs": {
         "hyprlang": [
@@ -645,6 +661,7 @@
         "flake-parts": "flake-parts",
         "home-manager": "home-manager",
         "home-manager-stable": "home-manager-stable",
+        "homebrew-cask": "homebrew-cask",
         "hyprland": "hyprland",
         "hyprland-plugins": "hyprland-plugins",
         "nix-darwin": "nix-darwin",
