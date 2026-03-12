@@ -31,7 +31,7 @@
 
     homebrew-cask = {
       url = "github:homebrew/homebrew-cask";
-      inputs.nixpkgs.follows = "nixpkgs";
+      flake = false;
     };
 
     zen-browser = {
