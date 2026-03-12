@@ -29,10 +29,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    homebrew-cask = {
-      url = "github:homebrew/homebrew-cask";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # homebrew-cask = {
+    #   url = "github:homebrew/homebrew-cask";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
+    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
 
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
