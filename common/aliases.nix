@@ -12,8 +12,7 @@
 
   rebuildCmd =
     if isDarwin
-    # then "darwin-rebuild switch --flake 'path:${dotfilesPath}#${hostName}'"
-    then "nh os switch ${dotfilesPath} -H ${hostName}"
+    then "nh darwin switch ${dotfilesPath} -H ${hostName}"
     else "nh os switch ${dotfilesPath} -H ${hostName}";
 
   rebuildNixCmd =
