@@ -13,12 +13,12 @@ in {
     description = "Primary user of this system";
   };
 
+  programs.nh = {
+    enable = true;
+  };
+
   config = {
     nix.package = pkgs.lix;
-
-    programs.nh = {
-      enable = true;
-    };
 
     nix.settings = {
       experimental-features = ["nix-command" "flakes"];
