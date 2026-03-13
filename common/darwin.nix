@@ -62,7 +62,6 @@ in {
     ];
 
     programs.zsh.enable = true;
-    programs.nh.enable = true;
     security.sudo.extraConfig = "Defaults pwfeedback";
 
     system.stateVersion = 5;
