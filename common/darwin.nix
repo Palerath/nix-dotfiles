@@ -30,16 +30,6 @@ in {
       trusted-users = ["root" username];
     };
 
-    nix.gc = {
-      automatic = true;
-      interval = {
-        Weekday = 0;
-        Hour = 3;
-        Minute = 37;
-      };
-      options = "--delete-older-than 15d";
-    };
-
     nix.optimise.automatic = true;
 
     nixpkgs.config.allowBroken = true;
