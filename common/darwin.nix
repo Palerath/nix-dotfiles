@@ -16,6 +16,10 @@ in {
   config = {
     nix.package = pkgs.lix;
 
+    programs.nh = {
+      enable = true;
+    };
+
     nix.settings = {
       experimental-features = ["nix-command" "flakes"];
       auto-optimise-store = true;
