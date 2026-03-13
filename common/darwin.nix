@@ -13,10 +13,6 @@ in {
     description = "Primary user of this system";
   };
 
-  programs.nh = {
-    enable = true;
-  };
-
   config = {
     nix.package = pkgs.lix;
 
@@ -66,6 +62,7 @@ in {
     ];
 
     programs.zsh.enable = true;
+    programs.nh.enable = true;
     security.sudo.extraConfig = "Defaults pwfeedback";
 
     system.stateVersion = 5;
