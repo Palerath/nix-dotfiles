@@ -2,6 +2,9 @@
 *.old
 *.backup
 
+# DS_STORE
+.DS_STORE
+
 # Nix store links
 /nix/store
 # Vim config
