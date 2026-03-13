@@ -8,7 +8,6 @@
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
     flake-parts.url = "github:hercules-ci/flake-parts";
     hyprland.url = "github:hyprwm/Hyprland";
-    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
 
     nix-darwin = {
       url = "github:nix-darwin/nix-darwin";
@@ -29,6 +28,12 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # homebrew-cask = {
+    #   url = "github:homebrew/homebrew-cask";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
+    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
 
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
@@ -118,22 +123,20 @@
           hostName,
           system ? "aarch64-darwin",
         }: let
-          pkgs = import nixpkgs {
+          pkgs-stable = import nixpkgs-stable {
             inherit system;
             config.allowUnfree = true;
           };
 
           specialArgs = {
-            inherit inputs hostName self pkgs;
+            inherit inputs hostName self pkgs-stable;
             userConfigs = self.userConfigs;
           };
         in
           nix-darwin.lib.darwinSystem {
-            inherit system;
-            specialArgs = specialArgs;
+            inherit system specialArgs;
             modules = [
               home-manager.darwinModules.home-manager
-              inputs.sops-nix.nixosModules.sops
               inputs.nix-homebrew.darwinModules.nix-homebrew
               {
                 _module.args = {inherit inputs;};
