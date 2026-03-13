@@ -3,6 +3,7 @@
     sops
 
     wl-clipboard
+    libinput
     uutils-coreutils-noprefix
     findutils
     ffmpeg-full
