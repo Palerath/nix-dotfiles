@@ -58,6 +58,7 @@ in {
       unzip
       p7zip
       ffmpeg-full
+      sops
     ];
 
     programs.zsh.enable = true;

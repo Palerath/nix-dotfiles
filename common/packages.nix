@@ -1,5 +1,7 @@
 {pkgs, ...}: {
   environment.systemPackages = with pkgs; [
+    sops
+
     wl-clipboard
     uutils-coreutils-noprefix
     findutils
@@ -21,7 +23,7 @@
     # File formats
     rar
     zip
-    xz 
+    xz
   ];
 
   programs.nh.enable = true;
