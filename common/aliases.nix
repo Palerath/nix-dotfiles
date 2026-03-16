@@ -13,12 +13,12 @@
   rebuildCmd =
     if isDarwin
     then "nh darwin switch ${dotfilesPath} -H ${hostName}"
-    else "rm /home/perihelie/.config/mimeapps.list.backup && nh os switch ${dotfilesPath} -H ${hostName}";
+    else "nh os switch ${dotfilesPath} -H ${hostName}";
 
   rebuildNixCmd =
     if isDarwin
     then "sudo darwin-rebuild switch --flake 'path:${dotfilesPath}#${hostName}'"
-    else "rm /home/perihelie/.config/mimeapps.list.backup && sudo nixos-rebuild switch --flake 'path:${dotfilesPath}#${hostName}'";
+    else "sudo nixos-rebuild switch --flake 'path:${dotfilesPath}#${hostName}'";
 in {
   shellAliases = {
     kumit = "bash ${dotfilesPath}/scripts/kumit.sh";
