@@ -21,7 +21,7 @@
     p7zip
     toybox
     net-tools
-    du-dust
+    dust
     dua
 
     # File formats
