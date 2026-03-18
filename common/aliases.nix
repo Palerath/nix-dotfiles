@@ -41,6 +41,7 @@ in {
     gs = "git status";
     gb = "git branch";
 
+    cat = "bat";
     ls = "eza";
     ll = "eza -la";
     la = "eza -la";
@@ -49,6 +50,7 @@ in {
     "..." = "z ../..";
 
     core-ls = "ls";
+    core-cat = "cat";
     zi = "zi";
   };
 }

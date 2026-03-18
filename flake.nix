@@ -179,6 +179,7 @@
             rustup
             pkg-config
             openssl
+            hyperfine # command benchmark
 
             python3
             uv

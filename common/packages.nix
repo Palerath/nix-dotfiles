@@ -13,6 +13,7 @@
     fd
     bat
     eza
+    xh
     zoxide
     fzf
     file
@@ -20,6 +21,8 @@
     p7zip
     toybox
     net-tools
+    du-dust
+    dua
 
     # File formats
     rar
