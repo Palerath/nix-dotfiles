@@ -1,20 +1,24 @@
-# Keys are derived from each host's SSH Ed25519 host key.
-# To get a host's age public key:
-#   ssh-keyscan <hostname> | ssh-to-age
-# or from the machine directly:
-#   cat /etc/ssh/ssh_host_ed25519_key.pub | ssh-to-age
-
 keys:
-  # periserver host key (run: ssh-keyscan periserver | ssh-to-age)
+  - &perikon age14truh9xkelz4perud6chaz9ejpmjfny0rkz69lr84zrnjqlx89psha6eex
+  - &airhelie age1x0at9d9kj9nc5huys45zc34r5hfpm6hgxxcnvmh5jh4j70ucmpsqzkrvke
   - &periserver age1a8wy7xq8xs7l00vkq7ehtp5dupal08u588xjxedyaw5c39ju8umsmxh8v0
 
-  # Generate with: age-keygen -o ~/.config/sops/age/keys.txt
-  - &perihelie age1szv0yeg8f0gf2v0n5hd8pmuuc82fez9mg5neclfpmtq2mfezdfwsqcqfew
-
 creation_rules:
-  # periserver secrets: decryptable by periserver and by you personally
+  - path_regex: hosts/perikon/secrets\.yaml$
+    key_groups:
+      - age:
+          - *perikon
   - path_regex: hosts/periserver/modules/secrets\.yaml$
     key_groups:
       - age:
           - *periserver
-          - *perihelie
+  - path_regex: hosts/airhelie/secrets\.yaml$
+    key_groups:
+      - age:
+          - *airhelie
+  - path_regex: secrets\.yaml$
+    key_groups:
+      - age:
+          - *perikon
+          - *airhelie
+          - *periserver
