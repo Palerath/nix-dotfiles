@@ -1,5 +1,6 @@
 keys:
   - &perikon age14truh9xkelz4perud6chaz9ejpmjfny0rkz69lr84zrnjqlx89psha6eex
+  - &perikon_host age107mf2xs77yseuaelwnvr8kuk6xygxznlrmdmqfsa0tz2uhd4pafs22n9dp
   - &airhelie age1x0at9d9kj9nc5huys45zc34r5hfpm6hgxxcnvmh5jh4j70ucmpsqzkrvke
   - &periserver age1a8wy7xq8xs7l00vkq7ehtp5dupal08u588xjxedyaw5c39ju8umsmxh8v0
 
@@ -7,7 +8,7 @@ creation_rules:
   - path_regex: hosts/perikon/secrets\.yaml$
     key_groups:
       - age:
-          - *perikon
+          - *perikon_host
   - path_regex: hosts/periserver/modules/secrets\.yaml$
     key_groups:
       - age:
