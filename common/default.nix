@@ -1,7 +1,4 @@
 {...}: {
-  # Shared settings across all hosts
-
-  # Security
   security.sudo.wheelNeedsPassword = true;
   security.sudo.extraConfig = "Defaults pwfeedback";
 
@@ -18,15 +15,16 @@
     dates = "weekly";
     options = "--delete-older-than 15d";
   };
+
   nix.optimise.automatic = true;
 
-  # Shared environment variables
   environment.variables = {
     EDITOR = "vim";
   };
 
   imports = [
     ./vim.nix
+    ./user.nix
     ./shell.nix
     ./packages.nix
     ./user.nix

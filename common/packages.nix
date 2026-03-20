@@ -1,34 +1,37 @@
-{pkgs, ...}: {
-  environment.systemPackages = with pkgs; [
-    sops
+{
+  pkgs,
+  lib,
+  ...
+}: {
+  environment.systemPackages = with pkgs;
+    [
+      sops
+      libinput
+      uutils-coreutils-noprefix
+      findutils
+      ffmpeg-full
+      tree
+      wget
+      ripgrep
+      fd
+      bat
+      eza
+      xh
+      zoxide
+      fzf
+      file
+      unzip
+      p7zip
+      toybox
+      net-tools
+      dust
+      dua
 
-    wl-clipboard
-    libinput
-    uutils-coreutils-noprefix
-    findutils
-    ffmpeg-full
-    tree
-    wget
-    ripgrep
-    fd
-    bat
-    eza
-    xh
-    zoxide
-    fzf
-    file
-    unzip
-    p7zip
-    toybox
-    net-tools
-    dust
-    dua
-
-    # File formats
-    rar
-    zip
-    xz
-  ];
-
-  programs.nh.enable = true;
+      rar
+      zip
+      xz
+    ]
+    ++ lib.optionals (!pkgs.stdenv.isDarwin) [
+      wl-clipboard
+    ];
 }
