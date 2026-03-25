@@ -29,7 +29,7 @@
       };
     };
   };
-  flake.homeModule.sops = {
+  flake.homeModules.sops = {
     self,
     config,
     pkgs,

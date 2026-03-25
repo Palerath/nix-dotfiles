@@ -38,8 +38,8 @@
     programs.home-manager.enable = true;
 
     imports = [
-      self.homeModules.perihelie.shell
-      self.homeModules.perihelie.hyprland
+      self.homeModules.shell
+      self.homeModules.hyprland
     ];
   };
 }
