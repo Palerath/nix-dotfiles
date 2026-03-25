@@ -3,7 +3,11 @@
   inputs,
   ...
 }: {
-  flake.nixosModules.perihelieConfiguration = {pkgs, ...}: {
+  flake.nixosModules.perihelieConfiguration = {
+    pkgs,
+    hostName,
+    ...
+  }: {
     imports = [
       inputs.home-manager.nixosModules.home-manager
       self.nixosModules.locales
@@ -24,7 +28,7 @@
     home-manager = {
       useGlobalPkgs = true;
       useUserPackages = true;
-      extraSpecialArgs = {inherit inputs;};
+      extraSpecialArgs = {inherit inputs hostName;};
 
       backupFileExtension = "backup";
 
