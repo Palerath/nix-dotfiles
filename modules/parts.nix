@@ -1,4 +1,7 @@
-{
+{inputs, ...}: {
+  imports = [
+    inputs.nixosModules.commons
+  ];
   config = {
     systems = [
       "x86_64-linux"

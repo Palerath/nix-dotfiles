@@ -7,9 +7,68 @@
     pkgs,
     config,
     lib,
+    hostName,
     ...
-  }: {
-    xdg.configFile."fastfetch/logos/cirno.png".source = ./images/cirno.png;
+  }: let
+    username = config.home.username;
+    isLinux = pkgs.stdenv.isLinux;
+    isDarwin = pkgs.stdenv.isDarwin;
+  in {
+    home.packages = with pkgs;
+      [
+        fish
+        fishPlugins.tide
+        fishPlugins.autopair
+        fishPlugins.bass
+      ]
+      ++ lib.optionals isLinux [
+        fishPlugins.fzf-fish
+      ];
+
+    programs.fish = {
+      enable = true;
+
+      shellInit = lib.mkIf (hostName != "periserver") ''
+        fastfetch
+      '';
+
+      shellAliases =
+        (import ./../../../common/aliases.nix {
+          inherit hostName username isDarwin;
+        }).shellAliases;
+
+      plugins =
+        [
+          {
+            name = "bang-bang";
+            src = pkgs.fishPlugins.bang-bang.src;
+          }
+        ]
+        ++ lib.optionals isLinux [
+          {
+            name = "fzf-fish";
+            src = pkgs.fishPlugins.fzf-fish.src;
+          }
+        ];
+
+      interactiveShellInit = ''
+        set -gx GTK_USE_PORTAL 1
+        set fish_greeting
+        set fish_handle_reflow 0
+        set -e fish_command_not_found_handler
+
+        # Tide configuration logic
+        if not test -f ~/.config/fish/tide_configured
+            tide configure --auto --style=Lean --prompt_colors='True color' --show_time='24-hour format' --lean_prompt_height='Two lines' --prompt_connection=Disconnected --prompt_spacing=Compact --icons='Many icons' --transient=No
+            touch ~/.config/fish/tide_configured
+        end
+
+        # Zoxide (Note: ensure zoxide is in your home.packages or enabled via programs.zoxide)
+        if command -v zoxide >/dev/null
+          zoxide init fish | source
+        end
+      '';
+    };
 
     programs.fastfetch = {
       enable = true;
