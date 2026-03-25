@@ -3,7 +3,7 @@
   inputs,
   ...
 }: {
-  flake.homeModules.perihelie.shell = {
+  flake.homeModules.shell = {
     pkgs,
     config,
     lib,
