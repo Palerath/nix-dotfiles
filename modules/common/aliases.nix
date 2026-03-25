@@ -7,6 +7,7 @@
     hostName,
     username,
     isDarwin ? false,
+    ...
   }: let
     dotfilesPath =
       if hostName == "periserver"
