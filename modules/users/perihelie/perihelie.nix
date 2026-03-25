@@ -26,12 +26,12 @@
       backupFileExtension = "backup";
 
       users.perihelie = {
-        imports = [self.homeModules.perihelie.home];
+        imports = [self.homeModules.perihelieHome];
       };
     };
   };
 
-  flake.homeModules.perihelie.home = {config, ...}: {
+  flake.homeModules.perihelieHome = {config, ...}: {
     home.username = "perihelie";
     home.homeDirectory = "/home/${config.home.username}";
     home.stateVersion = "24.05";
