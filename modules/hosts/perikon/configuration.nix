@@ -12,16 +12,20 @@
       self.nixosModules.perikonHardware
       self.nixosModules.perihelieConfiguration
       self.nixosModules.fileSystems
+      self.nixosModules.init
       self.nixosModules.sops
       self.nixosModules.hyprland
     ];
-
-    # networking.hostName = "perikon";
 
     # inputMethod = {
     #   type = "fcitx5";
     #   useMozcUT = true;
     # };
+
+    nix.settings = {
+      substituters = ["https://cache.nixos-cuda.org"];
+      trusted-public-keys = ["cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M="];
+    };
 
     nixpkgs.config.allowUnfree = true;
     nixpkgs.config.allowBroken = true;
