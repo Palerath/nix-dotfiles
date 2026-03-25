@@ -8,7 +8,10 @@
     lib,
     ...
   }: {
-    imports = [self.nixosModules.perikonHardware];
+    imports = [
+      self.nixosModules.perikonHardware
+      self.nixosModules.hyprland
+    ];
 
     inputMethod = {
       type = "fcitx5";
