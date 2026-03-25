@@ -4,7 +4,10 @@
   ...
 }: {
   flake.nixosModules.perihelieConfiguration = {pkgs, ...}: {
-    imports = [inputs.home-manager.nixosModules.home-manager];
+    imports = [
+      inputs.home-manager.nixosModules.home-manager
+      self.nixosModules.locales
+    ];
     environment.systemPackages = [pkgs.home-manager];
     users.users.perihelie = {
       isNormalUser = true;
@@ -28,7 +31,6 @@
       users.perihelie = {
         imports = [
           self.homeModules.perihelieHome
-          self.nixosModules.locales
         ];
       };
     };

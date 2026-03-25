@@ -38,23 +38,6 @@
 
       extraModulePackages = with config.boot.kernelPackages; [it87];
 
-      powerManagement.cpuFreqGovernor = "performance";
-
-      services.udev.extraRules = ''
-        # uinput permissions for input simulation
-        KERNEL=="uinput", GROUP="input", MODE="0660", OPTIONS+="static_node=uinput"
-
-        # Allow input group to access event devices
-        SUBSYSTEM=="input", GROUP="input", MODE="0660"
-
-        # NVIDIA device nodes
-        ACTION=="add", DEVPATH=="/bus/pci/drivers/nvidia", RUN+="${pkgs.runtimeShell} -c 'mknod -m 666 /dev/nvidia0 c 195 0'"
-        KERNEL=="nvidia*", MODE="0666"
-        KERNEL=="nvidia_uvm", MODE="0666"
-      '';
-
-      environment.systemPackages = [pkgs.efibootmgr];
-
       loader = {
         systemd-boot.enable = true;
         timeout = 10;
@@ -64,5 +47,20 @@
         };
       };
     };
+    environment.systemPackages = [pkgs.efibootmgr];
+    powerManagement.cpuFreqGovernor = "performance";
+
+    services.udev.extraRules = ''
+      # uinput permissions for input simulation
+      KERNEL=="uinput", GROUP="input", MODE="0660", OPTIONS+="static_node=uinput"
+
+      # Allow input group to access event devices
+      SUBSYSTEM=="input", GROUP="input", MODE="0660"
+
+      # NVIDIA device nodes
+      ACTION=="add", DEVPATH=="/bus/pci/drivers/nvidia", RUN+="${pkgs.runtimeShell} -c 'mknod -m 666 /dev/nvidia0 c 195 0'"
+      KERNEL=="nvidia*", MODE="0666"
+      KERNEL=="nvidia_uvm", MODE="0666"
+    '';
   };
 }
