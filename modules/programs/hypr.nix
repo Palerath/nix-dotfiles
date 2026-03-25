@@ -13,7 +13,7 @@
       withUWSM = true;
     };
 
-    programs.uswm = {
+    programs.uwsm = {
       enable = true;
       waylandCompositors = {
         hyprland = {
@@ -34,7 +34,7 @@
     };
   };
 
-  flake.homeModules.perihelie.hyprland = {
+  flake.homeModules.hyprland = {
     pkgs,
     config,
     lib,

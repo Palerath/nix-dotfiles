@@ -14,6 +14,36 @@
       self.nixosModules.commonAliases
     ];
 
+    environment.systemPackages = with pkgs;
+      [
+        libinput
+        uutils-coreutils-noprefix
+        findutils
+        ffmpeg-full
+        tree
+        wget
+        ripgrep
+        fd
+        bat
+        eza
+        zoxide
+        fzf
+        file
+        toybox
+        net-tools
+        dust
+        dua
+
+        rar
+        unzip
+        p7zip
+        zip
+        xz
+      ]
+      ++ lib.optionals (!pkgs.stdenv.isDarwin) [
+        wl-clipboard
+      ];
+
     security.sudo.wheelNeedsPassword = true;
     security.sudo.extraConfig = "Defaults pwfeedback";
 
@@ -37,7 +67,7 @@
 
     nix.settings = {
       experimental-features = ["nix-command" "flakes"];
-      # auto-optimise-store = true;
+      auto-optimise-store = false;
       substituters = [
         "https://cache.nixos.org/"
       ];
