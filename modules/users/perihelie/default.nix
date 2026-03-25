@@ -5,7 +5,7 @@
 }: {
   flake.homeConfigurations.perihelie = inputs.nixpkgs.lib.nixosSystem {
     modules = [
-      self.homeModules.perihelieConfiguration
+      self.homeModules.perihelieHomeConfiguration
     ];
   };
 }
