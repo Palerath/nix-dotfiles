@@ -10,7 +10,7 @@
     ...
   }: {
     imports = [
-      inputs.nixosModules.sops-nix
+      inputs.sops-nix.nixosModules.sops
     ];
 
     security.sudo.wheelNeedsPassword = true;
