@@ -47,16 +47,7 @@
     };
   };
 
-  outputs = inputs @ {
-    # flake-parts,
-    # nixpkgs,
-    # nixpkgs-stable,
-    # nix-darwin,
-    # home-manager,
-    # home-manager-stable,
-    self,
-    ...
-  }:
+  outputs = inputs:
     inputs.flake-parts.lib.mkFlake
     {inherit inputs;}
     (inputs.import-tree ./modules);

@@ -10,7 +10,7 @@
     ...
   }: {
     imports = [
-      inputs.sops-nix.sops
+      self.nixosModules.commonVim
     ];
 
     security.sudo.wheelNeedsPassword = true;
