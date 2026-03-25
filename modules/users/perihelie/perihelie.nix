@@ -3,7 +3,11 @@
   inputs,
   ...
 }: {
-  flake.nixosModules.perihelieConfiguration = {pkgs, ...}: {
+  flake.nixosModules.perihelieConfiguration = {
+    pkgs,
+    hostName,
+    ...
+  }: {
     imports = [inputs.home-manager.nixosModules.home-manager];
     environment.systemPackages = [pkgs.home-manager];
     users.users.perihelie = {
@@ -21,17 +25,17 @@
     home-manager = {
       useGlobalPkgs = true;
       useUserPackages = true;
-      extraSpecialArgs = {inherit inputs;};
+      extraSpecialArgs = {inherit inputs hostName;};
 
       backupFileExtension = "backup";
 
       users.perihelie = {
-        imports = [self.homeModules.perihelieHome];
+        imports = [self.homeModules.perihelieHomeConfiguration];
       };
     };
   };
 
-  flake.homeModules.perihelieHome = {config, ...}: {
+  flake.homeModules.perihelieHomeConfiguration = {config, ...}: {
     home.username = "perihelie";
     home.homeDirectory = "/home/${config.home.username}";
     home.stateVersion = "24.05";
