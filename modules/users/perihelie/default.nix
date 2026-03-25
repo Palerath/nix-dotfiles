@@ -6,6 +6,8 @@
   flake.homeConfigurations.perihelie = inputs.nixpkgs.lib.nixosSystem {
     modules = [
       self.homeModules.perihelieHomeConfiguration
+      self.homeModules.shell
+      self.homeModules.hyprland
     ];
   };
 }

@@ -34,7 +34,6 @@
     programs.home-manager.enable = true;
 
     imports = [
-      self.homeModules.shell
     ];
   };
 }
