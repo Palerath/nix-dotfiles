@@ -10,12 +10,16 @@
   }: {
     imports = [
       self.nixosModules.perikonHardware
+      self.nixosModules.perihelieConfiguration
+      self.nixosModules.common
+      self.nixosModules.sops
+      self.nixosModules.hyprland
     ];
 
-    inputMethod = {
-      type = "fcitx5";
-      useMozcUT = true;
-    };
+    # inputMethod = {
+    #   type = "fcitx5";
+    #   useMozcUT = true;
+    # };
 
     nixpkgs.config.allowUnfree = true;
     nixpkgs.config.allowBroken = true;

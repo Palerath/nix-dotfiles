@@ -3,7 +3,7 @@
   inputs,
   ...
 }: {
-  flake.nixosModule.sops = {
+  flake.nixosModules.sops = {
     self,
     config,
     pkgs,
