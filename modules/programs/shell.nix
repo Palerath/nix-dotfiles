@@ -3,7 +3,7 @@
   inputs,
   ...
 }: {
-  flake.homeModules.shell = {
+  flake.homeModules.perihelie.shell = {
     pkgs,
     config,
     lib,
@@ -31,12 +31,6 @@
       shellInit = lib.mkIf (hostName != "periserver") ''
         fastfetch
       '';
-
-      shellAliases =
-        (import self.nixosModules.commonAliases {
-          inherit hostName username isDarwin;
-        }).shellAliases;
-
       plugins =
         [
           {

@@ -26,20 +26,20 @@
       backupFileExtension = "backup";
 
       users.perihelie = {
-        imports = [self.homeModules.perihelieHomeConfiguration];
+        imports = [self.homeModules.perihelie.home];
       };
     };
   };
 
-  flake.homeModules.perihelieHomeConfiguration = {config, ...}: {
+  flake.homeModules.perihelie.home = {config, ...}: {
     home.username = "perihelie";
     home.homeDirectory = "/home/${config.home.username}";
     home.stateVersion = "24.05";
     programs.home-manager.enable = true;
 
     imports = [
-      self.homeModules.shell
-      self.homeModules.hyprland
+      self.homeModules.perihelie.shell
+      self.homeModules.perihelie.hyprland
     ];
   };
 }

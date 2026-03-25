@@ -6,6 +6,7 @@
   flake.lib = {
     mkHost = {
       hostName,
+      hostModule,
       system ? "x86_64-linux",
       useStable ? false,
     }: let
@@ -18,12 +19,9 @@
         inherit system;
         specialArgs = {inherit self inputs hostName;};
         modules = [
-          inputs.sops-nix.nixosModules.sops
           inputs.home-manager.nixosModules.home-manager
           self.nixosModules.common
-          # Host specific hardware and config
-          (self + "/hosts/${hostName}/hardware-configuration.nix")
-          (self + "/hosts/${hostName}/configuration.nix")
+          hostModule
         ];
       };
 
@@ -38,7 +36,6 @@
           inputs.home-manager.darwinModules.home-manager
           inputs.nix-homebrew.darwinModules.nix-homebrew
           self.nixosModules.common
-          (self + "/hosts/${hostName}/configuration.nix")
         ];
       };
   };

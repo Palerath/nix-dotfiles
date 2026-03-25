@@ -13,7 +13,7 @@
     };
   };
 
-  flake.homeModules.hyprland = {
+  flake.homeModules.perihelie.hyprland = {
     pkgs,
     config,
     lib,

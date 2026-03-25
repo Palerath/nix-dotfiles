@@ -4,11 +4,20 @@
   ...
 }: {
   flake.nixosModules.commonAliases = {
+    config,
+    pkgs,
+    lib,
     hostName,
-    username,
-    isDarwin ? false,
     ...
   }: let
+    normalUsers = lib.filterAttrs (n: v: v.isNormalUser) config.users.users;
+    username =
+      if (normalUsers != {})
+      then builtins.head (builtins.attrNames normalUsers)
+      else "root";
+
+    isDarwin = pkgs.stdenv.isDarwin;
+
     dotfilesPath =
       if hostName == "periserver"
       then "/opt/dotfiles"
@@ -26,7 +35,7 @@
       then "sudo darwin-rebuild switch --flake 'path:${dotfilesPath}#${hostName}'"
       else "sudo nixos-rebuild switch --flake 'path:${dotfilesPath}#${hostName}'";
   in {
-    shellAliases = {
+    environment.shellAliases = {
       kumit = "bash ${dotfilesPath}/scripts/kumit.sh";
       rebuild-nix = rebuildNixCmd;
       rebuild = rebuildCmd;
@@ -47,7 +56,6 @@
       gs = "git status";
       gb = "git branch";
 
-      cat = "bat";
       ls = "eza";
       ll = "eza -la";
       la = "eza -la";
@@ -56,7 +64,6 @@
       "..." = "z ../..";
 
       core-ls = "ls";
-      core-cat = "cat";
       zi = "zi";
     };
   };

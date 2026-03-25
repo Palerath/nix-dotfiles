@@ -11,10 +11,11 @@
     imports = [
       self.nixosModules.perikonHardware
       self.nixosModules.perihelieConfiguration
-      self.nixosModules.common
       self.nixosModules.sops
       self.nixosModules.hyprland
     ];
+
+    # networking.hostName = "perikon";
 
     # inputMethod = {
     #   type = "fcitx5";
