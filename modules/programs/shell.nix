@@ -33,7 +33,7 @@
       '';
 
       shellAliases =
-        (import ./../../../common/aliases.nix {
+        (import self.nixosModules.commonAliases {
           inherit hostName username isDarwin;
         }).shellAliases;
 
@@ -74,7 +74,6 @@
       enable = true;
       settings = {
         logo = {
-          # source = "/home/perihelie/.config/fastfetch/logos/cirno.png";
           source = "${config.home.homeDirectory}/.config/fastfetch/logos/cirno.png";
           type = "kitty-direct";
           height = 20;

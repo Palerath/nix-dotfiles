@@ -37,7 +37,7 @@
         modules = [
           inputs.home-manager.darwinModules.home-manager
           inputs.nix-homebrew.darwinModules.nix-homebrew
-          self.nixosModules.common-darwin
+          self.nixosModules.common
           (self + "/hosts/${hostName}/configuration.nix")
         ];
       };
