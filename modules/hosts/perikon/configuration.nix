@@ -10,6 +10,7 @@
   }: {
     imports = [
       self.nixosModules.perikonHardware
+      self.nixosModules.perihelieConfiguration
       self.nixosModules.hyprland
     ];
 
