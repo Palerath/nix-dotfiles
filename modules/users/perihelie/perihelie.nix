@@ -8,7 +8,6 @@
     environment.systemPackages = [pkgs.home-manager];
     users.users.perihelie = {
       isNormalUser = true;
-      description = "perihelie";
       shell = pkgs.fish;
       ignoreShellProgramCheck = true;
       extraGroups = [
