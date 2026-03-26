@@ -8,7 +8,7 @@
     pkgs,
     ...
   }: {
-    envirionment.systemPackages = with pkgs; [moonlight-qt];
+    environment.systemPackages = with pkgs; [moonlight-qt];
 
     #  UDP ports must be between 16384-32767
     services.sunshine = {

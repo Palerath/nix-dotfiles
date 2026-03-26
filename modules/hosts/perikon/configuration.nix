@@ -7,6 +7,7 @@
     pkgs,
     lib,
     hostName,
+    self,
     ...
   }: {
     imports = [
@@ -27,6 +28,7 @@
     ];
 
     networking.hostName = hostName;
+    my.primaryUser = "perihelie";
     environment.systemPackages = [pkgs.ethtool];
 
     inputMethod = {

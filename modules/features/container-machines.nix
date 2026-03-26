@@ -18,7 +18,7 @@
     config,
     ...
   }: let
-    username = self.lib.primaryUser config lib;
+    username = config.my.primaryUser;
   in {
     environment.systemPackages = with pkgs; [
       distrobox
@@ -41,7 +41,7 @@
     config,
     ...
   }: let
-    username = self.lib.primaryUser config lib;
+    username = config.my.primaryUser;
   in {
     environment.systemPackages = with pkgs; [
       looking-glass-client

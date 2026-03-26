@@ -12,6 +12,7 @@
     imports = [
       self.nixosModules.commonVim
       self.nixosModules.commonAliases
+      self.nixosModules.commonOptions
     ];
 
     environment.systemPackages = with pkgs;
@@ -77,6 +78,12 @@
         "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       ];
+    };
+  };
+  flake.nixosModules.commonOptions = {lib, ...}: {
+    options.my.primaryUser = lib.mkOption {
+      type = lib.types.str;
+      default = "root";
     };
   };
 }
