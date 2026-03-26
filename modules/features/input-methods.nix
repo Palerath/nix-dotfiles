@@ -81,7 +81,7 @@
       extraLayouts.qwerty-fr = {
         description = "QWERTY-FR layout";
         languages = ["fr"];
-        symbolsFile = ./symbols/us_qwerty-fr;
+        # symbolsFile = ./symbols/us_qwerty-fr;
       };
 
       layout = "qwerty-fr";

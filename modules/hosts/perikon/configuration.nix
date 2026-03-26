@@ -6,6 +6,7 @@
   flake.nixosModules.perikonConfiguration = {
     pkgs,
     lib,
+    hostName,
     ...
   }: {
     imports = [
@@ -19,18 +20,23 @@
       self.nixosModules.audio
       self.nixosModules.gayming
       self.nixosModules.graphics
-      self.nixosModules.inputMehtods
+      self.nixosModules.inputMethods
+      self.nixosModules.tailscaleClient
+      self.nixosModules.sunshine
+      self.nixosModules.containerMachines
     ];
+
+    networking.hostName = hostName;
+    environment.systemPackages = [pkgs.ethtool];
 
     inputMethod = {
       type = "fcitx5";
       useMozcUT = true;
     };
 
+    hardware.opentabletdriver.enable = true;
     nixpkgs.config.allowUnfree = true;
     nixpkgs.config.allowBroken = true;
-
-    hardware.opentabletdriver.enable = true;
 
     nix.settings = {
       experimental-features = [

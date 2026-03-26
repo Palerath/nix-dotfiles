@@ -38,5 +38,12 @@
           self.nixosModules.common
         ];
       };
+
+    primaryUser = config: lib: let
+      normalUsers = lib.filterAttrs (n: v: v.isNormalUser) config.users.users;
+    in
+      if normalUsers != {}
+      then builtins.head (builtins.attrNames normalUsers)
+      else "root";
   };
 }
