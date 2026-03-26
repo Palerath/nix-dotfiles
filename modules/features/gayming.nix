@@ -9,7 +9,6 @@
     ...
   }: {
     imports = [
-      self.homeModules.gayming
       inputs.aagl.nixosModules.default
     ];
 
@@ -74,6 +73,7 @@
   flake.homeModules.gayming = {
     pkgs,
     pkgs-stable,
+    ...
   }: {
     home.packages = [
       pkgs.lutris

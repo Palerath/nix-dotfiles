@@ -11,6 +11,7 @@
     imports = [
       inputs.home-manager.nixosModules.home-manager
       self.nixosModules.locales
+      self.nixosModules.fonts
     ];
     environment.systemPackages = [pkgs.home-manager];
     users.users.perihelie = {
@@ -28,7 +29,13 @@
     home-manager = {
       useGlobalPkgs = true;
       useUserPackages = true;
-      extraSpecialArgs = {inherit inputs hostName;};
+      extraSpecialArgs = {
+        inherit inputs hostName;
+        pkgs-stable = import inputs.nixpkgs-stable {
+          system = pkgs.stdenv.hostPlatform.system;
+          config.allowUnFree = true;
+        };
+      };
 
       backupFileExtension = "backup";
 
@@ -49,6 +56,8 @@
     imports = [
       self.homeModules.shell
       self.homeModules.hyprland
+      self.homeModules.gayming
+      self.homeModules.fonts
     ];
   };
 }
