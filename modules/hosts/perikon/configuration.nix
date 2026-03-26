@@ -15,6 +15,8 @@
       self.nixosModules.init
       self.nixosModules.sops
       self.nixosModules.hyprland
+      self.nixosModules.flatpak
+      self.nixosModules.gayming
     ];
 
     # inputMethod = {
