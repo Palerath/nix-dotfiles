@@ -7,6 +7,7 @@
     self,
     config,
     pkgs,
+    hostName,
     ...
   }: {
     imports = [inputs.sops-nix.nixosModules.sops];
@@ -14,19 +15,6 @@
 
     sops = {
       age.sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"];
-      defaultSopsFile = ./../../.sops.yaml;
-
-      secrets.smb_username = {};
-      secrets.smb_password = {};
-
-      templates."smb-secrets" = {
-        content = ''
-          username=${config.sops.placeholder.smb_username}
-          password=${config.sops.placeholder.smb_password}
-        '';
-        mode = "0400";
-        path = "/run/secrets-rendered/smb-secrets";
-      };
     };
   };
   flake.homeModules.sops = {
@@ -39,19 +27,6 @@
 
     sops = {
       age.sshKeyPaths = ["${config.home.homeDirectory}/.ssh/id_ed25519"];
-      defaultSopsFile = ./../../.sops.yaml;
-
-      secrets.smb_username = {};
-      secrets.smb_password = {};
-
-      templates."smb-secrets" = {
-        content = ''
-          username=${config.sops.placeholder.smb_username}
-          password=${config.sops.placeholder.smb_password}
-        '';
-        mode = "0400";
-        path = "${config.home.homeDirectory}/.config/smb-secrets";
-      };
     };
   };
 }

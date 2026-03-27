@@ -6,6 +6,7 @@
   flake.nixosModules.fileSystems = {
     pkgs,
     lib,
+    config,
     ...
   }: {
     environment.systemPackages = with pkgs; [
@@ -86,6 +87,21 @@
         "gid=100"
         "umask=0022"
       ];
+    };
+
+    # Samba shares
+    imports = [self.nixosModules.sops];
+    sops = {
+      secrets.smb_username = {};
+      secrets.smb_password = {};
+      templates."smb-secrets" = {
+        content = ''
+          username=${config.sops.placeholder.smb_username}
+          password=${config.sops.placeholder.smb_password}
+        '';
+        mode = "0400";
+        path = "/run/sops/smb-secrets";
+      };
     };
 
     fileSystems."/home/perihelie/shares/media" = {

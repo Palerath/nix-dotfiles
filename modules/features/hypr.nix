@@ -43,6 +43,53 @@
     config = lib.mkIf pkgs.stdenv.isLinux {
       xdg.configFile."uwsm/env".source = "${config.home.sessionVariablesPackage}/etc/profile.d/hm-session-vars.sh";
 
+      imports = [self.homeModules.wallpapers];
+
+      services.mako = {
+        enable = true;
+        extraConfig = ''
+          background-color=#202020
+          text-color=#9b8d7f
+          border-color=#9b8d7f
+          border-radius=10
+          default-timeout=5000
+          layer=overlay
+        '';
+      };
+
+      services.hypridle = {
+        enable = true;
+        settings = {
+          general = {
+            lock_cmd = "hyprlock";
+            before_sleep_cmd = "hyprlock";
+            after_sleep_cmd = "hyprctl dispatch dpms on";
+          };
+          listener = [
+            {
+              timeout = 600;
+              on-timeout = "hyprlock";
+            }
+            {
+              timeout = 900;
+              on-timeout = "hyprctl dispatch dpms off";
+              on-resume = "hyprctl dispatch dpms on";
+            }
+          ];
+        };
+      };
+
+      home.sessionVariables = {
+        NIXOS_OZONE_WL = "1";
+        LIBVA_DRIVER_NAME = "nvidia";
+        GBM_BACKEND = "nvidia-drm";
+        __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+        WLR_NO_HARDWARE_CURSORS = "1";
+
+        XCURSOR_THEME = "Adwaita";
+        XCURSOR_SIZE = "24";
+      };
+
       wayland.windowManager.hyprland = {
         enable = true;
         package = null;
@@ -60,12 +107,16 @@
 
           exec-once = [
             "kbuildsycoca6"
-            "uwsm app -- fcitx5"
-            "uwsm app -- mako"
-            "uwsm app -- waybar"
+            "fcitx5"
+            "mako"
+            "waybar"
             "random-wallpaper"
+            "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
             "hyprctl setcursor Adwaita 24"
-            "uwsm app -- ${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
+            "sleep 2 && systemctl --user restart xdg-desktop-portal-hyprland && systemctl --user restart xdg-desktop-portal"
+            "systemctl --user import-environment GTK_USE_PORTAL"
+            "dbus-update-activation-environment --systemd GTK_USE_PORTAL"
+            "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
           ];
 
           input = {
@@ -96,17 +147,24 @@
           };
 
           bind = let
-            screenshotDir = "${config.home.homeDirectory}/Pictures/Screenshots";
-            # Use lib.getExe to make it more robust
+            screenshotDir = "${config.home.homeDirectory}/drives/data/Pictures/Screenshots";
             screenshot = pkgs.writeShellScript "screenshot" ''
-              ${lib.getExe pkgs.grimblast} --notify copysave output ${screenshotDir}/Screenshot-$(date +%F_%H-%M-%S).png
+              PATH=${pkgs.libnotify}/bin:${pkgs.grimblast}/bin:$PATH
+              grimblast --notify copysave output ${screenshotDir}/Screenshot-$(date +%F_%H-%M-%S).png
+            '';
+            screenshot-area = pkgs.writeShellScript "screenshot-area" ''
+              PATH=${pkgs.libnotify}/bin:${pkgs.grimblast}/bin:$PATH
+              grimblast --notify copysave area ${screenshotDir}/Screenshot-$(date +%F_%H-%M-%S).png
             '';
           in
             [
-              "$mod, Return, exec, uwsm app -- $terminal"
-              "$mod, D, exec, uwsm app -- $menu"
+              "$mod, Return, exec, $terminal"
+              "$mod, D, exec, $menu"
+              "$mod, B, exec, zen-beta"
               "$mod SHIFT, Q, killactive"
-              "$mod, Escape, exec, uwsm app -- hyprlock"
+              "$mod SHIFT, E, exit"
+              "$mod SHIFT, Space, togglefloating"
+              "$mod, F, fullscreen"
 
               # Focus
               "$mod, H, movefocus, l"
@@ -114,11 +172,38 @@
               "$mod, K, movefocus, u"
               "$mod, J, movefocus, d"
 
-              # Custom screenshot bind
+              # Lock
+              "$mod, Escape, exec, hyprlock"
+              # Reload config
+              "$mod SHIFT, C, exec, hyprctl reload"
+
+              # Screenshots
               "$mod, 0x002e, exec, ${screenshot}"
+              "$mod SHIFT, 0x002e, exec, ${screenshot-area}"
+
+              # Wallpapers
+              "$mod, W, exec, random-wallpaper"
+              "$mod SHIFT, P, exec, random-wallpaper --image"
+              "$mod SHIFT, O, exec, random-wallpaper --gif"
+              "$mod SHIFT, L, exec, random-wallpaper --video"
+              "$mod SHIFT, M, exec, toggle-wallpaper-audio"
+
+              # Focus
+              "$mod, H, movefocus, l"
+              "$mod, L, movefocus, r"
+              "$mod, K, movefocus, u"
+              "$mod, J, movefocus, d"
+
+              # Move windows
+              "$mod SHIFT, H, movewindow, l"
+              "$mod SHIFT, L, movewindow, r"
+              "$mod SHIFT, K, movewindow, u"
+              "$mod SHIFT, J, movewindow, d"
+
+              # Split direction
+              "$mod, V, layoutmsg, togglesplit"
             ]
             ++ (
-              # Workspace loops (easier in Home Manager than manual wrapping!)
               builtins.concatLists (builtins.genList (
                   i: let
                     ws = i + 1;
@@ -134,6 +219,25 @@
             "$mod, mouse:272, movewindow"
             "$mod, mouse:273, resizewindow"
           ];
+
+          binde = [
+            "$mod CTRL, H, resizeactive, -20 0"
+            "$mod CTRL, L, resizeactive, 20 0"
+            "$mod CTRL, K, resizeactive, 0 -20"
+            "$mod CTRL, J, resizeactive, 0 20"
+          ];
+
+          extraConfig = ''
+            bind = $mod, R, submap, resize
+            submap = resize
+            binde = , H, resizeactive, -20 0
+            binde = , L, resizeactive, 20 0
+            binde = , K, resizeactive, 0 -20
+            binde = , J, resizeactive, 0 20
+            bind = , escape, submap, reset
+            bind = , return, submap, reset
+            submap = reset
+          '';
         };
       };
     };

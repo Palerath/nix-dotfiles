@@ -25,6 +25,23 @@
         fishPlugins.fzf-fish
       ];
 
+    programs.yazi = {
+      enable = true;
+      enableFishIntegration = true;
+      enableBashIntegration = true;
+
+      shellWrapperName = "y";
+
+      settings = {
+        manager = {
+          show_hidden = true;
+          sort_by = "mtime";
+          sort_dir_first = false;
+          sort_reverse = false;
+        };
+      };
+    };
+
     programs.fish = {
       enable = true;
 

@@ -54,10 +54,14 @@
     programs.home-manager.enable = true;
 
     imports = [
+      self.homeModules.sops
       self.homeModules.shell
+      self.homeModules.helix
       self.homeModules.hyprland
       self.homeModules.gayming
       self.homeModules.fonts
+      self.homeModules.galleryDL
     ];
+    sops.defaultSopsFile = ./perihelie_secrets.yaml;
   };
 }
