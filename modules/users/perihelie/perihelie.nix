@@ -38,7 +38,6 @@
       };
 
       backupFileExtension = "backup";
-
       users.perihelie = self.homeModules.perihelieHome;
     };
   };
