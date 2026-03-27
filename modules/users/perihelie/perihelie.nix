@@ -39,11 +39,7 @@
 
       backupFileExtension = "backup";
 
-      users.perihelie = {
-        imports = [
-          self.homeModules.perihelieHome
-        ];
-      };
+      users.perihelie = self.homeModules.perihelieHome;
     };
   };
 
