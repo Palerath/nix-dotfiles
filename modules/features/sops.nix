@@ -4,7 +4,6 @@
   ...
 }: {
   flake.nixosModules.sops = {
-    self,
     config,
     pkgs,
     ...
@@ -17,7 +16,6 @@
     };
   };
   flake.homeModules.sops = {
-    self,
     config,
     pkgs,
     ...

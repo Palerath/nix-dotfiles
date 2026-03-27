@@ -2,8 +2,52 @@
   self,
   inputs,
   ...
-}: let
-  perihelieHomeModule = {config, ...}: {
+}: {
+  flake.nixosModules.perihelieConfiguration = {
+    pkgs,
+    hostName,
+    ...
+  }: {
+    imports = [
+      inputs.home-manager.nixosModules.home-manager
+      self.nixosModules.locales
+      self.nixosModules.fonts
+    ];
+    environment.systemPackages = [pkgs.home-manager];
+    users.users.perihelie = {
+      isNormalUser = true;
+      shell = pkgs.fish;
+      ignoreShellProgramCheck = true;
+      extraGroups = [
+        "networkmanager"
+        "wheel"
+        "video"
+        "input"
+        "users"
+      ];
+    };
+    home-manager = {
+      useGlobalPkgs = true;
+      useUserPackages = true;
+      extraSpecialArgs = {
+        inherit inputs hostName;
+        pkgs-stable = import inputs.nixpkgs-stable {
+          system = pkgs.stdenv.hostPlatform.system;
+          config.allowUnFree = true;
+        };
+      };
+
+      backupFileExtension = "backup";
+
+      users.perihelie = {
+        imports = [
+          self.homeModules.perihelieHome
+        ];
+      };
+    };
+  };
+
+  flake.homeModules.perihelieHome = {config, ...}: {
     home.username = "perihelie";
     home.homeDirectory = "/home/${config.home.username}";
     home.stateVersion = "24.05";
@@ -20,35 +64,4 @@
     ];
     sops.defaultSopsFile = ./perihelie_secrets.yaml;
   };
-in {
-  flake.nixosModules.perihelieConfiguration = {
-    pkgs,
-    hostName,
-    ...
-  }: {
-    imports = [
-      inputs.home-manager.nixosModules.home-manager
-      self.nixosModules.locales
-      self.nixosModules.fonts
-    ];
-
-    users.users.perihelie = {
-      isNormalUser = true;
-      shell = pkgs.fish;
-      extraGroups = ["networkmanager" "wheel" "video" "input" "users"];
-    };
-
-    home-manager = {
-      useGlobalPkgs = true;
-      useUserPackages = true;
-      extraSpecialArgs = {inherit inputs hostName;};
-      backupFileExtension = "backup";
-
-      users.perihelie = {...}: {
-        imports = [perihelieHomeModule];
-      };
-    };
-  };
-
-  flake.homeModules.perihelieHome = perihelieHomeModule;
 }
