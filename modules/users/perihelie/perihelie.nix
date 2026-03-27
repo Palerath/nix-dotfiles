@@ -61,7 +61,9 @@
       self.homeModules.gayming
       self.homeModules.fonts
       self.homeModules.galleryDL
+      self.homeModules.mpv
+      self.homeModules.office
     ];
-    sops.defaultSopsFile = ./perihelie_secrets.yaml;
+    # sops.defaultSopsFile = ./perihelie_secrets.yaml;
   };
 }

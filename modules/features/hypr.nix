@@ -40,7 +40,10 @@
     lib,
     ...
   }: {
-    imports = [self.homeModules.wallpapers];
+    imports = [
+      self.homeModules.waybar
+      self.homeModules.wallpapers
+    ];
 
     config = lib.mkIf pkgs.stdenv.isLinux {
       xdg.configFile."uwsm/env".source = "${config.home.sessionVariablesPackage}/etc/profile.d/hm-session-vars.sh";

@@ -101,6 +101,5 @@
         };
       };
     };
-    home.packages = with pkgs; [mkvtools];
   };
 }

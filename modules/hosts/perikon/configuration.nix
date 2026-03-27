@@ -27,7 +27,7 @@
       self.nixosModules.containerMachines
     ];
 
-    sops.defaultSopsFile = ./perikon_secrets.yaml;
+    # sops.defaultSopsFile = ./perikon_secrets.yaml;
 
     networking.hostName = hostName;
     my.primaryUser = "perihelie";

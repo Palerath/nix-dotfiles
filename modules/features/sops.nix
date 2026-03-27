@@ -13,6 +13,7 @@
 
     sops = {
       age.sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"];
+      defaultSopsFile = ./../../.sops.yaml; # delete later
     };
   };
   flake.homeModules.sops = {
@@ -24,6 +25,7 @@
 
     sops = {
       age.sshKeyPaths = ["${config.home.homeDirectory}/.ssh/id_ed25519"];
+      defaultSopsFile = ./../../.sops.yaml; # delete later
     };
   };
 }
