@@ -7,7 +7,6 @@
     self,
     config,
     pkgs,
-    hostName,
     ...
   }: {
     imports = [inputs.sops-nix.nixosModules.sops];
