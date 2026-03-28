@@ -16,7 +16,7 @@
       self.nixosModules.fileSystems
       self.nixosModules.init
       self.nixosModules.sops
-      self.nixosModules.hyprland
+      self.nixosModules.desktopCompositors
       self.nixosModules.flatpak
       self.nixosModules.audio
       self.nixosModules.gayming

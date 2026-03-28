@@ -23,6 +23,10 @@
       };
     };
 
+    environment.variables = {
+      GTK_USE_PORTAL = "1";
+    };
+
     xdg.portal = {
       enable = true;
       extraPortals = with pkgs; [
@@ -65,6 +69,9 @@
 
     config = lib.mkIf pkgs.stdenv.isLinux {
       xdg.configFile."uwsm/env".source = "${config.home.sessionVariablesPackage}/etc/profile.d/hm-session-vars.sh";
+
+      home.packages = with pkgs; [
+      ];
 
       services.mako = {
         enable = true;
@@ -120,7 +127,7 @@
         settings = {
           "$mod" = "SUPER";
           "$terminal" = "kitty";
-          "$menu" = "wofi --show drun";
+          "$menu" = "${pkgs.wofi} --show drun";
 
           monitor = [
             "DP-1,2560x1440@75,0x0,1"
@@ -171,11 +178,15 @@
           bind = let
             screenshotDir = "${config.home.homeDirectory}/drives/data/Pictures/Screenshots";
             screenshot = pkgs.writeShellScript "screenshot" ''
-              PATH=${pkgs.libnotify}/bin:${pkgs.grimblast}/bin:$PATH
+              PATH=${pkgs.libnotify}/bin:${pkgs.grimblast}/bin:${pkgs.mako}/bin:$PATH
+              makoctl dismiss --all
+              sleep 0.1
               grimblast --notify copysave output ${screenshotDir}/Screenshot-$(date +%F_%H-%M-%S).png
             '';
             screenshot-area = pkgs.writeShellScript "screenshot-area" ''
-              PATH=${pkgs.libnotify}/bin:${pkgs.grimblast}/bin:$PATH
+              PATH=${pkgs.libnotify}/bin:${pkgs.grimblast}/bin:${pkgs.mako}/bin:$PATH
+              makoctl dismiss --all
+              sleep 0.1
               grimblast --notify copysave area ${screenshotDir}/Screenshot-$(date +%F_%H-%M-%S).png
             '';
           in

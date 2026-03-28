@@ -13,12 +13,11 @@
       kdePackages.plasma-workspace
       kdePackages.plasma-desktop
       kdePackages.plasma-wayland-protocols
-      kdePackages.wallpaper-engine-plugin
+      # kdePackages.wallpaper-engine-plugin
       kdePackages.qtwayland
       kdePackages.kirigami-addons
       kdePackages.kscreen
       kdePackages.kompare
-      hitori
     ];
 
     systemd.packages = with pkgs; [
