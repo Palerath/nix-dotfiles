@@ -44,7 +44,7 @@
   }: let
     isLinux = pkgs.stdenv.isLinux;
     dotfilesPath = "/home/${config.home.username}/dotfiles";
-    aliases = import "${self}/modules/common/aliases.nix" {
+    aliases = import "${self}/modules/common/_aliases.nix" {
       inherit dotfilesPath hostName;
       isDarwin = pkgs.stdenv.isDarwin;
     };
