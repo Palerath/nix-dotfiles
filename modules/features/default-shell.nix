@@ -99,16 +99,7 @@
     config,
     pkgs,
     ...
-  }: let
-    username = config.home.username;
-    sharedAliases = import self.nixosModules.commonAliases {inherit hostName username;};
-    # Function to generate Nushell alias lines
-    nushellAliases = builtins.concatStringsSep "\n" (
-      builtins.attrValues (
-        builtins.mapAttrs (name: value: "alias ${name} = ${value}") sharedAliases.shellAliases
-      )
-    );
-  in {
+  }: {
     home.packages = with pkgs; [
       carapace
     ];
@@ -117,13 +108,8 @@
       enable = true;
 
       # Shell aliases
-      shellAliases = sharedAliases.shellAliases;
 
       extraConfig = ''
-        # Direct alias integration
-           ${nushellAliases}
-
-        # fastfetch
         fastfetch
 
         # Core environment settings
