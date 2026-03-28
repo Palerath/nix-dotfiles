@@ -6,3 +6,6 @@
 	path = modules/hosts/perikon
 	url = git@github.com:Palerath/dotfiles-perikon.git
 	branch = dendritic
+[submodule "modules/common/vim"]
+	path = modules/common/vim
+	url = git@github.com:Palerath/vim-config.git
