@@ -14,11 +14,8 @@
       ntfs3g
       cifs-utils
       samba
+      rsync
     ];
-
-    programs.rsync = {
-      enable = true;
-    };
 
     services = {
       udisks2.enable = true;
