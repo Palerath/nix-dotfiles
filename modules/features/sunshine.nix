@@ -46,7 +46,6 @@
         virtual_sink = "sink-sunshine";
       };
     };
-
     systemd.user.services.sunshine = {
       serviceConfig = {
         PassEnvironment = [
@@ -59,10 +58,9 @@
           "PATH=${pkgs.cudaPackages.cudatoolkit}/bin:$PATH"
         ];
       };
-      after = ["graphical-session.target" "import-display-env.service"];
+      after = ["graphical-session.target"];
       wants = ["graphical-session.target"];
     };
-
     # Manual firewall configuration - all ports within ISP UDP range (16384-32767)
     networking.firewall.allowedTCPPorts = [
       24695
