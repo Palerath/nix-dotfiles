@@ -41,6 +41,7 @@
         deadnix
 
         rar
+        unrar
         unzip
         p7zip
         zip
@@ -49,6 +50,11 @@
       ++ lib.optionals (!pkgs.stdenv.isDarwin) [
         wl-clipboard
       ];
+
+    programs = {
+      dconf.enable = true;
+      direnv.enable = true;
+    };
 
     security.sudo.wheelNeedsPassword = true;
     security.sudo.extraConfig = "Defaults pwfeedback";

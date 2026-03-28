@@ -21,7 +21,7 @@
       self.nixosModules.audio
       self.nixosModules.gayming
       self.nixosModules.graphics
-      self.nixosModules.inputMethods
+      self.nixosModules.qwertyFR
       self.nixosModules.tailscaleClient
       self.nixosModules.sunshine
       self.nixosModules.containerMachines
@@ -32,10 +32,8 @@
     networking.hostName = hostName;
     my.primaryUser = "perihelie";
     environment.systemPackages = [pkgs.ethtool];
-
-    inputMethod = {
-      type = "fcitx5";
-      useMozcUT = true;
+    environment.sessionVariables = {
+      NH_FLAKE = lib.mkDefault "/home/perihelie/dotfiles";
     };
 
     hardware.opentabletdriver.enable = true;

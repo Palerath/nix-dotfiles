@@ -13,7 +13,14 @@
       self.nixosModules.locales
       self.nixosModules.fonts
       self.nixosModules.openTv
+      self.nixosModules.inputMethods
     ];
+
+    inputMethod = {
+      type = "fcitx5";
+      useMozcUT = true;
+    };
+
     environment.systemPackages = [pkgs.home-manager];
     users.users.perihelie = {
       isNormalUser = true;
@@ -27,6 +34,7 @@
         "users"
       ];
     };
+
     home-manager = {
       useGlobalPkgs = true;
       useUserPackages = true;

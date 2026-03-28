@@ -10,6 +10,11 @@
     ...
   }: {
     imports = [self.nixosModules.qwertyFR];
+    environment.systemPackages = with pkgs; [
+      mecab
+      mozcdic-ut-neologd
+      python313Packages.mecab-python3
+    ];
 
     options.inputMethod = {
       type = lib.mkOption {
@@ -76,6 +81,7 @@
   };
   flake.nixosModules.qwertyFR = {pkgs, ...}: {
     environment.systemPackages = [pkgs.qwerty-fr];
+    environment.sessionVariables.XKB_DEFAULT_LAYOUT = "qwerty-fr";
 
     services.xserver.xkb = {
       extraLayouts.qwerty-fr = {

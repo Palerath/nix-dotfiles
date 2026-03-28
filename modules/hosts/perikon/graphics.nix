@@ -14,6 +14,10 @@
     };
 
     environment.systemPackages = with pkgs; [
+      pciutils
+      libva
+      libva-utils
+
       vulkan-loader
       vulkan-tools
       vulkan-volk
@@ -68,6 +72,16 @@
         nvidiaSettings = true;
         powerManagement.enable = true;
         prime.offload.enable = false;
+      };
+
+      environment.sessionVariables = {
+        GBM_BACKEND = "nvidia-drm";
+        __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+        __GL_SHADER_DISK_CACHE = "1";
+        __GL_SHADER_DISK_CACHE_SKIP_CLEANUP = "1";
+        __GL_SHADER_DISK_CACHE_PATH = "/home/perihelie/.cache/nvidia_shaders";
+        __GL_SHADER_DISK_CACHE_SIZE = "10737418240";
+        LIBVA_DRIVER_NAME = "nvidia";
       };
     };
   };

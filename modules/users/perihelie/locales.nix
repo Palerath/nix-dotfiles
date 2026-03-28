@@ -5,6 +5,7 @@
 }: {
   flake.nixosModules.locales = {pkgs, ...}: {
     i18n.defaultLocale = "en_US.UTF-8";
+    time.timeZone = "Europe/Paris";
 
     i18n.glibcLocales = pkgs.glibcLocales.override {
       allLocales = true;

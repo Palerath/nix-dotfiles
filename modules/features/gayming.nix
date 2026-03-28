@@ -51,6 +51,14 @@
       enableRenice = true;
     };
 
+    environment.sessionVariables = {
+      PROTON_ENABLE_NVAPI = "1";
+      PROTON_ENABLE_NGX_UPDATER = "1";
+      XALIA_DISABLE = "1";
+      DISABLE_LAYER_AMD_SWITCHABLE_GRAPHICS_1 = "1";
+      VKD3D_CONFIG = "dxr";
+    };
+
     nix.settings = inputs.aagl.nixConfig;
     programs = {
       # anime-games-launcher.enable = true;

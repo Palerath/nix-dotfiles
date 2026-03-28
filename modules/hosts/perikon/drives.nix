@@ -16,6 +16,10 @@
       samba
     ];
 
+    programs.rsync = {
+      enable = true;
+    };
+
     services = {
       udisks2.enable = true;
       samba.smbd.enable = true;

@@ -8,6 +8,13 @@
     config,
     ...
   }: {
+    services.desktopManager = {
+      plasma6 = {
+        enable = true;
+        enableQt5Integration = true;
+      };
+    };
+
     environment.systemPackages = with pkgs; [
       kdePackages.xdg-desktop-portal-kde
       kdePackages.plasma-workspace
@@ -44,13 +51,6 @@
         plasma = {
           default = ["kde"];
         };
-      };
-    };
-
-    services.desktopManager = {
-      plasma6 = {
-        enable = true;
-        enableQt5Integration = true;
       };
     };
 
