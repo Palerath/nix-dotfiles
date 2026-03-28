@@ -30,29 +30,6 @@
     systemd.packages = with pkgs; [
       kdePackages.xdg-desktop-portal-kde
     ];
-    xdg.portal = {
-      enable = true;
-      extraPortals = with pkgs; [
-        kdePackages.xdg-desktop-portal-kde
-      ];
-      config = {
-        common = {
-          default = ["kde"];
-        };
-        hyprland = {
-          default = ["hyprland" "kde"];
-          "org.freedesktop.impl.portal.FileChooser" = ["kde"];
-          "org.freedesktop.impl.portal.Settings" = ["kde"];
-          "org.freedesktop.impl.portal.Inhibit" = ["kde"];
-        };
-        plasmax11 = {
-          default = ["kde"];
-        };
-        plasma = {
-          default = ["kde"];
-        };
-      };
-    };
 
     home-manager.sharedModules = [
       {

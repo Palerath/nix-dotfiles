@@ -27,23 +27,6 @@
       GTK_USE_PORTAL = "1";
     };
 
-    xdg.portal = {
-      enable = true;
-      extraPortals = with pkgs; [
-        xdg-desktop-portal-hyprland
-      ];
-      config = {
-        common = {
-          default = ["kde"];
-        };
-        hyprland = {
-          default = ["hyprland" "kde"];
-          "org.freedesktop.impl.portal.FileChooser" = ["kde"];
-          "org.freedesktop.impl.portal.Settings" = ["kde"];
-          "org.freedesktop.impl.portal.Inhibit" = ["kde"];
-        };
-      };
-    };
     nix.settings = {
       substituters = [
         "https://hyprland.cachix.org"
