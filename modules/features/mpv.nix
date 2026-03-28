@@ -9,7 +9,10 @@
     lib,
     ...
   }: {
-    home.packages = with pkgs; [yt-dlp];
+    home.packages = with pkgs; [
+      yt-dlp
+      memento
+    ];
 
     programs.mpv = {
       enable = true;

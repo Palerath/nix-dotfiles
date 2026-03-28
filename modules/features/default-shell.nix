@@ -10,6 +10,7 @@
       fastfetch
       yazi
       tmux
+      btop
     ];
 
     programs.oh-my-posh = {
