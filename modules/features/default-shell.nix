@@ -3,28 +3,15 @@
   inputs,
   ...
 }: {
-  flake.homeModules.shell = {
-    pkgs,
-    config,
-    lib,
-    hostName,
-    ...
-  }: let
-    username = config.home.username;
-    isLinux = pkgs.stdenv.isLinux;
-    isDarwin = pkgs.stdenv.isDarwin;
-  in {
-    home.packages = with pkgs;
-      [
-        fish
-        fishPlugins.tide
-        fishPlugins.autopair
-        fishPlugins.bass
-      ]
-      ++ lib.optionals isLinux [
-        fishPlugins.fzf-fish
-      ];
-
+  flake.homeModules.defaultShell = {...}: {
+    imports = with self.homeModules; [
+      fish
+      fastfetch
+      yazi
+      tmux
+    ];
+  };
+  flake.homeModules.yazi = {...}: {
     programs.yazi = {
       enable = true;
       enableFishIntegration = true;
@@ -41,7 +28,26 @@
         };
       };
     };
-
+  };
+  flake.homeModules.fish = {
+    hostName,
+    lib,
+    pkgs,
+    config,
+    ...
+  }: let
+    isLinux = pkgs.stdenv.isLinux;
+  in {
+    home.packages = with pkgs;
+      [
+        fish
+        fishPlugins.tide
+        fishPlugins.autopair
+        fishPlugins.bass
+      ]
+      ++ lib.optionals isLinux [
+        fishPlugins.fzf-fish
+      ];
     programs.fish = {
       enable = true;
 
@@ -80,7 +86,9 @@
         end
       '';
     };
+  };
 
+  flake.homeModules.fastfetch = {config, ...}: {
     programs.fastfetch = {
       enable = true;
       settings = {
@@ -110,7 +118,9 @@
         ];
       };
     };
+  };
 
+  flake.homeModules.tmux = {...}: {
     programs.tmux = {
       # ======================================================== #
       # config from: https://www.youtube.com/watch?v=XivdyrFCV4M #

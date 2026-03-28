@@ -26,7 +26,7 @@
     xdg.portal = {
       enable = true;
       extraPortals = with pkgs; [
-        kdePackages.xdg-desktop-portal-hyprland
+        xdg-desktop-portal-hyprland
       ];
       config = {
         common = {
@@ -60,12 +60,11 @@
     imports = [
       self.homeModules.waybar
       self.homeModules.wallpapers
+      inputs.hyprland.homeManagerModules.default
     ];
 
     config = lib.mkIf pkgs.stdenv.isLinux {
       xdg.configFile."uwsm/env".source = "${config.home.sessionVariablesPackage}/etc/profile.d/hm-session-vars.sh";
-
-      imports = [inputs.hyprland.homeManagerModules.default];
 
       services.mako = {
         enable = true;

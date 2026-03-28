@@ -55,8 +55,8 @@
 
     imports = [
       self.homeModules.sops
-      self.homeModules.shell
-      self.homeModules.helix
+      self.homeModules.defaultShell
+      self.homeModules.cliTextEditors
       self.homeModules.hyprland
       self.homeModules.gayming
       self.homeModules.fonts

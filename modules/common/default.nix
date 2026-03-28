@@ -35,6 +35,11 @@
         dust
         dua
 
+        nix-tree
+        nix-diff
+        statix
+        deadnix
+
         rar
         unzip
         p7zip

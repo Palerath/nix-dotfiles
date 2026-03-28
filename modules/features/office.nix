@@ -15,9 +15,10 @@
   };
   flake.homeModules.wordProcess = {pkgs, ...}: {
     home.packages = with pkgs; [
+      obsidian
       libreoffice-qt-fresh
-      onlyoffice
-      textstudio
+      onlyoffice-documentserver
+      texstudio
       texlab
     ];
   };
