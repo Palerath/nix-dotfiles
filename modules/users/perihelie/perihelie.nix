@@ -5,6 +5,7 @@
 }: {
   flake.nixosModules.perihelieConfiguration = {
     pkgs,
+    config,
     hostName,
     ...
   }: {
@@ -16,7 +17,7 @@
       self.nixosModules.inputMethods
     ];
 
-    inputMethod = {
+    config.inputMethod = {
       type = "fcitx5";
       useMozcUT = true;
     };

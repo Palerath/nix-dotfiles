@@ -25,6 +25,7 @@
       self.nixosModules.tailscaleClient
       self.nixosModules.sunshine
       self.nixosModules.containerMachines
+      self.nixosModules.otherPrograms
     ];
 
     # sops.defaultSopsFile = ./perikon_secrets.yaml;

@@ -12,6 +12,7 @@
       # File explorer
       kdePackages.dolphin
       kdePackages.filelight
+      xnviewmp
 
       # video encoding support
       x265
@@ -19,10 +20,6 @@
     ];
 
     home.sharedModules = {
-      home.packages = with pkgs; [
-        xnviewmp
-      ];
-
       programs.obs-studio = {
         enable = true;
         plugins = with pkgs.obs-studio-plugins; [

@@ -9,7 +9,7 @@
     config,
     ...
   }: {
-    imports = [self.nixosModules.qwertyFR];
+    # imports = [self.nixosModules.qwertyFR];
     environment.systemPackages = with pkgs; [
       mecab
       mozcdic-ut-neologd
