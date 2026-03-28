@@ -1,6 +1,7 @@
 # Backup files
 *.old
 *.backup
+result
 
 # DS_STORE
 .DS_STORE
