@@ -8,9 +8,14 @@
     if isDarwin
     then "nh darwin switch ${dotfilesPath} -H ${hostName}"
     else "nh os switch ${dotfilesPath} -H ${hostName}";
+  rebuild-nixCmd =
+    if isDarwin
+    then "sudo darwin-rebuild switch --flake  'path:${dotfilesPath}#${hostName}'"
+    else "sudo nixos-rebuild switch --flake  'path:${dotfilesPath}#${hostName}'";
 in {
   kumit = "bash ${dotfilesPath}/scripts/kumit.sh";
   rebuild = rebuildCmd;
+  rebuild-nix = rebuild-nixCmd;
   update-flakes = "cd ${dotfilesPath} && nix flake update && kumit 'update flakes.lock'";
 
   g = "git";
@@ -28,6 +33,6 @@ in {
   ll = "eza -la";
   la = "eza -la";
   l = "eza -l";
-  # ".." = "z ..";
-  # "..." = "z ../..";
+  ".." = "z ..";
+  "..." = "z ../..";
 }

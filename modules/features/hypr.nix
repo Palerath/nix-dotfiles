@@ -137,6 +137,7 @@
           cursor.no_hardware_cursors = 2;
 
           env = [
+            "WLR_DRM_DEVICES,/dev/dri/card1"
             "XCURSOR_THEME,Adwaita"
             "XCURSOR_SIZE,24"
             "LIBVA_DRIVER_NAME,nvidia"
