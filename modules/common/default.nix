@@ -53,7 +53,6 @@
     programs = {
       dconf.enable = true;
       direnv.enable = true;
-      git.signing.format = null;
     };
 
     security.sudo.wheelNeedsPassword = true;
