@@ -13,6 +13,7 @@
       self.nixosModules.commonVim
       self.nixosModules.commonAliases
       self.nixosModules.commonOptions
+      self.nixosModules.cachix
     ];
 
     environment.systemPackages = with pkgs;
