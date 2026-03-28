@@ -34,6 +34,7 @@
         dust
         dua
 
+        nh
         nix-tree
         nix-diff
         statix
