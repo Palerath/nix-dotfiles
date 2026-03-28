@@ -20,6 +20,7 @@
       onlyoffice-documentserver
       texstudio
       texlab
+      vscodium-fhs
     ];
   };
   flake.homeModules.mails = {
