@@ -11,6 +11,11 @@
       yazi
       tmux
     ];
+
+    programs.oh-my-posh = {
+      enable = true;
+      useTheme = "hul10";
+    };
   };
   flake.homeModules.yazi = {...}: {
     programs.yazi = {

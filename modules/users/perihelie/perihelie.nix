@@ -12,6 +12,7 @@
       inputs.home-manager.nixosModules.home-manager
       self.nixosModules.locales
       self.nixosModules.fonts
+      self.nixosModules.openTv
     ];
     environment.systemPackages = [pkgs.home-manager];
     users.users.perihelie = {
@@ -47,13 +48,18 @@
     };
   };
 
-  flake.homeModules.perihelieHome = {config, ...}: {
+  flake.homeModules.perihelieHome = {
+    config,
+    pkgs,
+    ...
+  }: {
     home.username = "perihelie";
     home.homeDirectory = "/home/${config.home.username}";
     home.stateVersion = "24.05";
     programs.home-manager.enable = true;
 
     imports = [
+      inputs.zen-browser.homeModules.beta
       self.homeModules.sops
       self.homeModules.defaultShell
       self.homeModules.cliTextEditors
@@ -64,6 +70,14 @@
       self.homeModules.mpv
       self.homeModules.office
     ];
+
     # sops.defaultSopsFile = ./perihelie_secrets.yaml;
+
+    programs.zen-browser = {
+      enable = true;
+      extraPrefs = ''
+        user_pref("widget.use-xdg-desktop-portal.file-picker", 2);
+      '';
+    };
   };
 }
