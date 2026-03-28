@@ -23,6 +23,23 @@
       };
     };
 
+    xdg.portal = {
+      enable = true;
+      extraPortals = with pkgs; [
+        kdePackages.xdg-desktop-portal-hyprland
+      ];
+      config = {
+        common = {
+          default = ["kde"];
+        };
+        hyprland = {
+          default = ["hyprland" "kde"];
+          "org.freedesktop.impl.portal.FileChooser" = ["kde"];
+          "org.freedesktop.impl.portal.Settings" = ["kde"];
+          "org.freedesktop.impl.portal.Inhibit" = ["kde"];
+        };
+      };
+    };
     nix.settings = {
       substituters = [
         "https://hyprland.cachix.org"
@@ -47,6 +64,8 @@
 
     config = lib.mkIf pkgs.stdenv.isLinux {
       xdg.configFile."uwsm/env".source = "${config.home.sessionVariablesPackage}/etc/profile.d/hm-session-vars.sh";
+
+      imports = [inputs.hyprland.homeManagerModules.default];
 
       services.mako = {
         enable = true;
@@ -97,6 +116,7 @@
         enable = true;
         package = null;
         portalPackage = null;
+        systemd.enable = false;
 
         settings = {
           "$mod" = "SUPER";
