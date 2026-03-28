@@ -1,0 +1,8 @@
+[submodule "modules/users/perihelie"]
+	path = modules/users/perihelie
+	url = git@github.com:Palerath/dotfiles-perihelie.git
+	branch = dendritic
+[submodule "modules/hosts/perikon"]
+	path = modules/hosts/perikon
+	url = git@github.com:Palerath/dotfiles-perikon.git
+	branch = dendritic
