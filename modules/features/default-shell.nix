@@ -6,7 +6,7 @@
   flake.homeModules.defaultShell = {...}: {
     imports = with self.homeModules; [
       fish
-      # nushell
+      nushell
       fastfetch
       yazi
       tmux
