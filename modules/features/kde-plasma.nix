@@ -54,28 +54,21 @@
       };
     };
 
-    systemd.user.services.kbuildsycoca6 = {
-      Unit = {
-        Description = "Rebuild KDE cache";
-        After = ["graphical-session.target"];
-        PartOf = ["graphical-session.target"];
-      };
-      Service = {
-        Type = "oneshot";
-        ExecStart = "${pkgs.kdePackages.kservice}/bin/kbuildsycoca6 --noincremental";
-        RemainAfterExit = true;
-      };
-      Install = {
-        WantedBy = ["graphical-session.target"];
-      };
-    };
-
     home-manager.sharedModules = [
       {
         xdg.configFile."kwinrc".text = ''
           [Compositing]
           LatencyPolicy=Low
           RenderLoop=Threaded
+        '';
+        # auto start kbuildsyscoca6
+        xdg.configFile."autostart/kbuildsycoca6.desktop".text = ''
+          [Desktop Entry]
+          Exec=kbuildsycoca6 --noincremental
+          Icon=system-run
+          Name=Rebuild KDE cache
+          Type=Application
+          X-KDE-autostart-phase=1
         '';
       }
     ];
