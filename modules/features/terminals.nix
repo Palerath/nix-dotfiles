@@ -3,7 +3,7 @@
   inputs,
   ...
 }: {
-  flake.homeManager.alacritty = {pkgs, ...}: {
+  flake.homeModules.alacritty = {pkgs, ...}: {
     programs.alacritty = {
       enable = true;
       settings = {
