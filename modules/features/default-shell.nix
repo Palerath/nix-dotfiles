@@ -43,6 +43,11 @@
     ...
   }: let
     isLinux = pkgs.stdenv.isLinux;
+    dotfilesPath = "/home/${config.home.username}/dotfiles";
+    aliases = import "${self}/modules/common/aliases.nix" {
+      inherit dotfilesPath hostName;
+      isDarwin = pkgs.stdenv.isDarwin;
+    };
   in {
     home.packages = with pkgs;
       [
@@ -56,6 +61,7 @@
       ];
     programs.fish = {
       enable = true;
+      shellAliases = aliases;
 
       shellInit = lib.mkIf (hostName != "periserver") ''
         fastfetch

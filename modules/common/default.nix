@@ -11,7 +11,6 @@
   }: {
     imports = [
       self.nixosModules.commonVim
-      self.nixosModules.commonAliases
       self.nixosModules.commonOptions
     ];
 
@@ -54,6 +53,7 @@
     programs = {
       dconf.enable = true;
       direnv.enable = true;
+      git.signing.format = null;
     };
 
     security.sudo.wheelNeedsPassword = true;
