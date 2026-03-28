@@ -10,11 +10,6 @@
     ...
   }: {
     # imports = [self.nixosModules.qwertyFR];
-    environment.systemPackages = with pkgs; [
-      mecab
-      mozcdic-ut-neologd
-      python313Packages.mecab-python3
-    ];
 
     options.inputMethod = {
       type = lib.mkOption {
@@ -36,6 +31,12 @@
       isIbus = imType == "ibus";
       isFcitx5 = imType == "fcitx5";
     in {
+      environment.systemPackages = with pkgs; [
+        mecab
+        mozcdic-ut-neologd
+        python313Packages.mecab-python3
+      ];
+
       i18n.inputMethod = {
         enable = true;
         type = imType;

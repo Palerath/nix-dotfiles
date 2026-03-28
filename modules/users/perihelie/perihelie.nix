@@ -13,20 +13,15 @@
       inputs.home-manager.nixosModules.home-manager
       self.nixosModules.locales
       self.nixosModules.fonts
-      self.nixosModules.openTv
-      self.nixosModules.inputMethods
     ];
 
-    config.inputMethod = {
-      type = "fcitx5";
-      useMozcUT = true;
-    };
-
     environment.systemPackages = [pkgs.home-manager];
+
     users.users.perihelie = {
       isNormalUser = true;
       shell = pkgs.fish;
       ignoreShellProgramCheck = true;
+
       extraGroups = [
         "networkmanager"
         "wheel"

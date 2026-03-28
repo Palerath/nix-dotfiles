@@ -22,13 +22,20 @@
       self.nixosModules.gayming
       self.nixosModules.graphics
       self.nixosModules.qwertyFR
+      self.nixosModules.inputMethods
       self.nixosModules.tailscaleClient
       self.nixosModules.sunshine
       self.nixosModules.containerMachines
+      # self.nixosModules.openTv
       self.nixosModules.otherPrograms
     ];
 
     # sops.defaultSopsFile = ./perikon_secrets.yaml;
+
+    inputMethod = {
+      type = "fcitx5";
+      useMozcUT = true;
+    };
 
     networking.hostName = hostName;
     my.primaryUser = "perihelie";
