@@ -9,3 +9,6 @@
 [submodule "modules/common/vim"]
 	path = modules/common/vim
 	url = git@github.com:Palerath/vim-config.git
+[submodule "modules/hosts/periserver"]
+	path = modules/hosts/periserver
+	url = git@github.com:Palerath/periserver.git
